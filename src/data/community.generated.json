@@ -444,6 +444,35 @@
       }
     },
     {
+      "id": "community-customer-journey",
+      "name": "Customer journey",
+      "description": "Journey stages left to right with how the customer feels at each. Use smiley icons for the mood.",
+      "cat": "Marketing",
+      "author": "Moovendhan V",
+      "authorGithub": "moovendhan-v",
+      "md": "<!-- layout: custom:customer-journey -->\n^ Onboarding research\n# From first visit to weekly use\n:::flow\n- smiley-meh | Discover | Finds us through a teammate's shared deck\n- smiley | Try | Opens a template, edits in the browser\n- smiley-sad | Connect | GitHub permissions feel scary\n- smiley | Present | First client presentation goes well\n- smiley | Adopt | Team moves all decks into the repo\n:::\n",
+      "stars": 0,
+      "community": true,
+      "look": {
+        "accent": "#8b5cf6"
+      },
+      "single": true,
+      "code": true,
+      "html": "<div class=\"h-full flex flex-col gap-10 p-16\">\n  <div>\n    {{#kicker}}<div class=\"text-sm font-semibold uppercase tracking-widest text-accent\">{{kicker}}</div>{{/kicker}}\n    <h2 class=\"font-head text-5xl font-bold tracking-tight mt-2\">{{title}}</h2>\n    {{#body}}<p class=\"text-xl text-muted mt-3 max-w-3xl\">{{body}}</p>{{/body}}\n  </div>\n  <div class=\"flex-1 grid grid-flow-col auto-cols-fr\">\n    {{#items}}\n    <div data-i=\"{{icon}}\" class=\"group flex flex-col items-center text-center gap-5 px-4 border-l border-rule first:border-0\">\n      <span class=\"font-mono text-sm font-semibold uppercase tracking-widest text-accent\">Stage {{index}}</span>\n      <div class=\"text-2xl font-bold\">{{title}}</div>\n      <div class=\"flex-1 flex flex-col justify-center\">\n        <i class=\"ph {{icon}} text-6xl text-accent group-data-[i=ph-smiley-sad]:text-[#ef4444] group-data-[i=ph-smiley-meh]:text-[#f59e0b] group-data-[i=ph-smiley]:text-[#22c55e]\"></i>\n      </div>\n      <div class=\"text-muted leading-snug\">{{text}}</div>\n    </div>\n    {{/items}}\n  </div>\n</div>\n",
+      "config": {
+        "id": "customer-journey",
+        "name": "Customer journey",
+        "category": "Marketing",
+        "author": "moovendhan-v",
+        "slots": [
+          "kicker",
+          "title",
+          "items[icon,title,text]"
+        ],
+        "description": "Journey stages left to right with how the customer feels at each. Use smiley icons for the mood."
+      }
+    },
+    {
       "id": "community-db-table",
       "name": "Database table",
       "description": "A table schema as a card: table name as the title, one row per column with its type.",
@@ -472,6 +501,66 @@
           "items[title,text]"
         ],
         "description": "A table schema as a card: table name as the title, one row per column with its type."
+      }
+    },
+    {
+      "id": "community-device-mockup",
+      "name": "Device mockup",
+      "description": "A product screenshot in a laptop frame with the pitch beside it. Put the screenshot URL in the image directive.",
+      "cat": "Product",
+      "author": "Moovendhan V",
+      "authorGithub": "moovendhan-v",
+      "md": "<!-- layout: custom:device-mockup; image: -->\n^ Product\n# Edit, preview, present\nMarkdown on the left, slides on the right, updated on every keystroke.\n- Live preview while you type\n- Present from the browser\n- Push changes to GitHub\n",
+      "stars": 0,
+      "community": true,
+      "look": {
+        "accent": "#3b82f6"
+      },
+      "single": true,
+      "code": true,
+      "html": "<div class=\"h-full grid grid-cols-[1fr_1.5fr] gap-12 p-16 items-center\">\n  <div class=\"flex flex-col gap-6\">\n    {{#kicker}}<div class=\"text-sm font-semibold uppercase tracking-widest text-accent\">{{kicker}}</div>{{/kicker}}\n    <h2 class=\"font-head text-5xl font-bold leading-tight tracking-tight\">{{title}}</h2>\n    {{#body}}<p class=\"text-xl text-muted\">{{body}}</p>{{/body}}\n    <ul class=\"flex flex-col gap-3\">{{#items}}<li class=\"flex gap-3 text-lg\"><i class=\"ph ph-check-circle text-2xl text-accent\"></i>{{title}}</li>{{/items}}</ul>\n  </div>\n  <div class=\"flex flex-col items-center\">\n    <div class=\"w-full rounded-t-2xl border-[10px] border-b-0 border-[#1f2937] bg-[#1f2937]\">\n      <div class=\"aspect-[16/10] rounded-md overflow-hidden bg-panel grid place-items-center\">\n        {{#image}}<img src=\"{{image}}\" class=\"h-full w-full object-cover object-top\">{{/image}}{{^image}}<i class=\"ph ph-browser text-8xl text-muted\"></i>{{/image}}\n      </div>\n    </div>\n    <div class=\"w-[112%] h-5 rounded-b-2xl bg-[#374151]\"></div>\n  </div>\n</div>\n",
+      "config": {
+        "id": "device-mockup",
+        "name": "Device mockup",
+        "category": "Product",
+        "author": "moovendhan-v",
+        "slots": [
+          "kicker",
+          "title",
+          "body",
+          "image",
+          "items[title]"
+        ],
+        "description": "A product screenshot in a laptop frame with the pitch beside it. Put the screenshot URL in the image directive."
+      }
+    },
+    {
+      "id": "community-dos-donts",
+      "name": "Do's and don'ts",
+      "description": "Guidelines as do/don't cards. check-circle for a do, x-circle for a don't; colors follow the icon.",
+      "cat": "Text",
+      "author": "Moovendhan V",
+      "authorGithub": "moovendhan-v",
+      "md": "<!-- layout: custom:dos-donts -->\n^ Slide guidelines\n# Make every slide count\n:::cards\n- check-circle | One idea per slide | Split anything that needs two titles\n- x-circle | Walls of text | If you read it aloud, cut it\n- check-circle | Big numbers | Let the key figure fill the slide\n- x-circle | Ten bullet points | Three is a list, ten is a document\n:::\n",
+      "stars": 0,
+      "community": true,
+      "look": {
+        "accent": "#22c55e"
+      },
+      "single": true,
+      "code": true,
+      "html": "<div class=\"h-full flex flex-col gap-10 p-16\">\n  <div>\n    {{#kicker}}<div class=\"text-sm font-semibold uppercase tracking-widest text-accent\">{{kicker}}</div>{{/kicker}}\n    <h2 class=\"font-head text-5xl font-bold tracking-tight mt-2\">{{title}}</h2>\n    {{#body}}<p class=\"text-xl text-muted mt-3 max-w-3xl\">{{body}}</p>{{/body}}\n  </div>\n  <div class=\"flex-1 grid grid-cols-2 gap-5 content-center\">\n    {{#items}}\n    <div data-i=\"{{icon}}\" class=\"group flex items-start gap-5 rounded-2xl border-2 border-accent p-6 data-[i=ph-x-circle]:border-[#ef4444]\">\n      <i class=\"ph {{icon}} text-4xl text-accent group-data-[i=ph-x-circle]:text-[#ef4444] shrink-0\"></i>\n      <div>\n        <div class=\"text-xl font-semibold\">{{title}}</div>\n        <div class=\"text-muted mt-1\">{{text}}</div>\n      </div>\n    </div>\n    {{/items}}\n  </div>\n</div>\n",
+      "config": {
+        "id": "dos-donts",
+        "name": "Do's and don'ts",
+        "category": "Text",
+        "author": "moovendhan-v",
+        "slots": [
+          "kicker",
+          "title",
+          "items[icon,title,text]"
+        ],
+        "description": "Guidelines as do/don't cards. check-circle for a do, x-circle for a don't; colors follow the icon."
       }
     },
     {
@@ -566,6 +655,36 @@
       }
     },
     {
+      "id": "community-event-schedule",
+      "name": "Event schedule",
+      "description": "A conference or workshop agenda. Time in the first cell, session and speaker in the second.",
+      "cat": "Events",
+      "author": "Moovendhan V",
+      "authorGithub": "moovendhan-v",
+      "md": "<!-- layout: custom:event-schedule -->\n^ DevConf · Hall B\n# Saturday schedule\nDoors open at 9:00. Lunch is on us.\n:::stats\n- 09:30 | Keynote: Slides as code\n- 10:30 | Workshop: your first md2slides deck\n- 12:00 | Lunch and demos\n- 13:30 | Panel: docs that never go stale\n- 15:00 | Lightning talks\n:::\n",
+      "stars": 0,
+      "community": true,
+      "look": {
+        "accent": "#e11d48"
+      },
+      "single": true,
+      "code": true,
+      "html": "<div class=\"h-full grid grid-cols-[1fr_1.6fr] gap-14 p-16\">\n  <div class=\"flex flex-col justify-center gap-5\">\n    {{#kicker}}<div class=\"text-sm font-semibold uppercase tracking-widest text-accent\">{{kicker}}</div>{{/kicker}}\n    <h2 class=\"font-head text-5xl font-bold leading-tight tracking-tight\">{{title}}</h2>\n    {{#body}}<p class=\"text-xl text-muted\">{{body}}</p>{{/body}}\n  </div>\n  <div class=\"flex flex-col justify-center\">\n    {{#items}}\n    <div class=\"flex items-center gap-8 py-5 border-b border-rule last:border-0\">\n      <span class=\"w-28 shrink-0 font-mono text-2xl font-bold text-accent\">{{title}}</span>\n      <span class=\"text-xl\">{{text}}</span>\n    </div>\n    {{/items}}\n  </div>\n</div>\n",
+      "config": {
+        "id": "event-schedule",
+        "name": "Event schedule",
+        "category": "Events",
+        "author": "moovendhan-v",
+        "slots": [
+          "kicker",
+          "title",
+          "body",
+          "items[title,text]"
+        ],
+        "description": "A conference or workshop agenda. Time in the first cell, session and speaker in the second."
+      }
+    },
+    {
       "id": "community-exec-summary",
       "name": "Executive summary",
       "description": "Challenge, approach and outcome in three columns. Exactly three rows.",
@@ -621,6 +740,35 @@
           "items[title,text]"
         ],
         "description": "Questions and answers in two columns. Question in the first cell, answer in the second."
+      }
+    },
+    {
+      "id": "community-feature-comparison",
+      "name": "Feature comparison",
+      "description": "You versus the alternatives, feature by feature. Our status as the icon (check-circle or x-circle), the feature, then how others compare.",
+      "cat": "Pitch",
+      "author": "Moovendhan V",
+      "authorGithub": "moovendhan-v",
+      "md": "<!-- layout: custom:feature-comparison -->\n^ Landscape\n# How we compare\n:::cards\n- check-circle | Decks live in your Git repo | Rarely\n- check-circle | Review changes in a pull request | No\n- check-circle | Share without uploading | Upload required\n- check-circle | Presenter view with notes | Yes\n- x-circle | Drag-and-drop canvas editor | Yes\n:::\n",
+      "stars": 0,
+      "community": true,
+      "look": {
+        "accent": "#3b82f6"
+      },
+      "single": true,
+      "code": true,
+      "html": "<div class=\"h-full flex flex-col gap-8 p-16\">\n  <div>\n    {{#kicker}}<div class=\"text-sm font-semibold uppercase tracking-widest text-accent\">{{kicker}}</div>{{/kicker}}\n    <h2 class=\"font-head text-5xl font-bold tracking-tight mt-2\">{{title}}</h2>\n    {{#body}}<p class=\"text-xl text-muted mt-3 max-w-3xl\">{{body}}</p>{{/body}}\n  </div>\n  <div class=\"my-auto rounded-2xl border border-rule overflow-hidden\">\n    <div class=\"grid grid-cols-[1.4fr_0.6fr_1fr] gap-6 px-8 py-4 bg-panel border-b border-rule text-sm font-semibold uppercase tracking-widest text-muted\"><span>Feature</span><span class=\"text-accent\">Us</span><span>Others</span></div>\n    {{#items}}\n    <div data-i=\"{{icon}}\" class=\"group grid grid-cols-[1.4fr_0.6fr_1fr] gap-6 items-center px-8 py-4 border-b border-rule last:border-0\">\n      <span class=\"text-xl font-semibold\">{{title}}</span>\n      <i class=\"ph {{icon}} text-3xl text-accent group-data-[i=ph-x-circle]:text-muted\"></i>\n      <span class=\"text-lg text-muted\">{{text}}</span>\n    </div>\n    {{/items}}\n  </div>\n</div>\n",
+      "config": {
+        "id": "feature-comparison",
+        "name": "Feature comparison",
+        "category": "Pitch",
+        "author": "moovendhan-v",
+        "slots": [
+          "kicker",
+          "title",
+          "items[icon,title,text]"
+        ],
+        "description": "You versus the alternatives, feature by feature. Our status as the icon (check-circle or x-circle), the feature, then how others compare."
       }
     },
     {
@@ -910,6 +1058,36 @@
       }
     },
     {
+      "id": "community-mission-vision-values",
+      "name": "Mission, vision and values",
+      "description": "Mission and vision as the title and body, with values as numbered cards below.",
+      "cat": "Company",
+      "author": "Moovendhan V",
+      "authorGithub": "moovendhan-v",
+      "md": "<!-- layout: custom:mission-vision-values -->\n^ Who we are\n# Make every presentation as easy to update as code.\nA world where nobody presents last month's numbers.\n:::cards\n- eye | Open by default | Our code, roadmap and templates are public\n- lightning | Ship small | Small changes, reviewed, released daily\n- handshake | Credit people | Every template shows who made it\n- heart | Care about craft | Good defaults beat endless options\n:::\n",
+      "stars": 0,
+      "community": true,
+      "look": {
+        "accent": "#ef4444"
+      },
+      "single": true,
+      "code": true,
+      "html": "<div class=\"h-full flex flex-col justify-between gap-10 p-16\">\n  <div class=\"grid grid-cols-2 gap-12\">\n    <div>\n      <div class=\"text-sm font-semibold uppercase tracking-widest text-accent\">Mission</div>\n      <h2 class=\"font-head text-4xl font-bold leading-tight tracking-tight mt-3\">{{title}}</h2>\n    </div>\n    {{#body}}<div>\n      <div class=\"text-sm font-semibold uppercase tracking-widest text-accent\">Vision</div>\n      <p class=\"text-3xl leading-snug mt-3 text-muted\">{{body}}</p>\n    </div>{{/body}}\n  </div>\n  <div class=\"grid grid-flow-col auto-cols-fr gap-5\">\n    {{#items}}\n    <div class=\"rounded-2xl bg-panel border border-rule p-6 flex flex-col gap-3\">\n      <div class=\"flex items-center justify-between\"><i class=\"ph {{icon}} text-3xl text-accent\"></i><span class=\"font-mono text-muted\">0{{index}}</span></div>\n      <div class=\"text-xl font-semibold\">{{title}}</div>\n      <div class=\"text-muted leading-snug\">{{text}}</div>\n    </div>\n    {{/items}}\n  </div>\n</div>\n",
+      "config": {
+        "id": "mission-vision-values",
+        "name": "Mission, vision and values",
+        "category": "Company",
+        "author": "moovendhan-v",
+        "slots": [
+          "kicker",
+          "title",
+          "body",
+          "items[icon,title,text]"
+        ],
+        "description": "Mission and vision as the title and body, with values as numbered cards below."
+      }
+    },
+    {
       "id": "community-next-steps",
       "name": "Next steps",
       "description": "Closing call to action: the ask on the left, numbered next steps with owners and dates on the right.",
@@ -937,6 +1115,35 @@
           "items[title,text]"
         ],
         "description": "Closing call to action: the ask on the left, numbered next steps with owners and dates on the right."
+      }
+    },
+    {
+      "id": "community-now-next-later",
+      "name": "Now, next, later",
+      "description": "A lightweight roadmap in three columns. Three rows: now, next, later; put the items in the third cell.",
+      "cat": "Plan",
+      "author": "Moovendhan V",
+      "authorGithub": "moovendhan-v",
+      "md": "<!-- layout: custom:now-next-later -->\n^ Roadmap\n# What we're working on\n:::cards\n- hammer | Now | Community templates, MCP auto-root, faster preview\n- calendar | Next | Real-time co-editing, comments on slides\n- telescope | Later | Analytics for shared links, plugin API\n:::\n",
+      "stars": 0,
+      "community": true,
+      "look": {
+        "accent": "#6366f1"
+      },
+      "single": true,
+      "code": true,
+      "html": "<div class=\"h-full flex flex-col gap-10 p-16\">\n  <div>\n    {{#kicker}}<div class=\"text-sm font-semibold uppercase tracking-widest text-accent\">{{kicker}}</div>{{/kicker}}\n    <h2 class=\"font-head text-5xl font-bold tracking-tight mt-2\">{{title}}</h2>\n    {{#body}}<p class=\"text-xl text-muted mt-3 max-w-3xl\">{{body}}</p>{{/body}}\n  </div>\n  <div class=\"flex-1 grid grid-cols-3 gap-6\">\n    {{#items}}\n    <div class=\"rounded-3xl border border-rule p-8 flex flex-col gap-5 first:bg-accent first:text-[#0a0a0c] first:border-transparent [&:nth-child(2)]:bg-panel\">\n      <div class=\"flex items-center justify-between\"><span class=\"font-head text-4xl font-black\">{{title}}</span><i class=\"ph {{icon}} text-3xl\"></i></div>\n      <div class=\"text-xl leading-relaxed opacity-85\">{{text}}</div>\n    </div>\n    {{/items}}\n  </div>\n</div>\n",
+      "config": {
+        "id": "now-next-later",
+        "name": "Now, next, later",
+        "category": "Plan",
+        "author": "moovendhan-v",
+        "slots": [
+          "kicker",
+          "title",
+          "items[icon,title,text]"
+        ],
+        "description": "A lightweight roadmap in three columns. Three rows: now, next, later; put the items in the third cell."
       }
     },
     {
@@ -970,6 +1177,65 @@
       }
     },
     {
+      "id": "community-open-roles",
+      "name": "Open roles",
+      "description": "Hiring slide: roles as cards with team and location. Icon, role, then team and location.",
+      "cat": "Company",
+      "author": "Moovendhan V",
+      "authorGithub": "moovendhan-v",
+      "md": "<!-- layout: custom:open-roles -->\n^ We're hiring\n# Build the future of presentations\nRemote-first, async, and we ship every day.\n:::cards\n- code | Senior TypeScript engineer | Product · Remote, EU\n- gear | Rust / Wasm engineer | Engine · Remote\n- paint-brush | Product designer | Design · Remote, US\n- megaphone | Developer advocate | Growth · Remote\n:::\n",
+      "stars": 0,
+      "community": true,
+      "look": {
+        "accent": "#22c55e"
+      },
+      "single": true,
+      "code": true,
+      "html": "<div class=\"h-full grid grid-cols-[1fr_1.5fr] gap-14 p-16\">\n  <div class=\"flex flex-col justify-center gap-5\">\n    {{#kicker}}<div class=\"text-sm font-semibold uppercase tracking-widest text-accent\">{{kicker}}</div>{{/kicker}}\n    <h2 class=\"font-head text-5xl font-bold leading-tight tracking-tight\">{{title}}</h2>\n    {{#body}}<p class=\"text-xl text-muted\">{{body}}</p>{{/body}}\n  </div>\n  <div class=\"flex flex-col justify-center gap-4\">\n    {{#items}}\n    <div class=\"flex items-center gap-5 rounded-2xl border border-rule bg-panel px-6 py-5\">\n      <div class=\"size-14 shrink-0 rounded-xl grid place-items-center bg-[color-mix(in_srgb,var(--accent)_16%,transparent)] text-accent\"><i class=\"ph {{icon}} text-2xl\"></i></div>\n      <div class=\"flex-1\">\n        <div class=\"text-xl font-semibold\">{{title}}</div>\n        <div class=\"text-muted\">{{text}}</div>\n      </div>\n      <i class=\"ph ph-arrow-up-right text-2xl text-accent\"></i>\n    </div>\n    {{/items}}\n  </div>\n</div>\n",
+      "config": {
+        "id": "open-roles",
+        "name": "Open roles",
+        "category": "Company",
+        "author": "moovendhan-v",
+        "slots": [
+          "kicker",
+          "title",
+          "body",
+          "items[icon,title,text]"
+        ],
+        "description": "Hiring slide: roles as cards with team and location. Icon, role, then team and location."
+      }
+    },
+    {
+      "id": "community-org-chart",
+      "name": "Org chart",
+      "description": "A leader on top and their team below. The first row is the leader.",
+      "cat": "Company",
+      "author": "Moovendhan V",
+      "authorGithub": "moovendhan-v",
+      "md": "<!-- layout: custom:org-chart -->\n^ Delivery team\n# Who you will work with\n:::cards\n- user-circle | Asha Rao | Engagement lead\n- code | Leo Martin | Tech lead\n- cloud | Mei Chen | Cloud architect\n- paint-brush | Sam Okafor | Designer\n- test-tube | Ana Silva | QA lead\n:::\n",
+      "stars": 0,
+      "community": true,
+      "look": {
+        "accent": "#0ea5e9"
+      },
+      "single": true,
+      "code": true,
+      "html": "<div class=\"h-full flex flex-col gap-8 p-16\">\n  <div>\n    {{#kicker}}<div class=\"text-sm font-semibold uppercase tracking-widest text-accent\">{{kicker}}</div>{{/kicker}}\n    <h2 class=\"font-head text-5xl font-bold tracking-tight mt-2\">{{title}}</h2>\n  </div>\n  <div class=\"flex-1 flex flex-wrap content-center gap-x-6 gap-y-14\">\n    {{#items}}\n    <div class=\"relative flex flex-col items-center text-center gap-3 rounded-2xl border border-rule bg-panel p-6\n      first:w-80 first:mx-[calc((100%-20rem)/2)] first:bg-accent first:text-[#0a0a0c] first:border-transparent\n      first:after:content-[''] first:after:absolute first:after:top-full first:after:left-1/2 first:after:h-7 first:after:w-0.5 first:after:bg-rule\n      [&:not(:first-child)]:flex-1 [&:not(:first-child)]:min-w-0\n      [&:not(:first-child)]:before:content-[''] [&:not(:first-child)]:before:absolute [&:not(:first-child)]:before:bottom-full [&:not(:first-child)]:before:left-1/2 [&:not(:first-child)]:before:h-7 [&:not(:first-child)]:before:w-0.5 [&:not(:first-child)]:before:bg-rule\n      [&:not(:first-child)]:after:content-[''] [&:not(:first-child)]:after:absolute [&:not(:first-child)]:after:-top-7 [&:not(:first-child)]:after:-left-3 [&:not(:first-child)]:after:-right-3 [&:not(:first-child)]:after:h-0.5 [&:not(:first-child)]:after:bg-rule\n      [&:not(:first-child):nth-child(2)]:after:left-1/2 [&:not(:first-child):last-child]:after:right-1/2\">\n      <span class=\"size-14 rounded-full grid place-items-center border-2 border-current\"><i class=\"ph {{icon}} text-2xl\"></i></span>\n      <div class=\"text-xl font-semibold\">{{title}}</div>\n      <div class=\"opacity-70\">{{text}}</div>\n    </div>\n    {{/items}}\n  </div>\n</div>\n",
+      "config": {
+        "id": "org-chart",
+        "name": "Org chart",
+        "category": "Company",
+        "author": "moovendhan-v",
+        "slots": [
+          "kicker",
+          "title",
+          "items[icon,title,text]"
+        ],
+        "description": "A leader on top and their team below. The first row is the leader."
+      }
+    },
+    {
       "id": "community-pricing-tiers",
       "name": "Pricing tiers",
       "description": "Three plan cards with the middle one highlighted. Put the price in the third cell of each row.",
@@ -996,6 +1262,64 @@
           "items[icon,title,text]"
         ],
         "description": "Three plan cards with the middle one highlighted. Put the price in the third cell of each row."
+      }
+    },
+    {
+      "id": "community-priority-matrix",
+      "name": "Priority matrix",
+      "description": "Impact versus effort in a 2x2. Four rows in order: quick wins, big bets, fill-ins, money pits.",
+      "cat": "Strategy",
+      "author": "Moovendhan V",
+      "authorGithub": "moovendhan-v",
+      "md": "<!-- layout: custom:priority-matrix -->\n^ Planning\n# What we do first\n:::cards\n- lightning | Quick wins | Share links, template search\n- rocket | Big bets | Real-time co-editing\n- list-checks | Fill-ins | More icon packs\n- prohibit | Money pits | Native desktop app\n:::\n",
+      "stars": 0,
+      "community": true,
+      "look": {
+        "accent": "#14b8a6"
+      },
+      "single": true,
+      "code": true,
+      "html": "<div class=\"h-full flex flex-col gap-6 p-14\">\n  <div>\n    {{#kicker}}<div class=\"text-sm font-semibold uppercase tracking-widest text-accent\">{{kicker}}</div>{{/kicker}}\n    <h2 class=\"font-head text-5xl font-bold tracking-tight mt-2\">{{title}}</h2>\n    {{#body}}<p class=\"text-xl text-muted mt-3 max-w-3xl\">{{body}}</p>{{/body}}\n  </div>\n  <div class=\"flex-1 grid grid-cols-[2.5rem_1fr] grid-rows-[1fr_2.5rem] gap-3\">\n    <div class=\"flex items-center justify-center\"><span class=\"-rotate-90 whitespace-nowrap text-sm font-semibold uppercase tracking-widest text-muted\">Impact →</span></div>\n    <div class=\"grid grid-cols-2 grid-rows-2 gap-4\">\n      {{#items}}\n      <div class=\"rounded-2xl border border-rule bg-panel p-6 flex flex-col justify-end gap-2 first:bg-accent first:text-[#0a0a0c] first:border-transparent\">\n        <i class=\"ph {{icon}} text-3xl\"></i>\n        <div class=\"text-2xl font-bold\">{{title}}</div>\n        <div class=\"opacity-75 leading-snug\">{{text}}</div>\n      </div>\n      {{/items}}\n    </div>\n    <div></div>\n    <div class=\"flex items-center justify-center text-sm font-semibold uppercase tracking-widest text-muted\">Effort →</div>\n  </div>\n</div>\n",
+      "config": {
+        "id": "priority-matrix",
+        "name": "Priority matrix",
+        "category": "Strategy",
+        "author": "moovendhan-v",
+        "slots": [
+          "kicker",
+          "title",
+          "items[icon,title,text]"
+        ],
+        "description": "Impact versus effort in a 2x2. Four rows in order: quick wins, big bets, fill-ins, money pits."
+      }
+    },
+    {
+      "id": "community-problem-solution",
+      "name": "Problem and solution",
+      "description": "The problem on the left, your solution on the right, joined by an arrow. Exactly two rows.",
+      "cat": "Pitch",
+      "author": "Moovendhan V",
+      "authorGithub": "moovendhan-v",
+      "md": "<!-- layout: custom:problem-solution -->\n^ Why now\n# Decks drift out of date\n:::cards\n- smiley-sad | The problem | Every update means a new file, an email and someone presenting last month's numbers.\n- smiley | Our solution | The deck is Markdown in your repo. Merge a change and every link shows the new version.\n:::\n",
+      "stars": 0,
+      "community": true,
+      "look": {
+        "accent": "#10b981"
+      },
+      "single": true,
+      "code": true,
+      "html": "<div class=\"h-full flex flex-col gap-10 p-16\">\n  <div>\n    {{#kicker}}<div class=\"text-sm font-semibold uppercase tracking-widest text-accent\">{{kicker}}</div>{{/kicker}}\n    <h2 class=\"font-head text-5xl font-bold tracking-tight mt-2\">{{title}}</h2>\n    {{#body}}<p class=\"text-xl text-muted mt-3 max-w-3xl\">{{body}}</p>{{/body}}\n  </div>\n  <div class=\"relative flex-1 grid grid-cols-2 gap-16\">\n    {{#items}}\n    <div class=\"rounded-3xl p-12 flex flex-col justify-center gap-6 border border-rule bg-panel even:bg-accent even:text-[#0a0a0c] even:border-transparent\">\n      <i class=\"ph {{icon}} text-6xl\"></i>\n      <div class=\"font-head text-4xl font-bold\">{{title}}</div>\n      <div class=\"text-2xl leading-relaxed opacity-80\">{{text}}</div>\n    </div>\n    {{/items}}\n    <div class=\"absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 size-20 rounded-full grid place-items-center bg-bg border-2 border-rule\"><i class=\"ph ph-arrow-right text-4xl text-accent\"></i></div>\n  </div>\n</div>\n",
+      "config": {
+        "id": "problem-solution",
+        "name": "Problem and solution",
+        "category": "Pitch",
+        "author": "moovendhan-v",
+        "slots": [
+          "kicker",
+          "title",
+          "items[icon,title,text]"
+        ],
+        "description": "The problem on the left, your solution on the right, joined by an arrow. Exactly two rows."
       }
     },
     {
@@ -1371,6 +1695,37 @@
       }
     },
     {
+      "id": "community-speaker-profile",
+      "name": "Speaker profile",
+      "description": "Introduce a speaker: photo, name, role, short bio and highlights.",
+      "cat": "People",
+      "author": "Moovendhan V",
+      "authorGithub": "moovendhan-v",
+      "md": "<!-- layout: custom:speaker-profile -->\n^ Keynote speaker\n# Moovendhan V\nAWS cloud developer and builder of CyberTechMind. Writes about infrastructure, security and developer tools.\n:::cards\n- cloud | AWS | ECS, Lambda, Terraform\n- microphone-stage | Talks | 12 meetups and conferences\n- github-logo | Open source | md2slides, md2docs\n:::\n",
+      "stars": 0,
+      "community": true,
+      "look": {
+        "accent": "#f97316"
+      },
+      "single": true,
+      "code": true,
+      "html": "<div class=\"h-full grid grid-cols-[0.9fr_1.4fr] gap-14 p-16 items-center\">\n  <div class=\"relative aspect-square\">\n    <div class=\"absolute inset-0 translate-x-5 translate-y-5 rounded-[2.5rem] bg-accent\"></div>\n    <div class=\"relative h-full rounded-[2.5rem] overflow-hidden bg-panel border border-rule grid place-items-center\">\n      {{#image}}<img src=\"{{image}}\" class=\"h-full w-full object-cover\">{{/image}}{{^image}}<i class=\"ph ph-user text-[10rem] text-muted\"></i>{{/image}}\n    </div>\n  </div>\n  <div class=\"flex flex-col gap-6\">\n    {{#kicker}}<span class=\"self-start rounded-full bg-chip px-4 py-1.5 text-sm font-semibold uppercase tracking-widest text-accent\">{{kicker}}</span>{{/kicker}}\n    <h2 class=\"font-head text-7xl font-black tracking-tight leading-none\">{{title}}</h2>\n    {{#body}}<p class=\"text-xl text-muted leading-relaxed\">{{body}}</p>{{/body}}\n    <div class=\"flex flex-col gap-3\">\n      {{#items}}<div class=\"flex items-center gap-4 text-xl\"><i class=\"ph {{icon}} text-2xl text-accent\"></i><span class=\"font-semibold\">{{title}}</span><span class=\"text-muted\">{{text}}</span></div>{{/items}}\n    </div>\n  </div>\n</div>\n",
+      "config": {
+        "id": "speaker-profile",
+        "name": "Speaker profile",
+        "category": "People",
+        "author": "moovendhan-v",
+        "slots": [
+          "kicker",
+          "title",
+          "body",
+          "image",
+          "items[icon,title,text]"
+        ],
+        "description": "Introduce a speaker: photo, name, role, short bio and highlights."
+      }
+    },
+    {
       "id": "community-sprint-review",
       "name": "Sprint review",
       "description": "Show what the team shipped this sprint, the numbers, demos and what comes next.",
@@ -1404,6 +1759,36 @@
       }
     },
     {
+      "id": "community-stat-rings",
+      "name": "Stat rings",
+      "description": "Percentages as donut rings. Label in the first cell, a 0 to 100 value in the second.",
+      "cat": "Data",
+      "author": "Moovendhan V",
+      "authorGithub": "moovendhan-v",
+      "md": "<!-- layout: custom:stat-rings -->\n^ Traction\n# Customers stay and grow\n:::stats\n- Monthly retention | 94\n- Teams on paid plans | 38\n- Decks updated weekly | 71\n- NPS promoters | 62\n:::\n",
+      "stars": 0,
+      "community": true,
+      "look": {
+        "accent": "#ec4899"
+      },
+      "single": true,
+      "code": true,
+      "html": "<div class=\"h-full flex flex-col gap-10 p-16\">\n  <div>\n    {{#kicker}}<div class=\"text-sm font-semibold uppercase tracking-widest text-accent\">{{kicker}}</div>{{/kicker}}\n    <h2 class=\"font-head text-5xl font-bold tracking-tight mt-2\">{{title}}</h2>\n    {{#body}}<p class=\"text-xl text-muted mt-3 max-w-3xl\">{{body}}</p>{{/body}}\n  </div>\n  <div class=\"flex-1 grid grid-flow-col auto-cols-fr gap-8 items-center\">\n    {{#items}}\n    <div class=\"flex flex-col items-center gap-5\">\n      <div class=\"size-48 rounded-full grid place-items-center\" style=\"background: conic-gradient(var(--accent) calc({{text}} * 1%), var(--rule) 0)\">\n        <div class=\"size-36 rounded-full bg-bg grid place-items-center font-head text-4xl font-bold\">{{text}}%</div>\n      </div>\n      <div class=\"text-xl font-semibold text-center\">{{title}}</div>\n    </div>\n    {{/items}}\n  </div>\n</div>\n",
+      "config": {
+        "id": "stat-rings",
+        "name": "Stat rings",
+        "category": "Data",
+        "author": "moovendhan-v",
+        "slots": [
+          "kicker",
+          "title",
+          "body",
+          "items[title,text]"
+        ],
+        "description": "Percentages as donut rings. Label in the first cell, a 0 to 100 value in the second."
+      }
+    },
+    {
       "id": "community-swot-grid",
       "name": "SWOT grid",
       "description": "Strengths, weaknesses, opportunities and threats in a 2x2 grid with big initials.",
@@ -1429,6 +1814,36 @@
           "items[title,text]"
         ],
         "description": "Strengths, weaknesses, opportunities and threats in a 2x2 grid with big initials."
+      }
+    },
+    {
+      "id": "community-tam-sam-som",
+      "name": "Market size (TAM, SAM, SOM)",
+      "description": "Market size as nested circles: total, serviceable and obtainable. Label in the first cell, value in the second, largest first.",
+      "cat": "Pitch",
+      "author": "Moovendhan V",
+      "authorGithub": "moovendhan-v",
+      "md": "<!-- layout: custom:tam-sam-som -->\n^ Market\n# A $4B market we can reach\nTeams that keep docs in Git and present to clients.\n:::stats\n- TAM | $42B\n- SAM | $4.1B\n- SOM | $210M\n:::\n",
+      "stars": 0,
+      "community": true,
+      "look": {
+        "accent": "#8b5cf6"
+      },
+      "single": true,
+      "code": true,
+      "html": "<div class=\"h-full grid grid-cols-[1fr_1.1fr] gap-12 p-16 items-center\">\n  <div class=\"flex flex-col gap-6\">\n    {{#kicker}}<div class=\"text-sm font-semibold uppercase tracking-widest text-accent\">{{kicker}}</div>{{/kicker}}\n    <h2 class=\"font-head text-5xl font-bold leading-tight tracking-tight\">{{title}}</h2>\n    {{#body}}<p class=\"text-xl text-muted\">{{body}}</p>{{/body}}\n    <div class=\"flex flex-col gap-4\">\n      {{#items}}\n      <div class=\"flex items-center gap-4\">\n        <span class=\"size-5 rounded-full bg-accent shrink-0\" style=\"opacity: calc(0.25 + {{index}} * 0.25)\"></span>\n        <span class=\"text-xl font-semibold w-20\">{{title}}</span>\n        <span class=\"font-head text-3xl font-bold\">{{text}}</span>\n      </div>\n      {{/items}}\n    </div>\n  </div>\n  <div class=\"relative h-full\">\n    {{#items}}\n    <div class=\"absolute left-1/2 bottom-0 -translate-x-1/2 rounded-full border-2 border-accent grid justify-items-center pt-8\" style=\"width: calc(36rem - ({{index}} - 1) * 11rem); height: calc(36rem - ({{index}} - 1) * 11rem); background: color-mix(in srgb, var(--accent) calc({{index}} * 22%), transparent)\">\n      <span class=\"text-lg font-bold\">{{title}}</span>\n    </div>\n    {{/items}}\n  </div>\n</div>\n",
+      "config": {
+        "id": "tam-sam-som",
+        "name": "Market size (TAM, SAM, SOM)",
+        "category": "Pitch",
+        "author": "moovendhan-v",
+        "slots": [
+          "kicker",
+          "title",
+          "body",
+          "items[title,text]"
+        ],
+        "description": "Market size as nested circles: total, serviceable and obtainable. Label in the first cell, value in the second, largest first."
       }
     },
     {
@@ -1538,6 +1953,66 @@
       }
     },
     {
+      "id": "community-testimonial-cards",
+      "name": "Testimonial cards",
+      "description": "Three customer quotes as cards. Icon for the avatar, the person and role in the second cell, the quote in the third.",
+      "cat": "Marketing",
+      "author": "Moovendhan V",
+      "authorGithub": "moovendhan-v",
+      "md": "<!-- layout: custom:testimonial-cards -->\n^ Customers\n# Teams that switched\n:::cards\n- user | Priya N., VP Engineering | Our board deck now ships from a pull request.\n- user | Leo M., Solutions Architect | Client updates take minutes, not an afternoon.\n- user | Sam O., Head of Growth | One link, always current. Nobody asks for the latest version.\n:::\n",
+      "stars": 0,
+      "community": true,
+      "look": {
+        "accent": "#f59e0b"
+      },
+      "single": true,
+      "code": true,
+      "html": "<div class=\"h-full flex flex-col gap-10 p-16\">\n  <div>\n    {{#kicker}}<div class=\"text-sm font-semibold uppercase tracking-widest text-accent\">{{kicker}}</div>{{/kicker}}\n    <h2 class=\"font-head text-5xl font-bold tracking-tight mt-2\">{{title}}</h2>\n    {{#body}}<p class=\"text-xl text-muted mt-3 max-w-3xl\">{{body}}</p>{{/body}}\n  </div>\n  <div class=\"flex-1 grid grid-flow-col auto-cols-fr gap-6 items-center\">\n    {{#items}}\n    <figure class=\"rounded-3xl border border-rule bg-panel p-8 flex flex-col gap-6 h-full justify-between even:bg-accent even:text-[#0a0a0c] even:border-transparent\">\n      <i class=\"ph ph-quotes text-5xl opacity-60\"></i>\n      <blockquote class=\"text-2xl font-medium leading-snug\">{{text}}</blockquote>\n      <figcaption class=\"flex items-center gap-4\">\n        <span class=\"size-12 rounded-full grid place-items-center border-2 border-current\"><i class=\"ph {{icon}} text-2xl\"></i></span>\n        <span class=\"text-lg font-semibold\">{{title}}</span>\n      </figcaption>\n    </figure>\n    {{/items}}\n  </div>\n</div>\n",
+      "config": {
+        "id": "testimonial-cards",
+        "name": "Testimonial cards",
+        "category": "Marketing",
+        "author": "moovendhan-v",
+        "slots": [
+          "kicker",
+          "title",
+          "items[icon,title,text]"
+        ],
+        "description": "Three customer quotes as cards. Icon for the avatar, the person and role in the second cell, the quote in the third."
+      }
+    },
+    {
+      "id": "community-user-persona",
+      "name": "User persona",
+      "description": "A target customer: photo, name and role, a quote, and traits as rows (label, then detail).",
+      "cat": "Marketing",
+      "author": "Moovendhan V",
+      "authorGithub": "moovendhan-v",
+      "md": "<!-- layout: custom:user-persona -->\n^ Engineering manager, 34\n# Maya\nI present to clients every week and the numbers are never current.\n:::cards\n- target | Goals | Fewer status meetings, decks that update themselves\n- warning | Frustrations | Copying numbers between tools before every call\n- wrench | Tools | GitHub, Jira, Notion, Slack\n- chat-circle | Where to reach her | Engineering newsletters, LinkedIn, meetups\n:::\n",
+      "stars": 0,
+      "community": true,
+      "look": {
+        "accent": "#06b6d4"
+      },
+      "single": true,
+      "code": true,
+      "html": "<div class=\"h-full grid grid-cols-[0.8fr_1.5fr] gap-12 p-16\">\n  <div class=\"flex flex-col items-center justify-center gap-6 rounded-3xl bg-panel border border-rule p-10 text-center\">\n    <div class=\"size-48 rounded-full overflow-hidden ring-4 ring-accent ring-offset-4 ring-offset-bg bg-[color-mix(in_srgb,var(--accent)_16%,transparent)] grid place-items-center\">\n      {{#image}}<img src=\"{{image}}\" class=\"h-full w-full object-cover\">{{/image}}{{^image}}<i class=\"ph ph-user text-8xl text-accent\"></i>{{/image}}\n    </div>\n    <div>\n      <div class=\"font-head text-4xl font-bold\">{{title}}</div>\n      {{#kicker}}<div class=\"text-lg text-accent font-semibold mt-1\">{{kicker}}</div>{{/kicker}}\n    </div>\n    {{#body}}<p class=\"text-lg italic text-muted\">“{{body}}”</p>{{/body}}\n  </div>\n  <div class=\"grid grid-cols-2 gap-5 content-center\">\n    {{#items}}\n    <div class=\"rounded-2xl border border-rule p-6 flex flex-col gap-2\">\n      <div class=\"flex items-center gap-3 text-sm font-semibold uppercase tracking-widest text-accent\"><i class=\"ph {{icon}} text-xl\"></i>{{title}}</div>\n      <div class=\"text-lg leading-snug\">{{text}}</div>\n    </div>\n    {{/items}}\n  </div>\n</div>\n",
+      "config": {
+        "id": "user-persona",
+        "name": "User persona",
+        "category": "Marketing",
+        "author": "moovendhan-v",
+        "slots": [
+          "kicker",
+          "title",
+          "body",
+          "image",
+          "items[icon,title,text]"
+        ],
+        "description": "A target customer: photo, name and role, a quote, and traits as rows (label, then detail)."
+      }
+    },
+    {
       "id": "community-versus",
       "name": "Versus",
       "description": "Two options side by side with a VS badge. Use exactly two rows.",
@@ -1631,7 +2106,7 @@
       "github": "moovendhan-v",
       "name": "Moovendhan V",
       "role": "Creator & maintainer",
-      "templates": 57
+      "templates": 73
     }
   ]
 }

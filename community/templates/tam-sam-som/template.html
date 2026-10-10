@@ -1,0 +1,23 @@
+<div class="h-full grid grid-cols-[1fr_1.1fr] gap-12 p-16 items-center">
+  <div class="flex flex-col gap-6">
+    {{#kicker}}<div class="text-sm font-semibold uppercase tracking-widest text-accent">{{kicker}}</div>{{/kicker}}
+    <h2 class="font-head text-5xl font-bold leading-tight tracking-tight">{{title}}</h2>
+    {{#body}}<p class="text-xl text-muted">{{body}}</p>{{/body}}
+    <div class="flex flex-col gap-4">
+      {{#items}}
+      <div class="flex items-center gap-4">
+        <span class="size-5 rounded-full bg-accent shrink-0" style="opacity: calc(0.25 + {{index}} * 0.25)"></span>
+        <span class="text-xl font-semibold w-20">{{title}}</span>
+        <span class="font-head text-3xl font-bold">{{text}}</span>
+      </div>
+      {{/items}}
+    </div>
+  </div>
+  <div class="relative h-full">
+    {{#items}}
+    <div class="absolute left-1/2 bottom-0 -translate-x-1/2 rounded-full border-2 border-accent grid justify-items-center pt-8" style="width: calc(36rem - ({{index}} - 1) * 11rem); height: calc(36rem - ({{index}} - 1) * 11rem); background: color-mix(in srgb, var(--accent) calc({{index}} * 22%), transparent)">
+      <span class="text-lg font-bold">{{title}}</span>
+    </div>
+    {{/items}}
+  </div>
+</div>

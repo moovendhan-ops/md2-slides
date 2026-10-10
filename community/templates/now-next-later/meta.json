@@ -1,0 +1,17 @@
+{
+  "name": "Now, next, later",
+  "description": "A lightweight roadmap in three columns. Three rows: now, next, later; put the items in the third cell.",
+  "category": "Plan",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "items[icon,title,text]"
+  ],
+  "look": {
+    "accent": "#6366f1"
+  }
+}

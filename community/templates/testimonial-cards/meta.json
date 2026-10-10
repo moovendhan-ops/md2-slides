@@ -1,0 +1,17 @@
+{
+  "name": "Testimonial cards",
+  "description": "Three customer quotes as cards. Icon for the avatar, the person and role in the second cell, the quote in the third.",
+  "category": "Marketing",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "items[icon,title,text]"
+  ],
+  "look": {
+    "accent": "#f59e0b"
+  }
+}

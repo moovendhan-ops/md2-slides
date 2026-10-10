@@ -1,0 +1,17 @@
+{
+  "name": "Org chart",
+  "description": "A leader on top and their team below. The first row is the leader.",
+  "category": "Company",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "items[icon,title,text]"
+  ],
+  "look": {
+    "accent": "#0ea5e9"
+  }
+}

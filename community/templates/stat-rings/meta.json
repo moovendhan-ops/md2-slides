@@ -1,0 +1,18 @@
+{
+  "name": "Stat rings",
+  "description": "Percentages as donut rings. Label in the first cell, a 0 to 100 value in the second.",
+  "category": "Data",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "body",
+    "items[title,text]"
+  ],
+  "look": {
+    "accent": "#ec4899"
+  }
+}

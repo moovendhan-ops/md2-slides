@@ -1,0 +1,17 @@
+{
+  "name": "Priority matrix",
+  "description": "Impact versus effort in a 2x2. Four rows in order: quick wins, big bets, fill-ins, money pits.",
+  "category": "Strategy",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "items[icon,title,text]"
+  ],
+  "look": {
+    "accent": "#14b8a6"
+  }
+}

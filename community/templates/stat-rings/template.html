@@ -1,0 +1,17 @@
+<div class="h-full flex flex-col gap-10 p-16">
+  <div>
+    {{#kicker}}<div class="text-sm font-semibold uppercase tracking-widest text-accent">{{kicker}}</div>{{/kicker}}
+    <h2 class="font-head text-5xl font-bold tracking-tight mt-2">{{title}}</h2>
+    {{#body}}<p class="text-xl text-muted mt-3 max-w-3xl">{{body}}</p>{{/body}}
+  </div>
+  <div class="flex-1 grid grid-flow-col auto-cols-fr gap-8 items-center">
+    {{#items}}
+    <div class="flex flex-col items-center gap-5">
+      <div class="size-48 rounded-full grid place-items-center" style="background: conic-gradient(var(--accent) calc({{text}} * 1%), var(--rule) 0)">
+        <div class="size-36 rounded-full bg-bg grid place-items-center font-head text-4xl font-bold">{{text}}%</div>
+      </div>
+      <div class="text-xl font-semibold text-center">{{title}}</div>
+    </div>
+    {{/items}}
+  </div>
+</div>

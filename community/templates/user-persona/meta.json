@@ -1,0 +1,19 @@
+{
+  "name": "User persona",
+  "description": "A target customer: photo, name and role, a quote, and traits as rows (label, then detail).",
+  "category": "Marketing",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "body",
+    "image",
+    "items[icon,title,text]"
+  ],
+  "look": {
+    "accent": "#06b6d4"
+  }
+}
