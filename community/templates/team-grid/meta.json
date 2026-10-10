@@ -1,0 +1,17 @@
+{
+  "name": "Team grid",
+  "description": "Team members as round avatars with name and role. Use an icon per person.",
+  "category": "People",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "items[icon,title,text]"
+  ],
+  "look": {
+    "accent": "#ec4899"
+  }
+}

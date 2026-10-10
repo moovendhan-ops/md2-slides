@@ -1,0 +1,19 @@
+{
+  "name": "Color block title",
+  "description": "Bold title on a full-height accent block, with an image or shape on the side.",
+  "category": "Title",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "body",
+    "image"
+  ],
+  "look": {
+    "accent": "#6366f1",
+    "bg": "solid"
+  }
+}

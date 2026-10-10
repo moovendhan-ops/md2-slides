@@ -1,0 +1,17 @@
+{
+  "name": "Pricing tiers",
+  "description": "Three plan cards with the middle one highlighted. Put the price in the third cell of each row.",
+  "category": "Business",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "items[icon,title,text]"
+  ],
+  "look": {
+    "accent": "#8b5cf6"
+  }
+}

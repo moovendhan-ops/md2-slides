@@ -1,0 +1,18 @@
+{
+  "name": "Progress bars",
+  "description": "Labelled horizontal bars. Put a percentage (0 to 100) in the second cell.",
+  "category": "Data",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "body",
+    "items[title,text]"
+  ],
+  "look": {
+    "accent": "#06b6d4"
+  }
+}

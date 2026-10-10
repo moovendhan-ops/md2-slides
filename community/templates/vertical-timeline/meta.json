@@ -1,0 +1,18 @@
+{
+  "name": "Vertical timeline",
+  "description": "Milestones down a vertical line, with the title and intro on the left.",
+  "category": "Timeline",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "body",
+    "items[title,text]"
+  ],
+  "look": {
+    "accent": "#10b981"
+  }
+}

@@ -8,5 +8,5 @@
   {"h":"7 · Icons","b":"Phosphor classes: <i class=\"ph {{icon}}\"></i> or a fixed one like ph ph-rocket."},
   {"h":"8 · Config","b":"JSON with id, name, category, author, slots, description. id becomes the layout name: <!-- layout: custom:your-id -->."},
   {"h":"9 · Rules for the community","b":"No external scripts or fetches, no fixed pixel sizes over the slide, must look right in dark and light, and in 16:9 and 4:3."},
-  {"h":"10 · Publish","b":"Save keeps it in your templates. Submit opens a PR to md2slides/community-templates with templates/<id>/template.html + config.json."}
+  {"h":"10 · Publish","b":"Save keeps it in your templates. Submit to community opens a pull request on the md2slides repo adding community/templates/<id>/ (template.html, deck.md, meta.json), forking it for you if needed. Once merged, everyone gets the layout."}
 ]

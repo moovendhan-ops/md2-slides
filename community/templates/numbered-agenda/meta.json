@@ -1,0 +1,18 @@
+{
+  "name": "Numbered agenda",
+  "description": "Title on the left, a numbered agenda on the right. Best with 3 to 5 items.",
+  "category": "Agenda",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "body",
+    "items[title,text]"
+  ],
+  "look": {
+    "accent": "#34d399"
+  }
+}

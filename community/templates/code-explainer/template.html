@@ -1,0 +1,18 @@
+<div class="h-full grid grid-cols-[2fr_3fr] gap-12 p-16 items-center">
+  <div class="flex flex-col gap-6">
+    {{#kicker}}<span class="self-start text-xs font-semibold tracking-widest uppercase text-accent bg-chip px-3 py-1 rounded-full">{{kicker}}</span>{{/kicker}}
+    <h2 class="font-head text-5xl font-bold leading-tight tracking-tight">{{title}}</h2>
+    {{#body}}<p class="text-lg text-muted">{{body}}</p>{{/body}}
+    <ul class="flex flex-col gap-3">
+      {{#items}}
+      <li class="flex gap-3 text-lg"><i class="ph ph-check-circle text-accent text-2xl shrink-0"></i><span>{{title}}</span></li>
+      {{/items}}
+    </ul>
+  </div>
+  <div class="rounded-2xl border border-rule bg-panel overflow-hidden">
+    <div class="flex gap-2 px-5 py-4 border-b border-rule">
+      <span class="size-3 rounded-full bg-rule"></span><span class="size-3 rounded-full bg-rule"></span><span class="size-3 rounded-full bg-rule"></span>
+    </div>
+    <pre class="font-mono text-base leading-relaxed p-6 whitespace-pre-wrap break-words">{{code}}</pre>
+  </div>
+</div>

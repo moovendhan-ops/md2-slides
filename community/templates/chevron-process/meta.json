@@ -1,0 +1,17 @@
+{
+  "name": "Chevron process",
+  "description": "Steps as connected arrow chevrons, numbered automatically. Best with 3 to 5 steps.",
+  "category": "Process",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "items[icon,title,text]"
+  ],
+  "look": {
+    "accent": "#14b8a6"
+  }
+}

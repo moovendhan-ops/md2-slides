@@ -22,8 +22,14 @@ export function ExportStrip() {
   );
 }
 
+const slideCount = (md: string) => (md.match(/^---$/gm)?.length ?? 0) + 1;
+
+/** How many community templates the landing page shows; the rest are in the app. */
+const SHOWN = 7;
+
 /** Community templates, each credited to its author's GitHub profile. */
 export function CommunitySection() {
+  const more = COMMUNITY_TEMPLATES.length - SHOWN;
   return (
     <section id="templates" className="mx-auto max-w-6xl scroll-mt-20 px-5 py-24">
       <div className="flex flex-wrap items-end justify-between gap-4">
@@ -33,11 +39,11 @@ export function CommunitySection() {
         </a>
       </div>
       <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {COMMUNITY_TEMPLATES.map((t) => (
+        {COMMUNITY_TEMPLATES.slice(0, SHOWN).map((t) => (
           <div key={t.id} className="flex flex-col rounded-2xl border border-zinc-800 bg-zinc-950 p-5">
             <div className="flex items-center gap-2 text-xs text-zinc-500">
               <span className="rounded-full border border-zinc-800 px-2 py-0.5">{t.cat}</span>
-              <span>{(t.md.match(/^---$/gm)?.length ?? 0) + 1} slides</span>
+              <span>{slideCount(t.md)} {slideCount(t.md) === 1 ? "slide" : "slides"}</span>
             </div>
             <h3 className="mt-3 text-[16px] font-semibold text-zinc-50">{t.name}</h3>
             <p className="mt-1 flex-1 text-[13px] leading-relaxed text-zinc-400">{t.description}</p>
@@ -49,10 +55,17 @@ export function CommunitySection() {
             </div>
           </div>
         ))}
+        {more > 0 && (
+          <Link href="/app" className="flex flex-col items-center justify-center gap-2 rounded-2xl border border-zinc-800 bg-zinc-950 p-5 text-center text-sm text-zinc-300 hover:border-zinc-600">
+            <Icon name="squares-four" className="text-2xl text-blue-400" />
+            {more} more in the app
+            <span className="text-xs text-zinc-500">Templates → Community</span>
+          </Link>
+        )}
         <a href={`${BRAND.repo}/blob/main/CONTRIBUTING.md`} className="flex flex-col items-center justify-center gap-2 rounded-2xl border border-dashed border-zinc-800 p-5 text-center text-sm text-zinc-500 hover:border-zinc-600 hover:text-zinc-300">
           <Icon name="plus-circle" className="text-2xl" />
           Your template here
-          <span className="text-xs">deck.md + meta.json in one PR</span>
+          <span className="text-xs">Submit to community from the app, or open a PR</span>
         </a>
       </div>
     </section>

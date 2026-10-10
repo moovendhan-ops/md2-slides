@@ -1,0 +1,18 @@
+{
+  "name": "Icon grid",
+  "description": "Six features in a clean 3x2 grid with tinted icon tiles.",
+  "category": "Features",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "body",
+    "items[icon,title,text]"
+  ],
+  "look": {
+    "accent": "#f59e0b"
+  }
+}

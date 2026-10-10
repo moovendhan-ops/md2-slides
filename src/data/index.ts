@@ -38,8 +38,11 @@ export interface Contributor {
 }
 
 export const SEED_TEMPLATES = templates as TemplateRecord[];
-/** Templates contributed via community/templates (validated by scripts/community.mjs). */
-export const COMMUNITY_TEMPLATES = community.templates as TemplateRecord[];
+/**
+ * Templates contributed via community/templates (validated by scripts/community.mjs).
+ * Cast through unknown: each template's `look` has different keys, so the inferred JSON type is a union.
+ */
+export const COMMUNITY_TEMPLATES = community.templates as unknown as TemplateRecord[];
 export const CONTRIBUTORS = community.contributors as Contributor[];
 export const BLOCK_SNIPPETS = snippets as Snippet[];
 export const AI_PRESETS = aiPresets as AiPreset[];

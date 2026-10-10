@@ -1,0 +1,17 @@
+{
+  "name": "Section divider",
+  "description": "A huge outlined section number with the section title, to open each part of a deck.",
+  "category": "Structure",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "body"
+  ],
+  "look": {
+    "accent": "#f97316"
+  }
+}
