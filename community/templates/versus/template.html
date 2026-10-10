@@ -1,0 +1,16 @@
+<div class="h-full flex flex-col gap-8 p-16">
+  <div class="text-center">
+    {{#kicker}}<div class="text-sm font-semibold uppercase tracking-widest text-accent">{{kicker}}</div>{{/kicker}}
+    <h2 class="font-head text-5xl font-bold tracking-tight mt-2">{{title}}</h2>
+  </div>
+  <div class="relative flex-1 grid grid-cols-2 gap-6">
+    {{#items}}
+    <div class="rounded-3xl p-12 flex flex-col justify-center gap-5 bg-panel border border-rule even:bg-accent even:text-[#0a0a0c] even:border-transparent">
+      <i class="ph {{icon}} text-6xl"></i>
+      <div class="font-head text-4xl font-bold">{{title}}</div>
+      <div class="text-xl leading-relaxed opacity-80">{{text}}</div>
+    </div>
+    {{/items}}
+    <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 size-24 rounded-full grid place-items-center bg-bg border-4 border-accent font-head text-3xl font-black text-accent">VS</div>
+  </div>
+</div>

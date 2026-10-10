@@ -1,0 +1,19 @@
+{
+  "name": "Image story",
+  "description": "Full-bleed photo with a dark gradient and the headline at the bottom left.",
+  "category": "Media",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "body",
+    "image"
+  ],
+  "look": {
+    "accent": "#38bdf8",
+    "mode": "dark"
+  }
+}

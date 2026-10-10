@@ -1,0 +1,16 @@
+{
+  "name": "SWOT grid",
+  "description": "Strengths, weaknesses, opportunities and threats in a 2x2 grid with big initials.",
+  "category": "Strategy",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "title",
+    "items[title,text]"
+  ],
+  "look": {
+    "accent": "#0ea5e9"
+  }
+}

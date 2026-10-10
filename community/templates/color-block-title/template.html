@@ -1,0 +1,15 @@
+<div class="h-full grid grid-cols-[1.25fr_1fr]">
+  <div class="bg-accent text-[#0a0a0c] flex flex-col justify-between p-16">
+    {{#kicker}}<span class="text-sm font-bold uppercase tracking-[0.3em]">{{kicker}}</span>{{/kicker}}
+    <h1 class="font-head text-7xl font-black leading-[0.95] tracking-tight">{{title}}</h1>
+    <p class="text-xl font-medium max-w-md">{{body}}</p>
+  </div>
+  <div class="relative overflow-hidden bg-panel">
+    {{#image}}<img src="{{image}}" class="absolute inset-0 h-full w-full object-cover">{{/image}}
+    {{^image}}
+    <div class="absolute -right-24 -top-24 size-[30rem] rounded-full bg-accent"></div>
+    <div class="absolute left-12 bottom-12 size-48 rounded-[3rem] border-[1.5rem] border-accent"></div>
+    <div class="absolute right-16 bottom-28 size-16 rounded-full bg-fg"></div>
+    {{/image}}
+  </div>
+</div>

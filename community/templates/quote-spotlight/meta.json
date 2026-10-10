@@ -1,0 +1,17 @@
+{
+  "name": "Quote spotlight",
+  "description": "One big testimonial or quote with the speaker underneath.",
+  "category": "Quote",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "title",
+    "body",
+    "kicker"
+  ],
+  "look": {
+    "accent": "#f472b6"
+  }
+}

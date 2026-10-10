@@ -1,0 +1,18 @@
+{
+  "name": "Funnel",
+  "description": "A conversion funnel whose bars narrow step by step. Put the number in the second cell.",
+  "category": "Data",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "body",
+    "items[title,text]"
+  ],
+  "look": {
+    "accent": "#3b82f6"
+  }
+}

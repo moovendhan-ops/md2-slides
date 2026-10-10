@@ -1,0 +1,17 @@
+{
+  "name": "FAQ grid",
+  "description": "Questions and answers in two columns. Question in the first cell, answer in the second.",
+  "category": "Text",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "items[title,text]"
+  ],
+  "look": {
+    "accent": "#e11d48"
+  }
+}

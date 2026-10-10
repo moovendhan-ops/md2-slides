@@ -1,0 +1,17 @@
+{
+  "name": "Versus",
+  "description": "Two options side by side with a VS badge. Use exactly two rows.",
+  "category": "Comparison",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "items[icon,title,text]"
+  ],
+  "look": {
+    "accent": "#ef4444"
+  }
+}

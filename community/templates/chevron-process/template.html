@@ -1,0 +1,20 @@
+<div class="h-full flex flex-col justify-center gap-14 p-16">
+  <div>
+    {{#kicker}}<div class="text-sm font-semibold uppercase tracking-widest text-accent">{{kicker}}</div>{{/kicker}}
+    <h2 class="font-head text-5xl font-bold tracking-tight mt-2">{{title}}</h2>
+  </div>
+  <div class="grid grid-flow-col auto-cols-fr">
+    {{#items}}
+    <div class="flex flex-col gap-6">
+      <div class="h-28 flex items-center gap-4 pl-14 pr-10 bg-accent text-[#0a0a0c] [clip-path:polygon(0_0,calc(100%-2.5rem)_0,100%_50%,calc(100%-2.5rem)_100%,0_100%,2.5rem_50%)] first:[clip-path:polygon(0_0,calc(100%-2.5rem)_0,100%_50%,calc(100%-2.5rem)_100%,0_100%)] first:pl-8 even:opacity-80">
+        <span class="font-head text-4xl font-black">{{index}}</span>
+        <i class="ph {{icon}} text-3xl"></i>
+      </div>
+      <div class="pr-8">
+        <div class="text-2xl font-semibold">{{title}}</div>
+        <div class="text-muted mt-1 leading-snug">{{text}}</div>
+      </div>
+    </div>
+    {{/items}}
+  </div>
+</div>

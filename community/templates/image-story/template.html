@@ -1,0 +1,10 @@
+<div class="relative h-full overflow-hidden bg-panel">
+  {{#image}}<img src="{{image}}" class="absolute inset-0 h-full w-full object-cover">{{/image}}
+  {{^image}}<div class="absolute inset-0 bg-[radial-gradient(60rem_40rem_at_80%_20%,var(--accent),transparent_70%)] opacity-60"></div>{{/image}}
+  <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+  <div class="relative h-full flex flex-col justify-end gap-5 p-20 text-white">
+    {{#kicker}}<span class="self-start rounded-full bg-accent px-4 py-1.5 text-sm font-semibold uppercase tracking-widest text-black">{{kicker}}</span>{{/kicker}}
+    <h2 class="font-head text-7xl font-black leading-[0.95] tracking-tight max-w-4xl">{{title}}</h2>
+    {{#body}}<p class="text-2xl text-white/80 max-w-2xl">{{body}}</p>{{/body}}
+  </div>
+</div>

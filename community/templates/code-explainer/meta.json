@@ -1,0 +1,20 @@
+{
+  "name": "Code explainer",
+  "description": "Key points on the left, the code they explain in an editor frame on the right.",
+  "category": "Code",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "body",
+    "items[title]",
+    "code"
+  ],
+  "look": {
+    "accent": "#fbbf24",
+    "font": "plex"
+  }
+}
