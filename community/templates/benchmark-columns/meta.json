@@ -1,0 +1,19 @@
+{
+  "name": "Benchmark columns",
+  "description": "A column chart for benchmarks. Label in the first cell, a 0 to 100 score in the second. The first column is highlighted.",
+  "category": "Developer",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "body",
+    "items[title,text]"
+  ],
+  "look": {
+    "accent": "#22c55e",
+    "font": "mono"
+  }
+}

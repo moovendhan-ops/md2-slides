@@ -1,0 +1,11 @@
+<div class="h-full grid grid-cols-[1fr_1.35fr] gap-12 p-16 items-center">
+  <div class="flex flex-col gap-6">
+    {{#kicker}}<div class="font-mono text-sm font-semibold uppercase tracking-widest text-accent">{{kicker}}</div>{{/kicker}}
+    <h1 class="font-head text-6xl font-bold leading-[1.02] tracking-tight">{{title}}</h1>
+    {{#body}}<p class="text-xl text-muted">{{body}}</p>{{/body}}
+  </div>
+  <div class="rounded-2xl overflow-hidden border border-rule bg-[#0b0d10] shadow-2xl">
+    <div class="flex items-center gap-2 px-5 py-4 border-b border-white/10"><span class="size-3 rounded-full bg-[#ff5f57]"></span><span class="size-3 rounded-full bg-[#febc2e]"></span><span class="size-3 rounded-full bg-[#28c840]"></span><span class="ml-3 font-mono text-sm text-white/50">zsh</span></div>
+    <pre class="font-mono text-lg leading-relaxed p-7 text-[#e6edf3] whitespace-pre-wrap break-words">{{code}}<span class="inline-block w-2.5 h-5 align-middle bg-accent animate-pulse"></span></pre>
+  </div>
+</div>

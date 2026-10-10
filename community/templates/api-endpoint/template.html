@@ -1,0 +1,22 @@
+<div class="h-full grid grid-cols-[1fr_1.15fr] gap-12 p-16">
+  <div class="flex flex-col gap-6">
+    <div class="flex items-center gap-4">
+      <span class="rounded-lg bg-accent text-[#0a0a0c] px-4 py-2 font-mono text-xl font-bold">{{kicker}}</span>
+      <h2 class="font-mono text-4xl font-semibold tracking-tight">{{title}}</h2>
+    </div>
+    {{#body}}<p class="text-xl text-muted">{{body}}</p>{{/body}}
+    <div class="rounded-2xl border border-rule overflow-hidden">
+      <div class="px-5 py-3 bg-panel border-b border-rule text-sm font-semibold uppercase tracking-widest text-muted">Parameters</div>
+      {{#items}}
+      <div class="flex gap-6 px-5 py-3 border-b border-rule last:border-0">
+        <code class="font-mono text-accent w-40 shrink-0">{{title}}</code>
+        <span class="text-muted">{{text}}</span>
+      </div>
+      {{/items}}
+    </div>
+  </div>
+  <div class="rounded-2xl overflow-hidden border border-rule bg-panel self-center">
+    <div class="px-5 py-3 border-b border-rule font-mono text-sm text-muted">Example</div>
+    <pre class="font-mono text-base leading-relaxed p-6 whitespace-pre-wrap break-words">{{code}}</pre>
+  </div>
+</div>

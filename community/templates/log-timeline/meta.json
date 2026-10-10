@@ -1,0 +1,18 @@
+{
+  "name": "Log timeline",
+  "description": "An incident or deploy as timestamped log lines. Time in the first cell, event in the second.",
+  "category": "Developer",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "items[title,text]"
+  ],
+  "look": {
+    "accent": "#eab308",
+    "font": "mono"
+  }
+}

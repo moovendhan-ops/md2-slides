@@ -1,0 +1,19 @@
+{
+  "name": "Terminal hero",
+  "description": "A headline beside a big terminal window. The first code block is the terminal session.",
+  "category": "Developer",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "body",
+    "code"
+  ],
+  "look": {
+    "accent": "#22c55e",
+    "font": "mono"
+  }
+}

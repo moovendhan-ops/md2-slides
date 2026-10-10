@@ -1,0 +1,11 @@
+<div class="h-full flex flex-col gap-8 p-16">
+  <div class="flex items-start gap-6">
+    <div class="size-20 shrink-0 rounded-2xl grid place-items-center bg-accent text-[#0a0a0c]"><i class="ph ph-bug text-4xl"></i></div>
+    <div class="flex flex-col gap-2">
+      {{#kicker}}<div class="font-mono text-sm font-semibold uppercase tracking-widest text-accent">{{kicker}}</div>{{/kicker}}
+      <h2 class="font-mono text-4xl font-bold leading-tight">{{title}}</h2>
+    </div>
+  </div>
+  <pre class="flex-1 rounded-2xl border-l-4 border-accent bg-panel font-mono text-lg leading-relaxed p-7 whitespace-pre-wrap break-words overflow-hidden text-muted">{{code}}</pre>
+  {{#body}}<div class="flex items-center gap-4 rounded-2xl bg-[color-mix(in_srgb,var(--accent)_14%,transparent)] px-6 py-5 text-xl"><i class="ph ph-wrench text-2xl text-accent"></i><span><b>Fix:</b> {{body}}</span></div>{{/body}}
+</div>
