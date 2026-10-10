@@ -73,6 +73,8 @@ export async function writeDeck(ctx: Context, args: WriteArgs, mode: "create" | 
   return {
     written: true as const,
     path: args.path,
+    /** Absolute location, so the user knows where the deck landed. */
+    file: full,
     validation,
     preview: await previewLink(ctx, markdown, args.path),
     next: "Commit and push this file: it appears in the md2slides dashboard (Repositories) and in the VS Code extension. The preview link opens it right away.",
