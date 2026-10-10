@@ -60,6 +60,7 @@ export function CommandPalette() {
       { label: "Open template studio (HTML + Tailwind)", icon: "code-block", run: () => { closeModal(); setView("studio"); } },
       { label: "Browse templates", icon: "squares-four", run: () => { closeModal(); setView("templates"); } },
       { label: "Save deck as template", icon: "bookmark-simple", run: () => file.saveAsTemplate() },
+      { label: "Submit deck to community", icon: "git-pull-request", run: () => file.submitToCommunity() },
       { label: "Show problems", icon: "warning", run: inEditor(() => { useEditor.getState().set({ problemsOpen: true }); closeModal(); }) },
       { label: "Syntax reference", icon: "book-open", run: inEditor(() => { useEditor.getState().set({ syntaxOpen: true }); closeModal(); }) },
       { label: "Customize theme", icon: "sliders-horizontal", run: inEditor(() => { set({ customOpen: true }); closeModal(); }) },

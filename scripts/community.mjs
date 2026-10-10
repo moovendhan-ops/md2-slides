@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 /**
  * Validate community templates and write src/data/community.generated.json.
- *   community/templates/<id>/deck.md + meta.json  ({ name, description, category, author: { github, name? }, look? })
+ *   community/templates/<id>/deck.md + meta.json  ({ name, description, category, author: { github, name? }, look?, slots? })
+ *   community/templates/<id>/template.html          (optional: an HTML + Tailwind layout, used as `custom:<id>`)
  *   community/CONTRIBUTORS.json                    (people credited on the contributors wall)
- * Fails on invalid entries. `--check` fails if the generated file is out of date (CI).
+ * Fails on invalid entries. `--check` also fails if the generated file is out of date.
  */
 import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
@@ -14,6 +15,7 @@ const dir = join(root, "community/templates");
 const out = join(root, "src/data/community.generated.json");
 const HANDLE = /^[A-Za-z0-9](?:[A-Za-z0-9]|-(?=[A-Za-z0-9])){0,38}$/;
 const ID = /^[a-z0-9][a-z0-9-]{1,40}$/;
+const BUILTIN_LAYOUTS = new Set(JSON.parse(readFileSync(join(root, "src/data/code-templates.json"), "utf8")).map((c) => c.id));
 const errors = [];
 
 const templates = readdirSync(dir, { withFileTypes: true })
@@ -38,6 +40,12 @@ const templates = readdirSync(dir, { withFileTypes: true })
     const bad = deck.problems.filter((p) => p.sev === "error");
     if (!deck.slides.length) return fail("deck.md has no slides");
     if (bad.length) return fail(`deck.md has errors: ${bad.map((p) => `line ${p.line + 1} ${p.msg}`).join("; ")}`);
+    const html = existsSync(at("template.html")) ? readFileSync(at("template.html"), "utf8") : null;
+    if (html != null) {
+      if (BUILTIN_LAYOUTS.has(id)) return fail("a layout can't reuse a built-in layout id");
+      if (/<script|on\w+=|fetch\(/i.test(html)) return fail("template.html can't contain scripts, inline handlers or fetch()");
+    }
+    const layout = html == null ? {} : { single: true, code: true, html, config: { id, name: meta.name, category: meta.category, author: meta.author.github, slots: meta.slots ?? [], description: meta.description } };
     return [
       {
         id: `community-${id}`,
@@ -50,6 +58,7 @@ const templates = readdirSync(dir, { withFileTypes: true })
         stars: 0,
         community: true,
         look: meta.look ?? {},
+        ...layout,
       },
     ];
   });

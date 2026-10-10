@@ -7,6 +7,7 @@ import { BootScreen } from "@/components/shell/boot-screen";
 import { AiDialog } from "@/features/ai/ai-dialog";
 import { CommandPalette } from "@/features/palette/command-palette";
 import { CommitDialog } from "@/features/commit/commit-dialog";
+import { ContributeDialog } from "@/features/community/contribute-dialog";
 import { EditorView } from "@/features/editor/editor-view";
 import { NewSlideDialog } from "@/features/editor/new-slide-dialog";
 import { PrintRoot } from "@/features/present/print-root";
@@ -48,6 +49,7 @@ function Shell() {
       </div>
       <CommandPalette />
       <CommitDialog />
+      <ContributeDialog />
       <AiDialog />
       <NewSlideDialog />
       <RepoPickerDialog />

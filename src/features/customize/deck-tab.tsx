@@ -24,7 +24,7 @@ function insertAtCaret(text: string) {
 export function DeckTab() {
   const { options: o, deck } = useDeck();
   const { setOption } = useDeckActions();
-  const { saveAsTemplate } = useFileActions();
+  const { saveAsTemplate, submitToCommunity } = useFileActions();
   return (
     <>
       <Section title="Footer">
@@ -50,6 +50,9 @@ export function DeckTab() {
       </Section>
       <Button variant="outline" className="gap-1.5 border-zinc-800" onClick={() => saveAsTemplate()}>
         <Icon name="bookmark-simple" /> Save deck as template
+      </Button>
+      <Button variant="outline" className="gap-1.5 border-zinc-800" onClick={submitToCommunity}>
+        <Icon name="git-pull-request" /> Submit to community
       </Button>
     </>
   );

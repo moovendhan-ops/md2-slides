@@ -107,6 +107,61 @@ export class GitHubClient {
     return commit;
   }
 
+  repo(repo: string) {
+    return this.req<GhRepo & { owner: { login: string } }>(`/repos/${repo}`);
+  }
+
+  /** True when `path` exists on `ref` (default branch when omitted). */
+  async exists(repo: string, path: string, ref?: string) {
+    try {
+      await this.req(`/repos/${repo}/contents/${path.split("/").map(encodeURIComponent).join("/")}${ref ? `?ref=${encodeURIComponent(ref)}` : ""}`);
+      return true;
+    } catch (e) {
+      if (e instanceof GitHubError && e.status === 404) return false;
+      throw e;
+    }
+  }
+
+  /**
+   * Where a user can push a branch for `upstream`: the repo itself when they
+   * have write access, otherwise their fork (created, or reused, on demand).
+   */
+  async pushTarget(upstream: string): Promise<{ repo: string; owner: string; base: string; baseSha: string }> {
+    const up = await this.repo(upstream);
+    const base = up.default_branch;
+    const ref = await this.req<{ object: { sha: string } }>(`/repos/${upstream}/git/ref/heads/${encodeURIComponent(base)}`);
+    if (up.permissions?.push) return { repo: upstream, owner: up.owner.login, base, baseSha: ref.object.sha };
+    const fork = await this.req<{ full_name: string; owner: { login: string } }>(`/repos/${upstream}/forks`, { method: "POST", body: JSON.stringify({ default_branch_only: true }) });
+    // Forking is asynchronous: wait until the fork answers (usually a few seconds).
+    for (let i = 0; i < 10; i++) {
+      try {
+        await this.req(`/repos/${fork.full_name}/git/ref/heads/${encodeURIComponent(base)}`);
+        break;
+      } catch (e) {
+        if (!(e instanceof GitHubError && (e.status === 404 || e.status === 409)) || i === 9) throw e;
+        await new Promise((r) => setTimeout(r, 1500));
+      }
+    }
+    return { repo: fork.full_name, owner: fork.owner.login, base, baseSha: ref.object.sha };
+  }
+
+  /**
+   * Commit `changes` on a new branch (in the repo or the user's fork) and open
+   * a pull request against `upstream`'s default branch.
+   */
+  async contribute(upstream: string, branch: string, pr: { title: string; body: string }, changes: FileChange[]) {
+    const target = await this.pushTarget(upstream);
+    // A fork shares objects with its parent, so the branch can start at upstream's tip even when the fork is behind.
+    await this.req(`/repos/${target.repo}/git/refs`, { method: "POST", body: JSON.stringify({ ref: `refs/heads/${branch}`, sha: target.baseSha }) });
+    await this.commit(target.repo, branch, pr.title, changes);
+    const head = target.repo === upstream ? branch : `${target.owner}:${branch}`;
+    const res = await this.req<{ number: number; html_url: string }>(`/repos/${upstream}/pulls`, {
+      method: "POST",
+      body: JSON.stringify({ title: pr.title, body: pr.body, head, base: target.base, maintainer_can_modify: true }),
+    });
+    return { url: res.html_url, pullRequest: res.number, forked: target.repo !== upstream };
+  }
+
   /** Commit onto a new branch and open a pull request against `base`. */
   async pullRequest(repo: string, base: string, message: string, changes: FileChange[]) {
     const head = `md2slides/${Date.now().toString(36)}`;

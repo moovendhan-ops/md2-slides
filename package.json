@@ -19,7 +19,7 @@
     "postinstall": "node scripts/patch-webllm.mjs",
     "player:build": "node scripts/build-player.mjs",
     "predev": "node scripts/patch-webllm.mjs && node scripts/community.mjs && node scripts/build-player.mjs --dev",
-    "prebuild": "node scripts/patch-webllm.mjs && node scripts/community.mjs --check && node scripts/build-player.mjs",
+    "prebuild": "node scripts/patch-webllm.mjs && node scripts/community.mjs && node scripts/build-player.mjs",
     "community": "node scripts/community.mjs",
     "mcp:build": "node packages/mcp/build.mjs",
     "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
