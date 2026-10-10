@@ -1,16 +1,48 @@
 name: Community templates
 
+# Pull requests (including ones opened from the app's "Submit to community"):
+# validate every template. Contributors don't need to commit the generated catalog.
+# Pushes to main: regenerate src/data/community.generated.json and commit it if it changed.
 on:
   pull_request:
     paths: ["community/**", "src/data/community.generated.json", "scripts/community.mjs"]
+  push:
+    branches: [main]
+    paths: ["community/**", "scripts/community.mjs"]
 
 jobs:
   validate:
+    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Validate templates and check the generated catalog is committed
-        run: node scripts/community.mjs --check
+          cache: npm
+      - run: npm ci
+      - name: Validate templates
+        run: node scripts/community.mjs
+
+  sync-catalog:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Regenerate the community catalog
+        run: node scripts/community.mjs
+      - name: Commit it if it changed
+        run: |
+          git diff --quiet -- src/data/community.generated.json && exit 0
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/community.generated.json
+          git commit -m "Regenerate community catalog"
+          git push

@@ -1,4 +1,5 @@
-import type { AuthProvider, CommitRequest, CommitResult, GitProvider, Me, Repo, RepoTree } from "./types";
+import type { CommunitySubmission } from "@/domain/community/submission";
+import type { AuthProvider, CommitRequest, CommitResult, ContributeResult, GitProvider, Me, Repo, RepoTree } from "./types";
 
 /** Error with the HTTP status from our API routes (401 = signed out, 429 = rate limited). */
 export class ApiError extends Error {
@@ -50,5 +51,9 @@ export class GitHubProvider implements GitProvider, AuthProvider {
 
   commit(req: CommitRequest) {
     return call<CommitResult>("/api/github/commit", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(req) });
+  }
+
+  submitCommunity(s: CommunitySubmission) {
+    return call<ContributeResult>("/api/community/submit", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(s) });
   }
 }

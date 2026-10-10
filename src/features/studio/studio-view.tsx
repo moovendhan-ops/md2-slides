@@ -7,6 +7,7 @@ import { Seg } from "@/components/common/controls";
 import { Icon } from "@/components/common/icon";
 import { Button } from "@/components/ui/button";
 import { useSaveTemplate } from "@/hooks/use-queries";
+import { useContribute } from "@/stores/contribute";
 import { useLayoutStore } from "@/stores/layouts";
 import { useStudio, type StudioTab } from "@/stores/studio";
 import { StudioPreview } from "./studio-preview";
@@ -23,6 +24,7 @@ export function StudioView() {
   const st = useStudio();
   const save = useSaveTemplate();
   const register = useLayoutStore((s) => s.register);
+  const contribute = useContribute((s) => s.open);
   const code = st.tab === "guide" ? "" : st[st.tab];
 
   const persist = async (pr: boolean) => {
@@ -35,7 +37,9 @@ export function StudioView() {
     const md = st.sample.replace(/layout:\s*custom:[\w-]+/, `layout: custom:${config.id}`);
     const meta = { id: config.id, name: config.name || config.id, category: config.category || "Custom", author: config.author || "You" };
     await save.mutateAsync({ id: `code-${meta.id}`, name: meta.name, cat: meta.category, author: meta.author, md, stars: 0, community: true, single: true, code: true, look: {}, html: st.html, config: meta });
-    toast(pr ? `Opened PR: templates/${config.id}/{template.html, config.json} → md2slides/community-templates` : `Saved “${meta.name}” — use <!-- layout: custom:${config.id} -->`);
+    if (!pr) return toast(`Saved “${meta.name}” — use <!-- layout: custom:${config.id} -->`);
+    const { description, slots } = config as { description?: string; slots?: string[] };
+    contribute({ id: config.id, name: meta.name, category: meta.category, description, md, layout: { html: st.html, slots } });
   };
 
   return (
