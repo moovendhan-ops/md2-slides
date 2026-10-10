@@ -1,7 +1,7 @@
-/* eslint-disable @next/next/no-img-element -- static slide renders */
 import { Icon } from "@/components/common/icon";
 import { PAINS, WORKFLOW, WORKS_WITH } from "./content";
 import { SectionHead } from "./section-head";
+import { WorkflowSlide } from "./workflow-slide";
 
 export function WorksWith() {
   return (
@@ -53,7 +53,7 @@ export function Workflow() {
                 <p className="mt-1 text-[13.5px] text-zinc-400">{s.text}</p>
                 <pre className="mt-4 overflow-x-auto rounded-lg border border-zinc-800 bg-zinc-950 p-4 font-mono text-[12.5px] leading-relaxed text-zinc-300">{s.code}</pre>
               </div>
-              <img src={s.img} alt={`${s.title}: rendered slide`} loading="lazy" className="w-full rounded-xl border border-zinc-800" />
+              <WorkflowSlide md={s.slide} title={s.title} />
             </div>
           ))}
         </div>

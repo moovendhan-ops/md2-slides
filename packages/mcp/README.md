@@ -19,12 +19,14 @@ claude mcp add md2slides -- npx -y md2slides-mcp
 ```json
 {
   "mcpServers": {
-    "md2slides": { "command": "npx", "args": ["-y", "md2slides-mcp", "--root", "/path/to/your/repo"] }
+    "md2slides": { "command": "npx", "args": ["-y", "md2slides-mcp"] }
   }
 }
 ```
 
 **Cursor / VS Code:** add the same `command` and `args` to your MCP settings.
+
+No path to configure: decks go into the project the client has open (its working folder, or its MCP workspace roots). Claude Desktop has no project, so its decks go into `~/md2slides`; pass `--root /path/to/repo` to write into a repo instead. Every write reports the full path of the file.
 
 ## Then ask
 
@@ -50,7 +52,7 @@ The `new_deck` prompt runs the whole flow for a topic.
 
 | Flag / env | Default | |
 | --- | --- | --- |
-| `--root` / `MD2SLIDES_ROOT` | current directory | Workspace the decks are written under |
+| `--root` / `MD2SLIDES_ROOT` | the client's project (MCP roots or working folder); `~/md2slides` when that is `/` or your home folder | Workspace the decks are written under |
 | `--app-url` / `MD2SLIDES_APP_URL` | `https://md2slides.cybertechmind.com` | App used for preview links (use your own deployment) |
 
 Everything runs locally and needs Node 18.17+.

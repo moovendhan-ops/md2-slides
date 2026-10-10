@@ -1,6 +1,6 @@
 {
   "name": "md2slides-mcp",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "MCP server and CLI for md2slides: open and preview decks, or let Claude write slide decks validated by the md2slides engine.",
   "keywords": ["mcp", "model-context-protocol", "claude", "markdown", "slides", "presentation", "md2slides", "cli"],
   "type": "module",

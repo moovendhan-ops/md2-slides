@@ -30,10 +30,31 @@ export const PAINS: { pain: string; fix: string; icon: string; detail: string }[
   { icon: "paperclip", pain: "Emailing a 40 MB .pptx", fix: "A link, or one HTML file", detail: "Share a view-only link (nothing stored on a server) or export an offline HTML presentation." },
 ];
 
-export const WORKFLOW: { n: string; title: string; text: string; code: string; img: string }[] = [
-  { n: "01", title: "Write (or let Claude write)", text: "Plain Markdown with blocks for cards, stats, timelines, code and Mermaid.", code: "## Everything is a block\n\n:::cards style=glass cols=3\n- lightning | Live preview | …\n- squares-four | Components | …\n:::", img: "/landing/slide-2.jpg" },
-  { n: "02", title: "Push to your repo", text: "The dashboard syncs with GitHub. Your deck sits next to the code it explains.", code: "git add decks/q3.md\ngit commit -m \"Q3 review: add results\"\ngit push", img: "/landing/slide-4.jpg" },
-  { n: "03", title: "Present or share", text: "Full presenter with notes, pen and timer, a share link or one offline HTML file.", code: "```ts deck.ts {2|3}\nconst deck = await parse(\"q3.md\");\nconst link = await share(deck);\npresent(deck);\n```", img: "/landing/slide-5.jpg" },
+/** Shared look for the workflow slides (front matter, as in any deck). */
+const WORKFLOW_LOOK = "---\ntheme: zinc\naccent: #3b82f6\nbg: mesh\nglass: true\nnums: false\n---\n";
+
+export const WORKFLOW: { n: string; title: string; text: string; code: string; slide: string }[] = [
+  {
+    n: "01",
+    title: "Write (or let Claude write)",
+    text: "Plain Markdown with blocks for cards, stats, timelines, code and Mermaid.",
+    code: "## Everything is a block\n\n:::cards style=glass cols=3\n- lightning | Live preview | …\n- squares-four | Components | …\n:::",
+    slide: `${WORKFLOW_LOOK}^ Write\n## Everything is a block\n:::cards style=glass cols=3\n- lightning | Live preview | Every keystroke re-renders\n- squares-four | Components | Cards, stats, charts, Mermaid\n- git-branch | In your repo | One .md file per deck\n:::`,
+  },
+  {
+    n: "02",
+    title: "Push to your repo",
+    text: "The dashboard syncs with GitHub. Your deck sits next to the code it explains.",
+    code: "git add decks/q3.md\ngit commit -m \"Q3 review: add results\"\ngit push",
+    slide: `${WORKFLOW_LOOK}^ Q3 review\n## Results\n:::stats style=boxed\n- 42% | Faster deploys | +12%\n- 99.9% | Uptime\n- 3x | Release cadence | +1x\n:::`,
+  },
+  {
+    n: "03",
+    title: "Present or share",
+    text: "Full presenter with notes, pen and timer, a share link or one offline HTML file.",
+    code: "```ts deck.ts {2|3}\nconst deck = await parse(\"q3.md\");\nconst link = await share(deck);\npresent(deck);\n```",
+    slide: `${WORKFLOW_LOOK}^ Present\n## One deck, three ways out\n:::cards style=outline cols=3\n- presentation | Presenter | Notes, pen, laser and timer\n- share-network | Share link | The deck travels in the link\n- file-html | HTML file | Works offline, anywhere\n:::`,
+  },
 ];
 
 export const MCP = {
@@ -41,7 +62,7 @@ export const MCP = {
   sub: "Run the md2slides MCP server with npx. Claude reads the syntax, writes the .md into your repo, fixes anything the engine flags, and hands you a preview link.",
   install: {
     "Claude Code": "claude mcp add md2slides -- npx -y md2slides-mcp",
-    "Claude Desktop": '{\n  "mcpServers": {\n    "md2slides": {\n      "command": "npx",\n      "args": ["-y", "md2slides-mcp", "--root", "/path/to/repo"]\n    }\n  }\n}',
+    "Claude Desktop": '{\n  "mcpServers": {\n    "md2slides": {\n      "command": "npx",\n      "args": ["-y", "md2slides-mcp"]\n    }\n  }\n}',
     "Cursor / VS Code": '"md2slides": {\n  "command": "npx",\n  "args": ["-y", "md2slides-mcp"]\n}',
   } as Record<string, string>,
   prompt: "Make a 6-slide client update in decks/acme-q3.md: results as stats, the new architecture as a Mermaid diagram, and next quarter's plan.",

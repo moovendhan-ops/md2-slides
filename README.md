@@ -81,6 +81,7 @@ claude mcp add md2slides -- npx -y md2slides-mcp
 ```
 
 - **Tools:** `get_syntax`, `list_blocks`, `list_templates`, `validate_deck`, `create_deck`, `update_deck`, `read_deck`, `preview_link`, plus a `new_deck` prompt.
+- **Where decks go:** no path to configure. The server writes into the project the client has open (its working folder or MCP workspace roots). Claude Desktop has no project, so its decks go into `~/md2slides`; `--root` overrides both.
 - **How decks are written:** each deck is validated by the same Wasm engine, then written inside the workspace. It refuses paths outside the workspace and won't overwrite by accident. Claude gets back a `/v#…` preview link.
 - **To the dashboard:** push the file and it appears in the dashboard.
 - **Build and release:** `npm run mcp:build` builds it. Pushing an `mcp-v*` tag publishes to npm when the `NPM_TOKEN` secret is set. Details are in [packages/mcp/README.md](packages/mcp/README.md).
@@ -88,7 +89,8 @@ claude mcp add md2slides -- npx -y md2slides-mcp
 ## Community templates
 
 - **Adding one:** community templates live in `community/templates/<id>/` as `deck.md` plus `meta.json`, with the author's GitHub username.
-- **Validation:** `npm run community` validates them with the engine and regenerates `src/data/community.generated.json`. The build and a CI workflow check it's up to date.
+- **From the app:** **Submit to community** (Template studio, or Customize → Deck) opens the pull request for you, forking the repo when needed.
+- **Validation:** `npm run community` validates them with the engine and regenerates `src/data/community.generated.json`. PR CI validates; after merge, CI (and every build) regenerates the catalog.
 - **Credit:** in the app and on the landing page, each template shows its author's avatar, name and a link to their GitHub profile. A contributors wall lists everyone, including people in `community/CONTRIBUTORS.json`. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Share links (no server storage)

@@ -4,6 +4,7 @@ import { exec } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+import { RootsListChangedNotificationSchema } from "@modelcontextprotocol/sdk/types.js";
 import { z } from "zod";
 import snippets from "../../../src/data/snippets.json";
 import templates from "../../../src/data/templates.json";
@@ -14,17 +15,21 @@ import { BRAND } from "../../../src/lib/brand";
 import { previewLink, readDeck, validateDeck, writeDeck, type Context } from "./handlers";
 
 import { startLocalSlideServer } from "./local-server";
+import { defaultRoot, rootFromClient } from "./workspace";
 
-const VERSION = "0.1.3";
+const VERSION = "0.1.5";
 
 function arg(name: string): string | undefined {
   const i = process.argv.indexOf(`--${name}`);
   return i > 0 ? process.argv[i + 1] : process.argv.find((a) => a.startsWith(`--${name}=`))?.split("=")[1];
 }
 
+/** An explicit workspace wins; otherwise the client's MCP roots (after connect), then defaultRoot(). */
+const explicitRoot = arg("root") ?? process.env.MD2SLIDES_ROOT;
+
 const ctx: Context = {
   engine: loadNodeEngine(() => readFileSync(fileURLToPath(new URL("./slide_engine_bg.wasm", import.meta.url)))),
-  root: arg("root") ?? process.env.MD2SLIDES_ROOT ?? process.cwd(),
+  root: explicitRoot ?? defaultRoot(),
   appUrl: arg("app-url") ?? process.env.MD2SLIDES_APP_URL ?? BRAND.url,
 };
 
@@ -42,6 +47,9 @@ if (directFile) {
     open: !process.argv.includes("--no-open"),
   });
 }
+
+/** Settles once the workspace is known (the client's roots are read right after initialize). */
+let workspaceReady: Promise<void> = Promise.resolve();
 
 const json = (value: unknown) => ({ content: [{ type: "text" as const, text: JSON.stringify(value, null, 2) }] });
 const fail = (e: unknown) => ({ isError: true, content: [{ type: "text" as const, text: (e as Error).message }] });
@@ -94,13 +102,13 @@ server.registerTool(
     inputSchema: { ...writeSchema, overwrite: z.boolean().optional() },
     annotations: { destructiveHint: false },
   },
-  async (args) => writeDeck(ctx, args, "create").then(json, fail),
+  async (args) => workspaceReady.then(() => writeDeck(ctx, args, "create")).then(json, fail),
 );
 
 server.registerTool(
   "update_deck",
   { title: "Update deck", description: "Validate and replace the contents of an existing deck .md file in the workspace.", inputSchema: writeSchema, annotations: { destructiveHint: true } },
-  async (args) => writeDeck(ctx, args, "update").then(json, fail),
+  async (args) => workspaceReady.then(() => writeDeck(ctx, args, "update")).then(json, fail),
 );
 
 server.registerTool(
@@ -108,6 +116,7 @@ server.registerTool(
   { title: "Read deck", description: "Read an existing deck .md file from the workspace.", inputSchema: { path: z.string() }, annotations: { readOnlyHint: true } },
   async ({ path }) => {
     try {
+      await workspaceReady;
       return { content: [{ type: "text", text: readDeck(ctx, path) }] };
     } catch (e) {
       return fail(e);
@@ -120,6 +129,7 @@ server.registerTool(
   { title: "Preview link", description: "A view-only link that opens the deck in the md2slides viewer (the deck travels inside the link; nothing is uploaded).", inputSchema: { markdown: z.string().optional(), path: z.string().optional() } },
   async ({ markdown, path }) => {
     try {
+      await workspaceReady;
       const md = markdown ?? (path ? readDeck(ctx, path) : undefined);
       if (!md) throw new Error("Pass markdown or a workspace path");
       return json({ url: await previewLink(ctx, md, path) });
@@ -145,6 +155,21 @@ server.registerPrompt(
   }),
 );
 
+/** Follow the client's workspace folder (MCP roots) when no --root was given. */
+async function syncRootFromClient() {
+  if (explicitRoot || !server.server.getClientCapabilities()?.roots) return;
+  try {
+    const root = rootFromClient((await server.server.listRoots()).roots);
+    if (root) ctx.root = root;
+  } catch (e) {
+    console.error(`md2slides MCP: could not read the client's roots (${(e as Error).message})`);
+  }
+}
+
+server.server.setNotificationHandler(RootsListChangedNotificationSchema, () => (workspaceReady = syncRootFromClient()));
+server.server.oninitialized = () => {
+  workspaceReady = syncRootFromClient().then(() => console.error(`md2slides MCP ${VERSION} ready · workspace ${ctx.root}`));
+};
+
 await server.connect(new StdioServerTransport());
-console.error(`md2slides MCP ${VERSION} ready · workspace ${ctx.root}`);
 

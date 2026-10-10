@@ -69,7 +69,6 @@ export function VideoDemo() {
             <div className="relative aspect-video w-full bg-black">
               <video
                 ref={videoRef}
-                poster="https://cdn.jsdelivr.net/gh/moovendhan-v/md2-slides@main/public/landing/slide-1.jpg"
                 preload="metadata"
                 autoPlay
                 loop
