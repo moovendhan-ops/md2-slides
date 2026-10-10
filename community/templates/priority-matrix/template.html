@@ -1,0 +1,21 @@
+<div class="h-full flex flex-col gap-6 p-14">
+  <div>
+    {{#kicker}}<div class="text-sm font-semibold uppercase tracking-widest text-accent">{{kicker}}</div>{{/kicker}}
+    <h2 class="font-head text-5xl font-bold tracking-tight mt-2">{{title}}</h2>
+    {{#body}}<p class="text-xl text-muted mt-3 max-w-3xl">{{body}}</p>{{/body}}
+  </div>
+  <div class="flex-1 grid grid-cols-[2.5rem_1fr] grid-rows-[1fr_2.5rem] gap-3">
+    <div class="flex items-center justify-center"><span class="-rotate-90 whitespace-nowrap text-sm font-semibold uppercase tracking-widest text-muted">Impact →</span></div>
+    <div class="grid grid-cols-2 grid-rows-2 gap-4">
+      {{#items}}
+      <div class="rounded-2xl border border-rule bg-panel p-6 flex flex-col justify-end gap-2 first:bg-accent first:text-[#0a0a0c] first:border-transparent">
+        <i class="ph {{icon}} text-3xl"></i>
+        <div class="text-2xl font-bold">{{title}}</div>
+        <div class="opacity-75 leading-snug">{{text}}</div>
+      </div>
+      {{/items}}
+    </div>
+    <div></div>
+    <div class="flex items-center justify-center text-sm font-semibold uppercase tracking-widest text-muted">Effort →</div>
+  </div>
+</div>

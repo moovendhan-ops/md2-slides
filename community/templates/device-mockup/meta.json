@@ -1,0 +1,19 @@
+{
+  "name": "Device mockup",
+  "description": "A product screenshot in a laptop frame with the pitch beside it. Put the screenshot URL in the image directive.",
+  "category": "Product",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "body",
+    "image",
+    "items[title]"
+  ],
+  "look": {
+    "accent": "#3b82f6"
+  }
+}

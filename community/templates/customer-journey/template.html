@@ -1,0 +1,19 @@
+<div class="h-full flex flex-col gap-10 p-16">
+  <div>
+    {{#kicker}}<div class="text-sm font-semibold uppercase tracking-widest text-accent">{{kicker}}</div>{{/kicker}}
+    <h2 class="font-head text-5xl font-bold tracking-tight mt-2">{{title}}</h2>
+    {{#body}}<p class="text-xl text-muted mt-3 max-w-3xl">{{body}}</p>{{/body}}
+  </div>
+  <div class="flex-1 grid grid-flow-col auto-cols-fr">
+    {{#items}}
+    <div data-i="{{icon}}" class="group flex flex-col items-center text-center gap-5 px-4 border-l border-rule first:border-0">
+      <span class="font-mono text-sm font-semibold uppercase tracking-widest text-accent">Stage {{index}}</span>
+      <div class="text-2xl font-bold">{{title}}</div>
+      <div class="flex-1 flex flex-col justify-center">
+        <i class="ph {{icon}} text-6xl text-accent group-data-[i=ph-smiley-sad]:text-[#ef4444] group-data-[i=ph-smiley-meh]:text-[#f59e0b] group-data-[i=ph-smiley]:text-[#22c55e]"></i>
+      </div>
+      <div class="text-muted leading-snug">{{text}}</div>
+    </div>
+    {{/items}}
+  </div>
+</div>

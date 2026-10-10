@@ -1,0 +1,18 @@
+{
+  "name": "Open roles",
+  "description": "Hiring slide: roles as cards with team and location. Icon, role, then team and location.",
+  "category": "Company",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "body",
+    "items[icon,title,text]"
+  ],
+  "look": {
+    "accent": "#22c55e"
+  }
+}

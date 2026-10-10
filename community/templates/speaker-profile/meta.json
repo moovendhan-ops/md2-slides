@@ -1,0 +1,19 @@
+{
+  "name": "Speaker profile",
+  "description": "Introduce a speaker: photo, name, role, short bio and highlights.",
+  "category": "People",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "body",
+    "image",
+    "items[icon,title,text]"
+  ],
+  "look": {
+    "accent": "#f97316"
+  }
+}

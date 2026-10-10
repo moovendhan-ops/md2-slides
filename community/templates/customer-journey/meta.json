@@ -1,0 +1,17 @@
+{
+  "name": "Customer journey",
+  "description": "Journey stages left to right with how the customer feels at each. Use smiley icons for the mood.",
+  "category": "Marketing",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "items[icon,title,text]"
+  ],
+  "look": {
+    "accent": "#8b5cf6"
+  }
+}

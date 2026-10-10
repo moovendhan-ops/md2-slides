@@ -1,0 +1,17 @@
+{
+  "name": "Feature comparison",
+  "description": "You versus the alternatives, feature by feature. Our status as the icon (check-circle or x-circle), the feature, then how others compare.",
+  "category": "Pitch",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "items[icon,title,text]"
+  ],
+  "look": {
+    "accent": "#3b82f6"
+  }
+}

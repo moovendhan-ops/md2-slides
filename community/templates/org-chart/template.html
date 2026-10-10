@@ -1,0 +1,21 @@
+<div class="h-full flex flex-col gap-8 p-16">
+  <div>
+    {{#kicker}}<div class="text-sm font-semibold uppercase tracking-widest text-accent">{{kicker}}</div>{{/kicker}}
+    <h2 class="font-head text-5xl font-bold tracking-tight mt-2">{{title}}</h2>
+  </div>
+  <div class="flex-1 flex flex-wrap content-center gap-x-6 gap-y-14">
+    {{#items}}
+    <div class="relative flex flex-col items-center text-center gap-3 rounded-2xl border border-rule bg-panel p-6
+      first:w-80 first:mx-[calc((100%-20rem)/2)] first:bg-accent first:text-[#0a0a0c] first:border-transparent
+      first:after:content-[''] first:after:absolute first:after:top-full first:after:left-1/2 first:after:h-7 first:after:w-0.5 first:after:bg-rule
+      [&:not(:first-child)]:flex-1 [&:not(:first-child)]:min-w-0
+      [&:not(:first-child)]:before:content-[''] [&:not(:first-child)]:before:absolute [&:not(:first-child)]:before:bottom-full [&:not(:first-child)]:before:left-1/2 [&:not(:first-child)]:before:h-7 [&:not(:first-child)]:before:w-0.5 [&:not(:first-child)]:before:bg-rule
+      [&:not(:first-child)]:after:content-[''] [&:not(:first-child)]:after:absolute [&:not(:first-child)]:after:-top-7 [&:not(:first-child)]:after:-left-3 [&:not(:first-child)]:after:-right-3 [&:not(:first-child)]:after:h-0.5 [&:not(:first-child)]:after:bg-rule
+      [&:not(:first-child):nth-child(2)]:after:left-1/2 [&:not(:first-child):last-child]:after:right-1/2">
+      <span class="size-14 rounded-full grid place-items-center border-2 border-current"><i class="ph {{icon}} text-2xl"></i></span>
+      <div class="text-xl font-semibold">{{title}}</div>
+      <div class="opacity-70">{{text}}</div>
+    </div>
+    {{/items}}
+  </div>
+</div>

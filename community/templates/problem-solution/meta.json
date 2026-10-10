@@ -1,0 +1,17 @@
+{
+  "name": "Problem and solution",
+  "description": "The problem on the left, your solution on the right, joined by an arrow. Exactly two rows.",
+  "category": "Pitch",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "items[icon,title,text]"
+  ],
+  "look": {
+    "accent": "#10b981"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "Do's and don'ts",
+  "description": "Guidelines as do/don't cards. check-circle for a do, x-circle for a don't; colors follow the icon.",
+  "category": "Text",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "items[icon,title,text]"
+  ],
+  "look": {
+    "accent": "#22c55e"
+  }
+}

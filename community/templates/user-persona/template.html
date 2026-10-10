@@ -1,0 +1,20 @@
+<div class="h-full grid grid-cols-[0.8fr_1.5fr] gap-12 p-16">
+  <div class="flex flex-col items-center justify-center gap-6 rounded-3xl bg-panel border border-rule p-10 text-center">
+    <div class="size-48 rounded-full overflow-hidden ring-4 ring-accent ring-offset-4 ring-offset-bg bg-[color-mix(in_srgb,var(--accent)_16%,transparent)] grid place-items-center">
+      {{#image}}<img src="{{image}}" class="h-full w-full object-cover">{{/image}}{{^image}}<i class="ph ph-user text-8xl text-accent"></i>{{/image}}
+    </div>
+    <div>
+      <div class="font-head text-4xl font-bold">{{title}}</div>
+      {{#kicker}}<div class="text-lg text-accent font-semibold mt-1">{{kicker}}</div>{{/kicker}}
+    </div>
+    {{#body}}<p class="text-lg italic text-muted">“{{body}}”</p>{{/body}}
+  </div>
+  <div class="grid grid-cols-2 gap-5 content-center">
+    {{#items}}
+    <div class="rounded-2xl border border-rule p-6 flex flex-col gap-2">
+      <div class="flex items-center gap-3 text-sm font-semibold uppercase tracking-widest text-accent"><i class="ph {{icon}} text-xl"></i>{{title}}</div>
+      <div class="text-lg leading-snug">{{text}}</div>
+    </div>
+    {{/items}}
+  </div>
+</div>
