@@ -1,0 +1,20 @@
+<div class="h-full grid place-items-center p-16">
+  <div class="w-full max-w-[64rem] rounded-3xl border border-rule bg-panel overflow-hidden">
+    <div class="flex items-start gap-5 p-10 border-b border-rule">
+      <span class="flex items-center gap-2 rounded-full bg-accent text-[#0a0a0c] px-4 py-2 font-semibold shrink-0"><i class="ph ph-git-pull-request text-xl"></i>Open</span>
+      <div>
+        <h2 class="font-head text-4xl font-bold leading-tight">{{title}} <span class="text-muted font-normal">{{kicker}}</span></h2>
+        {{#body}}<p class="text-xl text-muted mt-3">{{body}}</p>{{/body}}
+      </div>
+    </div>
+    <div class="divide-y divide-rule">
+      {{#items}}
+      <div class="flex items-center gap-4 px-10 py-4">
+        <i class="ph {{icon}} text-2xl text-accent"></i>
+        <span class="text-lg font-semibold">{{title}}</span>
+        <span class="ml-auto font-mono text-muted">{{text}}</span>
+      </div>
+      {{/items}}
+    </div>
+  </div>
+</div>

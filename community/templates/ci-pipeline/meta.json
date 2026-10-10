@@ -1,0 +1,19 @@
+{
+  "name": "CI pipeline",
+  "description": "A CI/CD run as connected stages. Status from the icon: check-circle passed, x-circle failed, spinner running, circle queued.",
+  "category": "Developer",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "body",
+    "items[icon,title,text]"
+  ],
+  "look": {
+    "accent": "#22c55e",
+    "font": "mono"
+  }
+}

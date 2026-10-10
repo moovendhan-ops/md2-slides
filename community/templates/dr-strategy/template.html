@@ -1,0 +1,17 @@
+<div class="h-full flex flex-col gap-8 p-16">
+  <div>
+    {{#kicker}}<div class="text-sm font-semibold uppercase tracking-widest text-accent">{{kicker}}</div>{{/kicker}}
+    <h2 class="font-head text-5xl font-bold tracking-tight mt-2">{{title}}</h2>
+    {{#body}}<p class="text-xl text-muted mt-3 max-w-3xl">{{body}}</p>{{/body}}
+  </div>
+  <div class="flex-1 grid grid-flow-col auto-cols-fr gap-6">
+    {{#items}}
+    <div class="flex flex-col justify-end gap-4">
+      <div class="text-xl font-semibold">{{title}}</div>
+      <div class="font-mono text-muted">{{text}}</div>
+      <div class="rounded-t-2xl bg-accent" style="height: calc({{index}} * 22%); opacity: calc(0.35 + {{index}} * 0.16)"></div>
+    </div>
+    {{/items}}
+  </div>
+  <div class="flex justify-between border-t-2 border-rule pt-3 font-mono text-sm uppercase tracking-widest text-muted"><span>Lower cost, slower recovery</span><span>Higher cost, faster recovery →</span></div>
+</div>

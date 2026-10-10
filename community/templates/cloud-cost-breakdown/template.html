@@ -1,0 +1,19 @@
+<div class="h-full flex flex-col justify-between gap-10 p-16">
+  <div>
+    {{#kicker}}<div class="text-sm font-semibold uppercase tracking-widest text-accent">{{kicker}}</div>{{/kicker}}
+    <h2 class="font-head text-5xl font-bold tracking-tight mt-2">{{title}}</h2>
+    {{#body}}<p class="text-xl text-muted mt-3 max-w-3xl">{{body}}</p>{{/body}}
+  </div>
+  <div class="flex h-24 rounded-2xl overflow-hidden">
+    {{#items}}<div class="relative h-full border-r-4 border-bg last:border-0 grid place-items-center font-mono text-xl font-bold" style="width: {{text}}%"><span class="absolute inset-0 bg-accent" style="opacity: calc(1.12 - {{index}} * 0.14)"></span><span class="relative">{{text}}%</span></div>{{/items}}
+  </div>
+  <div class="grid grid-cols-3 gap-x-10 gap-y-4">
+    {{#items}}
+    <div class="flex items-center gap-4 text-xl">
+      <span class="size-5 rounded-md bg-accent shrink-0" style="opacity: calc(1.12 - {{index}} * 0.14)"></span>
+      <span class="font-semibold">{{title}}</span>
+      <span class="ml-auto font-mono text-muted">{{text}}%</span>
+    </div>
+    {{/items}}
+  </div>
+</div>

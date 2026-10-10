@@ -1,0 +1,19 @@
+<div class="h-full flex flex-col justify-center gap-14 p-16">
+  <div>
+    {{#kicker}}<div class="text-sm font-semibold uppercase tracking-widest text-accent">{{kicker}}</div>{{/kicker}}
+    <h2 class="font-head text-5xl font-bold tracking-tight mt-2">{{title}}</h2>
+    {{#body}}<p class="text-xl text-muted mt-3 max-w-3xl">{{body}}</p>{{/body}}
+  </div>
+  <div class="grid grid-flow-col auto-cols-fr">
+    {{#items}}
+    <div data-i="{{icon}}" class="group relative flex flex-col items-center text-center gap-4">
+      <div class="absolute top-10 left-1/2 w-full h-1 bg-rule group-last:hidden"></div>
+      <div class="relative size-20 rounded-full grid place-items-center bg-bg border-4 border-accent group-data-[i=ph-x-circle]:border-[#ef4444] group-data-[i=ph-circle]:border-rule">
+        <i class="ph {{icon}} text-4xl text-accent group-data-[i=ph-x-circle]:text-[#ef4444] group-data-[i=ph-circle]:text-muted group-data-[i=ph-spinner]:animate-spin"></i>
+      </div>
+      <div class="font-mono text-xl font-semibold">{{title}}</div>
+      <div class="font-mono text-muted">{{text}}</div>
+    </div>
+    {{/items}}
+  </div>
+</div>
