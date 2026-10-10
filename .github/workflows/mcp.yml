@@ -22,6 +22,8 @@ jobs:
           registry-url: https://registry.npmjs.org
       - run: npm ci
       - run: npx vitest run packages/mcp
+      # The server bundles the standalone player (public/player/, gitignored).
+      - run: npm run player:build
       - run: npm run mcp:build
       - name: Smoke test (server starts)
         run: echo "" | timeout 10 node packages/mcp/dist/index.js
