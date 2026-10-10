@@ -1,0 +1,17 @@
+{
+  "name": "Tech stack grid",
+  "description": "Your stack as a grid of tiles. Icon, tool name and version or role per row.",
+  "category": "Developer",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "items[icon,title,text]"
+  ],
+  "look": {
+    "accent": "#10b981"
+  }
+}

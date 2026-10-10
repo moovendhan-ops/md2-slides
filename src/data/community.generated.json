@@ -1,6 +1,38 @@
 {
   "templates": [
     {
+      "id": "community-api-endpoint",
+      "name": "API endpoint",
+      "description": "Document one endpoint: HTTP method in the kicker, path as the title, an example in the code block and parameters as rows.",
+      "cat": "Developer",
+      "author": "Moovendhan V",
+      "authorGithub": "moovendhan-v",
+      "md": "<!-- layout: custom:api-endpoint -->\n^ POST\n# /v1/decks\nCreate a deck from Markdown. Returns the deck id and a preview link.\n:::stats\n- markdown | The deck source, required\n- path | Where to save it in the repo\n- theme | Optional theme override\n:::\n```json\n{\n  \"markdown\": \"# Q3 review\\n---\\n# Results\",\n  \"path\": \"decks/q3.md\"\n}\n→ 201 { \"id\": \"dk_42\", \"slides\": 2 }\n```\n",
+      "stars": 0,
+      "community": true,
+      "look": {
+        "accent": "#3b82f6",
+        "font": "plex"
+      },
+      "single": true,
+      "code": true,
+      "html": "<div class=\"h-full grid grid-cols-[1fr_1.15fr] gap-12 p-16\">\n  <div class=\"flex flex-col gap-6\">\n    <div class=\"flex items-center gap-4\">\n      <span class=\"rounded-lg bg-accent text-[#0a0a0c] px-4 py-2 font-mono text-xl font-bold\">{{kicker}}</span>\n      <h2 class=\"font-mono text-4xl font-semibold tracking-tight\">{{title}}</h2>\n    </div>\n    {{#body}}<p class=\"text-xl text-muted\">{{body}}</p>{{/body}}\n    <div class=\"rounded-2xl border border-rule overflow-hidden\">\n      <div class=\"px-5 py-3 bg-panel border-b border-rule text-sm font-semibold uppercase tracking-widest text-muted\">Parameters</div>\n      {{#items}}\n      <div class=\"flex gap-6 px-5 py-3 border-b border-rule last:border-0\">\n        <code class=\"font-mono text-accent w-40 shrink-0\">{{title}}</code>\n        <span class=\"text-muted\">{{text}}</span>\n      </div>\n      {{/items}}\n    </div>\n  </div>\n  <div class=\"rounded-2xl overflow-hidden border border-rule bg-panel self-center\">\n    <div class=\"px-5 py-3 border-b border-rule font-mono text-sm text-muted\">Example</div>\n    <pre class=\"font-mono text-base leading-relaxed p-6 whitespace-pre-wrap break-words\">{{code}}</pre>\n  </div>\n</div>\n",
+      "config": {
+        "id": "api-endpoint",
+        "name": "API endpoint",
+        "category": "Developer",
+        "author": "moovendhan-v",
+        "slots": [
+          "kicker",
+          "title",
+          "body",
+          "items[title,text]",
+          "code"
+        ],
+        "description": "Document one endpoint: HTTP method in the kicker, path as the title, an example in the code block and parameters as rows."
+      }
+    },
+    {
       "id": "community-api-launch",
       "name": "API launch",
       "description": "Announce a developer API: what it does, a code sample, pricing and next steps.",
@@ -14,6 +46,67 @@
         "theme": "midnight",
         "accent": "#a78bfa",
         "bg": "mesh"
+      }
+    },
+    {
+      "id": "community-architecture-stack",
+      "name": "Architecture stack",
+      "description": "System layers stacked top to bottom, like an OSI diagram. One row per layer.",
+      "cat": "Developer",
+      "author": "Moovendhan V",
+      "authorGithub": "moovendhan-v",
+      "md": "<!-- layout: custom:architecture-stack -->\n^ Architecture\n# Four layers, one binary\nThe same Rust core runs in the browser and on the server.\n:::cards\n- browser | UI | Next.js, React, Tailwind\n- plugs-connected | API | Route handlers on the edge\n- cpu | Engine | Rust compiled to WebAssembly\n- git-branch | Storage | Your GitHub repo\n:::\n",
+      "stars": 0,
+      "community": true,
+      "look": {
+        "accent": "#8b5cf6"
+      },
+      "single": true,
+      "code": true,
+      "html": "<div class=\"h-full grid grid-cols-[1fr_1.6fr] gap-14 p-16 items-center\">\n  <div class=\"flex flex-col gap-5\">\n    {{#kicker}}<div class=\"font-mono text-sm font-semibold uppercase tracking-widest text-accent\">{{kicker}}</div>{{/kicker}}\n    <h2 class=\"font-head text-5xl font-bold leading-tight tracking-tight\">{{title}}</h2>\n    {{#body}}<p class=\"text-xl text-muted\">{{body}}</p>{{/body}}\n  </div>\n  <div class=\"flex flex-col gap-3\">\n    {{#items}}\n    <div class=\"flex items-center gap-6 rounded-2xl px-7 py-5 border border-rule bg-panel first:bg-accent first:text-[#0a0a0c] first:border-transparent\">\n      <i class=\"ph {{icon}} text-3xl\"></i>\n      <span class=\"text-2xl font-semibold w-48 shrink-0\">{{title}}</span>\n      <span class=\"font-mono opacity-75\">{{text}}</span>\n    </div>\n    {{/items}}\n  </div>\n</div>\n",
+      "config": {
+        "id": "architecture-stack",
+        "name": "Architecture stack",
+        "category": "Developer",
+        "author": "moovendhan-v",
+        "slots": [
+          "kicker",
+          "title",
+          "body",
+          "items[icon,title,text]"
+        ],
+        "description": "System layers stacked top to bottom, like an OSI diagram. One row per layer."
+      }
+    },
+    {
+      "id": "community-benchmark-columns",
+      "name": "Benchmark columns",
+      "description": "A column chart for benchmarks. Label in the first cell, a 0 to 100 score in the second. The first column is highlighted.",
+      "cat": "Developer",
+      "author": "Moovendhan V",
+      "authorGithub": "moovendhan-v",
+      "md": "<!-- layout: custom:benchmark-columns -->\n^ Parse time · 200-slide deck\n# The Wasm engine is fast\nScore: relative throughput, higher is better.\n:::stats\n- md2slides | 96\n- Tool A | 58\n- Tool B | 41\n- Tool C | 23\n:::\n",
+      "stars": 0,
+      "community": true,
+      "look": {
+        "accent": "#22c55e",
+        "font": "mono"
+      },
+      "single": true,
+      "code": true,
+      "html": "<div class=\"h-full grid grid-cols-[1fr_1.5fr] gap-14 p-16\">\n  <div class=\"flex flex-col justify-center gap-5\">\n    {{#kicker}}<div class=\"font-mono text-sm font-semibold uppercase tracking-widest text-accent\">{{kicker}}</div>{{/kicker}}\n    <h2 class=\"font-head text-5xl font-bold leading-tight tracking-tight\">{{title}}</h2>\n    {{#body}}<p class=\"text-xl text-muted\">{{body}}</p>{{/body}}\n  </div>\n  <div class=\"grid grid-flow-col auto-cols-fr gap-6 pt-6\">\n    {{#items}}\n    <div class=\"group flex flex-col items-center gap-3\">\n      <div class=\"flex-1 w-full flex flex-col justify-end items-center gap-3 border-b-2 border-rule\">\n        <span class=\"font-mono text-2xl font-bold\">{{text}}</span>\n        <div class=\"w-full rounded-t-xl bg-rule group-first:bg-accent\" style=\"height: {{text}}%\"></div>\n      </div>\n      <span class=\"font-mono text-lg text-muted text-center\">{{title}}</span>\n    </div>\n    {{/items}}\n  </div>\n</div>\n",
+      "config": {
+        "id": "benchmark-columns",
+        "name": "Benchmark columns",
+        "category": "Developer",
+        "author": "moovendhan-v",
+        "slots": [
+          "kicker",
+          "title",
+          "body",
+          "items[title,text]"
+        ],
+        "description": "A column chart for benchmarks. Label in the first cell, a 0 to 100 score in the second. The first column is highlighted."
       }
     },
     {
@@ -76,6 +169,37 @@
       }
     },
     {
+      "id": "community-cli-reference",
+      "name": "CLI reference",
+      "description": "Commands and what they do, like a man page. Command in the first cell, description in the second.",
+      "cat": "Developer",
+      "author": "Moovendhan V",
+      "authorGithub": "moovendhan-v",
+      "md": "<!-- layout: custom:cli-reference -->\n^ md2-slides CLI\n# Commands\nRun with npx, nothing to install.\n:::stats\n- npx -y md2-slides deck.md | Validate and open the deck in your browser\n- npx -y md2-slides deck.md --no-open | Validate only, print the outline\n- npx -y md2-slides deck.md --port 8080 | Preview on a different port\n- npx -y md2-slides | Start the MCP server for Claude\n:::\n",
+      "stars": 0,
+      "community": true,
+      "look": {
+        "accent": "#38bdf8",
+        "font": "mono"
+      },
+      "single": true,
+      "code": true,
+      "html": "<div class=\"h-full flex flex-col gap-8 p-16\">\n  <div class=\"flex items-end justify-between gap-10\">\n    <div>\n      {{#kicker}}<div class=\"font-mono text-sm font-semibold uppercase tracking-widest text-accent\">{{kicker}}</div>{{/kicker}}\n      <h2 class=\"font-head text-5xl font-bold tracking-tight mt-2\">{{title}}</h2>\n    </div>\n    {{#body}}<p class=\"text-lg text-muted max-w-md text-right\">{{body}}</p>{{/body}}\n  </div>\n  <div class=\"flex-1 flex flex-col justify-center gap-3\">\n    {{#items}}\n    <div class=\"grid grid-cols-[1.1fr_1fr] items-center gap-8 rounded-xl border border-rule bg-panel px-6 py-4\">\n      <code class=\"font-mono text-xl\"><span class=\"text-accent select-none\">$ </span>{{title}}</code>\n      <span class=\"text-lg text-muted\">{{text}}</span>\n    </div>\n    {{/items}}\n  </div>\n</div>\n",
+      "config": {
+        "id": "cli-reference",
+        "name": "CLI reference",
+        "category": "Developer",
+        "author": "moovendhan-v",
+        "slots": [
+          "kicker",
+          "title",
+          "body",
+          "items[title,text]"
+        ],
+        "description": "Commands and what they do, like a man page. Command in the first cell, description in the second."
+      }
+    },
+    {
       "id": "community-code-explainer",
       "name": "Code explainer",
       "description": "Key points on the left, the code they explain in an editor frame on the right.",
@@ -105,6 +229,36 @@
           "code"
         ],
         "description": "Key points on the left, the code they explain in an editor frame on the right."
+      }
+    },
+    {
+      "id": "community-code-fullbleed",
+      "name": "Full-bleed code",
+      "description": "Code fills the slide in an editor frame with a filename tab. The kicker is the filename.",
+      "cat": "Developer",
+      "author": "Moovendhan V",
+      "authorGithub": "moovendhan-v",
+      "md": "<!-- layout: custom:code-fullbleed -->\n^ src/server/rate-limit.ts\n# A sliding-window rate limiter in 10 lines\n```ts\nconst hits = new Map<string, number[]>();\n\nexport function rateLimit(key: string, limit: number, windowMs: number) {\n  const now = Date.now();\n  const recent = (hits.get(key) ?? []).filter((t) => now - t < windowMs);\n  if (recent.length >= limit) return Math.ceil((windowMs - (now - recent[0])) / 1000);\n  recent.push(now);\n  hits.set(key, recent);\n  return 0;\n}\n```\n",
+      "stars": 0,
+      "community": true,
+      "look": {
+        "accent": "#a78bfa",
+        "font": "mono"
+      },
+      "single": true,
+      "code": true,
+      "html": "<div class=\"h-full flex flex-col gap-6 p-12\">\n  <h2 class=\"font-head text-3xl font-bold tracking-tight\">{{title}}</h2>\n  <div class=\"flex-1 min-h-0 rounded-2xl overflow-hidden border border-rule bg-panel flex flex-col\">\n    <div class=\"flex items-end gap-1 px-4 pt-3 border-b border-rule\">\n      <span class=\"flex gap-2 pb-3 pr-4\"><span class=\"size-3 rounded-full bg-[#ff5f57]\"></span><span class=\"size-3 rounded-full bg-[#febc2e]\"></span><span class=\"size-3 rounded-full bg-[#28c840]\"></span></span>\n      <span class=\"rounded-t-lg border border-b-0 border-rule bg-bg px-5 py-2 font-mono text-sm\"><i class=\"ph ph-file-code text-accent mr-2\"></i>{{kicker}}</span>\n    </div>\n    <pre class=\"flex-1 font-mono text-xl leading-relaxed p-8 whitespace-pre-wrap break-words overflow-hidden\">{{code}}</pre>\n  </div>\n</div>\n",
+      "config": {
+        "id": "code-fullbleed",
+        "name": "Full-bleed code",
+        "category": "Developer",
+        "author": "moovendhan-v",
+        "slots": [
+          "kicker",
+          "title",
+          "code"
+        ],
+        "description": "Code fills the slide in an editor frame with a filename tab. The kicker is the filename."
       }
     },
     {
@@ -139,6 +293,37 @@
       }
     },
     {
+      "id": "community-commit-log",
+      "name": "Commit log",
+      "description": "Changes as a git log with a branch line. Put the short hash in the first cell and the message in the second.",
+      "cat": "Developer",
+      "author": "Moovendhan V",
+      "authorGithub": "moovendhan-v",
+      "md": "<!-- layout: custom:commit-log -->\n^ main · v2.4.0\n# What landed this release\nFive commits, all reviewed in pull requests.\n:::stats\n- a1f9c2e | feat: live preview for custom layouts\n- 7be0d14 | fix: guard empty cart in checkout\n- 3c55e9a | perf: cache parsed decks per file\n- 0d8f2b1 | docs: MCP setup without --root\n- e42a6f0 | chore: bump md2slides-mcp to 0.1.5\n:::\n",
+      "stars": 0,
+      "community": true,
+      "look": {
+        "accent": "#f97316",
+        "font": "mono"
+      },
+      "single": true,
+      "code": true,
+      "html": "<div class=\"h-full grid grid-cols-[1fr_1.5fr] gap-14 p-16 items-center\">\n  <div class=\"flex flex-col gap-5\">\n    {{#kicker}}<div class=\"font-mono text-sm font-semibold uppercase tracking-widest text-accent\">{{kicker}}</div>{{/kicker}}\n    <h2 class=\"font-head text-5xl font-bold leading-tight tracking-tight\">{{title}}</h2>\n    {{#body}}<p class=\"text-xl text-muted\">{{body}}</p>{{/body}}\n  </div>\n  <div class=\"relative flex flex-col gap-5 pl-14\">\n    <div class=\"absolute left-[1.15rem] top-3 bottom-3 w-1 rounded-full bg-accent\"></div>\n    {{#items}}\n    <div class=\"relative flex items-center gap-5 rounded-xl border border-rule bg-panel px-5 py-4\">\n      <span class=\"absolute -left-[2.85rem] size-6 rounded-full bg-bg border-[5px] border-accent\"></span>\n      <code class=\"font-mono text-lg text-accent\">{{title}}</code>\n      <span class=\"font-mono text-lg\">{{text}}</span>\n    </div>\n    {{/items}}\n  </div>\n</div>\n",
+      "config": {
+        "id": "commit-log",
+        "name": "Commit log",
+        "category": "Developer",
+        "author": "moovendhan-v",
+        "slots": [
+          "kicker",
+          "title",
+          "body",
+          "items[title,text]"
+        ],
+        "description": "Changes as a git log with a branch line. Put the short hash in the first cell and the message in the second."
+      }
+    },
+    {
       "id": "community-contact-thanks",
       "name": "Thank you and contact",
       "description": "A big closing line with contact details as icon rows.",
@@ -169,6 +354,37 @@
       }
     },
     {
+      "id": "community-error-spotlight",
+      "name": "Error spotlight",
+      "description": "A bug or error in focus: error code in the kicker, the message as title, the stack trace as code and the fix as the body.",
+      "cat": "Developer",
+      "author": "Moovendhan V",
+      "authorGithub": "moovendhan-v",
+      "md": "<!-- layout: custom:error-spotlight -->\n^ TypeError · checkout-service\n# Cannot read properties of undefined (reading 'id')\nGuard against an empty cart before reading cart.items[0].\n```text\nat createOrder (src/orders/create.ts:42:19)\nat async handler (src/api/checkout.ts:18:5)\nat async Server.<anonymous> (node:internal/http:310:7)\n```\n",
+      "stars": 0,
+      "community": true,
+      "look": {
+        "accent": "#ef4444",
+        "font": "mono"
+      },
+      "single": true,
+      "code": true,
+      "html": "<div class=\"h-full flex flex-col gap-8 p-16\">\n  <div class=\"flex items-start gap-6\">\n    <div class=\"size-20 shrink-0 rounded-2xl grid place-items-center bg-accent text-[#0a0a0c]\"><i class=\"ph ph-bug text-4xl\"></i></div>\n    <div class=\"flex flex-col gap-2\">\n      {{#kicker}}<div class=\"font-mono text-sm font-semibold uppercase tracking-widest text-accent\">{{kicker}}</div>{{/kicker}}\n      <h2 class=\"font-mono text-4xl font-bold leading-tight\">{{title}}</h2>\n    </div>\n  </div>\n  <pre class=\"flex-1 rounded-2xl border-l-4 border-accent bg-panel font-mono text-lg leading-relaxed p-7 whitespace-pre-wrap break-words overflow-hidden text-muted\">{{code}}</pre>\n  {{#body}}<div class=\"flex items-center gap-4 rounded-2xl bg-[color-mix(in_srgb,var(--accent)_14%,transparent)] px-6 py-5 text-xl\"><i class=\"ph ph-wrench text-2xl text-accent\"></i><span><b>Fix:</b> {{body}}</span></div>{{/body}}\n</div>\n",
+      "config": {
+        "id": "error-spotlight",
+        "name": "Error spotlight",
+        "category": "Developer",
+        "author": "moovendhan-v",
+        "slots": [
+          "kicker",
+          "title",
+          "body",
+          "code"
+        ],
+        "description": "A bug or error in focus: error code in the kicker, the message as title, the stack trace as code and the fix as the body."
+      }
+    },
+    {
       "id": "community-faq-grid",
       "name": "FAQ grid",
       "description": "Questions and answers in two columns. Question in the first cell, answer in the second.",
@@ -195,6 +411,37 @@
           "items[title,text]"
         ],
         "description": "Questions and answers in two columns. Question in the first cell, answer in the second."
+      }
+    },
+    {
+      "id": "community-feature-flags",
+      "name": "Feature flags",
+      "description": "Flags with on/off toggles. Flag name in the first cell, on or off in the second.",
+      "cat": "Developer",
+      "author": "Moovendhan V",
+      "authorGithub": "moovendhan-v",
+      "md": "<!-- layout: custom:feature-flags -->\n^ Rollout\n# What is live this week\nFlags flip without a deploy.\n:::stats\n- community_submit | on\n- local_ai | off\n- live_landing_slides | on\n- mcp_auto_root | on\n- new_editor | off\n:::\n",
+      "stars": 0,
+      "community": true,
+      "look": {
+        "accent": "#6366f1",
+        "font": "mono"
+      },
+      "single": true,
+      "code": true,
+      "html": "<div class=\"h-full grid grid-cols-[1fr_1.4fr] gap-14 p-16 items-center\">\n  <div class=\"flex flex-col gap-5\">\n    {{#kicker}}<div class=\"font-mono text-sm font-semibold uppercase tracking-widest text-accent\">{{kicker}}</div>{{/kicker}}\n    <h2 class=\"font-head text-5xl font-bold leading-tight tracking-tight\">{{title}}</h2>\n    {{#body}}<p class=\"text-xl text-muted\">{{body}}</p>{{/body}}\n  </div>\n  <div class=\"rounded-2xl border border-rule bg-panel divide-y divide-rule\">\n    {{#items}}\n    <div class=\"flex items-center justify-between px-7 py-5\">\n      <code class=\"font-mono text-xl\">{{title}}</code>\n      <span data-v=\"{{text}}\" class=\"group w-20 h-10 rounded-full p-1 flex bg-rule data-[v=on]:bg-accent data-[v=on]:justify-end\">\n        <span class=\"size-8 rounded-full bg-white shadow\"></span>\n      </span>\n    </div>\n    {{/items}}\n  </div>\n</div>\n",
+      "config": {
+        "id": "feature-flags",
+        "name": "Feature flags",
+        "category": "Developer",
+        "author": "moovendhan-v",
+        "slots": [
+          "kicker",
+          "title",
+          "body",
+          "items[title,text]"
+        ],
+        "description": "Flags with on/off toggles. Flag name in the first cell, on or off in the second."
       }
     },
     {
@@ -301,6 +548,95 @@
       "look": {
         "theme": "zinc",
         "accent": "#f87171"
+      }
+    },
+    {
+      "id": "community-keyboard-shortcuts",
+      "name": "Keyboard shortcuts",
+      "description": "Shortcuts as key caps. Keys in the first cell (separate with +), action in the second.",
+      "cat": "Developer",
+      "author": "Moovendhan V",
+      "authorGithub": "moovendhan-v",
+      "md": "<!-- layout: custom:keyboard-shortcuts -->\n^ Presenter\n# Keys worth knowing\n:::stats\n- → | Next slide or reveal\n- O | Overview of all slides\n- D | Draw with the pen\n- L | Laser pointer\n- B | Blackout the screen\n- ⌘ + K | Command palette\n:::\n",
+      "stars": 0,
+      "community": true,
+      "look": {
+        "accent": "#f59e0b"
+      },
+      "single": true,
+      "code": true,
+      "html": "<div class=\"h-full flex flex-col gap-10 p-16\">\n  <div>\n    {{#kicker}}<div class=\"font-mono text-sm font-semibold uppercase tracking-widest text-accent\">{{kicker}}</div>{{/kicker}}\n    <h2 class=\"font-head text-5xl font-bold tracking-tight mt-2\">{{title}}</h2>\n  </div>\n  <div class=\"flex-1 grid grid-cols-2 gap-x-12 gap-y-5 content-center\">\n    {{#items}}\n    <div class=\"flex items-center justify-between gap-6 border-b border-rule pb-5\">\n      <span class=\"text-xl\">{{text}}</span>\n      <kbd class=\"shrink-0 rounded-xl border-2 border-rule border-b-[6px] bg-panel px-4 py-2 font-mono text-lg font-semibold\">{{title}}</kbd>\n    </div>\n    {{/items}}\n  </div>\n</div>\n",
+      "config": {
+        "id": "keyboard-shortcuts",
+        "name": "Keyboard shortcuts",
+        "category": "Developer",
+        "author": "moovendhan-v",
+        "slots": [
+          "kicker",
+          "title",
+          "items[title,text]"
+        ],
+        "description": "Shortcuts as key caps. Keys in the first cell (separate with +), action in the second."
+      }
+    },
+    {
+      "id": "community-launch-checklist",
+      "name": "Launch checklist",
+      "description": "A go/no-go checklist. Use check-circle for done and circle for open; the icon shows the state.",
+      "cat": "Developer",
+      "author": "Moovendhan V",
+      "authorGithub": "moovendhan-v",
+      "md": "<!-- layout: custom:launch-checklist -->\n^ Go / no-go\n# Launch readiness\nSix of eight done. Ship Thursday if the last two land.\n:::cards\n- check-circle | Load test | 5k rps, p99 under 200 ms\n- check-circle | Rollback plan | One-click revert tested\n- check-circle | Alerts | Paging on errors and latency\n- check-circle | Docs | Setup guide and FAQ live\n- check-circle | Security review | No open findings\n- check-circle | Feature flag | Off by default\n- circle | Status page | Add the new service\n- circle | Changelog | Draft ready for review\n:::\n",
+      "stars": 0,
+      "community": true,
+      "look": {
+        "accent": "#14b8a6"
+      },
+      "single": true,
+      "code": true,
+      "html": "<div class=\"h-full grid grid-cols-[1fr_1.5fr] gap-14 p-16 items-center\">\n  <div class=\"flex flex-col gap-5\">\n    {{#kicker}}<div class=\"font-mono text-sm font-semibold uppercase tracking-widest text-accent\">{{kicker}}</div>{{/kicker}}\n    <h2 class=\"font-head text-6xl font-bold leading-none tracking-tight\">{{title}}</h2>\n    {{#body}}<p class=\"text-xl text-muted\">{{body}}</p>{{/body}}\n  </div>\n  <div class=\"grid grid-cols-2 gap-4\">\n    {{#items}}\n    <div class=\"flex items-start gap-4 rounded-2xl border border-rule bg-panel p-5\">\n      <i class=\"ph {{icon}} text-3xl text-accent shrink-0\"></i>\n      <div>\n        <div class=\"text-xl font-semibold\">{{title}}</div>\n        <div class=\"text-muted text-sm mt-1\">{{text}}</div>\n      </div>\n    </div>\n    {{/items}}\n  </div>\n</div>\n",
+      "config": {
+        "id": "launch-checklist",
+        "name": "Launch checklist",
+        "category": "Developer",
+        "author": "moovendhan-v",
+        "slots": [
+          "kicker",
+          "title",
+          "body",
+          "items[icon,title,text]"
+        ],
+        "description": "A go/no-go checklist. Use check-circle for done and circle for open; the icon shows the state."
+      }
+    },
+    {
+      "id": "community-log-timeline",
+      "name": "Log timeline",
+      "description": "An incident or deploy as timestamped log lines. Time in the first cell, event in the second.",
+      "cat": "Developer",
+      "author": "Moovendhan V",
+      "authorGithub": "moovendhan-v",
+      "md": "<!-- layout: custom:log-timeline -->\n^ INC-142 · timeline\n# 42 minutes, minute by minute\n:::timeline style=v\n- 09:12:04 | p99 latency alert fires on checkout\n- 09:15:31 | On-call acknowledges, opens incident channel\n- 09:20:10 | Rollback of release 5.3.1 starts\n- 09:34:47 | Cache warmed, latency back to normal\n- 09:54:00 | Incident closed, postmortem scheduled\n:::\n",
+      "stars": 0,
+      "community": true,
+      "look": {
+        "accent": "#eab308",
+        "font": "mono"
+      },
+      "single": true,
+      "code": true,
+      "html": "<div class=\"h-full flex flex-col gap-8 p-16\">\n  <div>\n    {{#kicker}}<div class=\"font-mono text-sm font-semibold uppercase tracking-widest text-accent\">{{kicker}}</div>{{/kicker}}\n    <h2 class=\"font-head text-5xl font-bold tracking-tight mt-2\">{{title}}</h2>\n  </div>\n  <div class=\"flex-1 rounded-2xl border border-rule bg-[#0b0d10] p-8 font-mono text-xl flex flex-col justify-center gap-4\">\n    {{#items}}\n    <div class=\"flex gap-6\">\n      <span class=\"text-white/40 shrink-0\">[{{title}}]</span>\n      <span class=\"text-accent shrink-0\">INFO</span>\n      <span class=\"text-[#e6edf3]\">{{text}}</span>\n    </div>\n    {{/items}}\n  </div>\n</div>\n",
+      "config": {
+        "id": "log-timeline",
+        "name": "Log timeline",
+        "category": "Developer",
+        "author": "moovendhan-v",
+        "slots": [
+          "kicker",
+          "title",
+          "items[title,text]"
+        ],
+        "description": "An incident or deploy as timestamped log lines. Time in the first cell, event in the second."
       }
     },
     {
@@ -438,6 +774,36 @@
       }
     },
     {
+      "id": "community-release-notes",
+      "name": "Release notes",
+      "description": "A version's changes with type badges. Badge text in the second cell (Added, Fixed…), change in the third.",
+      "cat": "Developer",
+      "author": "Moovendhan V",
+      "authorGithub": "moovendhan-v",
+      "md": "<!-- layout: custom:release-notes -->\n^ v2.4.0\n# Release notes\nOctober 2026 · run npx -y md2-slides@latest\n:::cards\n- sparkle | Added | Submit layouts to the community from the app\n- sparkle | Added | 35 new community layouts\n- wrench | Fixed | Landing slides render live, no stale images\n- lightning | Faster | MCP server finds your repo on its own\n- warning | Changed | --root is now optional\n:::\n",
+      "stars": 0,
+      "community": true,
+      "look": {
+        "accent": "#ec4899"
+      },
+      "single": true,
+      "code": true,
+      "html": "<div class=\"h-full grid grid-cols-[1fr_1.6fr] gap-14 p-16 items-center\">\n  <div class=\"flex flex-col gap-5\">\n    <span class=\"self-start rounded-full bg-accent text-[#0a0a0c] px-5 py-2 font-mono text-2xl font-bold\">{{kicker}}</span>\n    <h2 class=\"font-head text-6xl font-bold leading-none tracking-tight\">{{title}}</h2>\n    {{#body}}<p class=\"text-xl text-muted\">{{body}}</p>{{/body}}\n  </div>\n  <div class=\"flex flex-col divide-y divide-rule\">\n    {{#items}}\n    <div class=\"flex items-center gap-5 py-5\">\n      <span class=\"w-32 shrink-0 flex items-center gap-2 rounded-lg bg-[color-mix(in_srgb,var(--accent)_16%,transparent)] px-3 py-1.5 text-sm font-semibold uppercase tracking-wider text-accent\"><i class=\"ph {{icon}}\"></i>{{title}}</span>\n      <span class=\"text-xl\">{{text}}</span>\n    </div>\n    {{/items}}\n  </div>\n</div>\n",
+      "config": {
+        "id": "release-notes",
+        "name": "Release notes",
+        "category": "Developer",
+        "author": "moovendhan-v",
+        "slots": [
+          "kicker",
+          "title",
+          "body",
+          "items[icon,title,text]"
+        ],
+        "description": "A version's changes with type badges. Badge text in the second cell (Added, Fixed…), change in the third."
+      }
+    },
+    {
       "id": "community-roadmap-rail",
       "name": "Roadmap rail",
       "description": "Numbered milestones on a horizontal rail, from a timeline or list.",
@@ -494,6 +860,65 @@
           "body"
         ],
         "description": "A huge outlined section number with the section title, to open each part of a deck."
+      }
+    },
+    {
+      "id": "community-service-flow",
+      "name": "Service flow",
+      "description": "A request travelling through services, left to right, with the step under each hop.",
+      "cat": "Developer",
+      "author": "Moovendhan V",
+      "authorGithub": "moovendhan-v",
+      "md": "<!-- layout: custom:service-flow -->\n^ Request path\n# What happens when you hit Share\n:::flow\n- browser | Browser | Deck encoded in the link\n- cloud | Edge | Serves the static viewer\n- cpu | Wasm engine | Parses Markdown in the tab\n- presentation | Viewer | Renders slides, nothing stored\n:::\n",
+      "stars": 0,
+      "community": true,
+      "look": {
+        "accent": "#06b6d4"
+      },
+      "single": true,
+      "code": true,
+      "html": "<div class=\"h-full flex flex-col justify-center gap-14 p-16\">\n  <div class=\"text-center\">\n    {{#kicker}}<div class=\"font-mono text-sm font-semibold uppercase tracking-widest text-accent\">{{kicker}}</div>{{/kicker}}\n    <h2 class=\"font-head text-5xl font-bold tracking-tight mt-2\">{{title}}</h2>\n    {{#body}}<p class=\"text-xl text-muted mt-3\">{{body}}</p>{{/body}}\n  </div>\n  <div class=\"flex items-start justify-center\">\n    {{#items}}\n    <div class=\"flex items-start [&:not(:last-child)]:after:content-['→'] after:text-6xl after:text-accent after:mx-4 after:mt-10\">\n      <div class=\"flex flex-col items-center gap-4 w-52 text-center\">\n        <div class=\"size-28 rounded-[1.75rem] grid place-items-center border-2 border-accent bg-[color-mix(in_srgb,var(--accent)_12%,transparent)]\"><i class=\"ph {{icon}} text-6xl text-accent\"></i></div>\n        <div class=\"font-mono text-2xl font-semibold\">{{title}}</div>\n        <div class=\"text-lg text-muted leading-snug\">{{text}}</div>\n      </div>\n    </div>\n    {{/items}}\n  </div>\n</div>\n",
+      "config": {
+        "id": "service-flow",
+        "name": "Service flow",
+        "category": "Developer",
+        "author": "moovendhan-v",
+        "slots": [
+          "kicker",
+          "title",
+          "body",
+          "items[icon,title,text]"
+        ],
+        "description": "A request travelling through services, left to right, with the step under each hop."
+      }
+    },
+    {
+      "id": "community-service-status",
+      "name": "Service status",
+      "description": "A status page: each service with a status icon, its uptime and a 30-day bar strip.",
+      "cat": "Developer",
+      "author": "Moovendhan V",
+      "authorGithub": "moovendhan-v",
+      "md": "<!-- layout: custom:service-status -->\n^ All systems operational\n# Status · last 30 days\n:::cards\n- check-circle | Editor | 99.99%\n- check-circle | Share links | 100%\n- check-circle | GitHub sync | 99.95%\n- check-circle | MCP preview | 99.98%\n:::\n",
+      "stars": 0,
+      "community": true,
+      "look": {
+        "accent": "#22c55e"
+      },
+      "single": true,
+      "code": true,
+      "html": "<div class=\"h-full flex flex-col gap-8 p-16\">\n  <div class=\"flex items-end justify-between\">\n    <h2 class=\"font-head text-5xl font-bold tracking-tight\">{{title}}</h2>\n    {{#kicker}}<span class=\"flex items-center gap-3 rounded-full bg-[color-mix(in_srgb,var(--accent)_16%,transparent)] px-5 py-2 text-lg font-semibold text-accent\"><span class=\"size-3 rounded-full bg-accent animate-pulse\"></span>{{kicker}}</span>{{/kicker}}\n  </div>\n  <div class=\"flex-1 flex flex-col justify-center gap-4\">\n    {{#items}}\n    <div class=\"rounded-2xl border border-rule bg-panel px-7 py-5 flex items-center gap-8\">\n      <i class=\"ph {{icon}} text-3xl text-accent\"></i>\n      <span class=\"text-2xl font-semibold w-56 shrink-0\">{{title}}</span>\n      <div class=\"flex-1 flex gap-1 h-9\"><span class=\"flex-1 rounded-sm bg-accent\"></span><span class=\"flex-1 rounded-sm bg-accent\"></span><span class=\"flex-1 rounded-sm bg-accent\"></span><span class=\"flex-1 rounded-sm bg-accent\"></span><span class=\"flex-1 rounded-sm bg-accent\"></span><span class=\"flex-1 rounded-sm bg-accent\"></span><span class=\"flex-1 rounded-sm bg-accent\"></span><span class=\"flex-1 rounded-sm bg-accent\"></span><span class=\"flex-1 rounded-sm bg-accent\"></span><span class=\"flex-1 rounded-sm bg-accent\"></span><span class=\"flex-1 rounded-sm bg-accent\"></span><span class=\"flex-1 rounded-sm bg-accent\"></span><span class=\"flex-1 rounded-sm bg-accent\"></span><span class=\"flex-1 rounded-sm bg-accent\"></span><span class=\"flex-1 rounded-sm bg-accent\"></span><span class=\"flex-1 rounded-sm bg-accent\"></span><span class=\"flex-1 rounded-sm bg-accent\"></span><span class=\"flex-1 rounded-sm bg-accent\"></span><span class=\"flex-1 rounded-sm bg-accent\"></span><span class=\"flex-1 rounded-sm bg-accent\"></span><span class=\"flex-1 rounded-sm bg-accent\"></span><span class=\"flex-1 rounded-sm bg-accent\"></span><span class=\"flex-1 rounded-sm bg-accent\"></span><span class=\"flex-1 rounded-sm bg-accent\"></span><span class=\"flex-1 rounded-sm bg-accent\"></span><span class=\"flex-1 rounded-sm bg-accent\"></span><span class=\"flex-1 rounded-sm bg-accent\"></span><span class=\"flex-1 rounded-sm bg-accent\"></span><span class=\"flex-1 rounded-sm bg-accent\"></span><span class=\"flex-1 rounded-sm bg-accent\"></span></div>\n      <span class=\"font-mono text-xl w-24 text-right\">{{text}}</span>\n    </div>\n    {{/items}}\n  </div>\n</div>\n",
+      "config": {
+        "id": "service-status",
+        "name": "Service status",
+        "category": "Developer",
+        "author": "moovendhan-v",
+        "slots": [
+          "kicker",
+          "title",
+          "items[icon,title,text]"
+        ],
+        "description": "A status page: each service with a status icon, its uptime and a 30-day bar strip."
       }
     },
     {
@@ -587,6 +1012,35 @@
       }
     },
     {
+      "id": "community-tech-stack-grid",
+      "name": "Tech stack grid",
+      "description": "Your stack as a grid of tiles. Icon, tool name and version or role per row.",
+      "cat": "Developer",
+      "author": "Moovendhan V",
+      "authorGithub": "moovendhan-v",
+      "md": "<!-- layout: custom:tech-stack-grid -->\n^ Stack\n# What we build with\n:::cards\n- file-ts | TypeScript | 5.6\n- atom | React | 19\n- triangle | Next.js | 15, App Router\n- gear | Rust | 1.82 → Wasm\n- cloud | Cloudflare | Workers + OpenNext\n- github-logo | GitHub | OAuth + Git Data API\n- test-tube | Vitest | 71 tests\n- robot | MCP | md2slides-mcp\n:::\n",
+      "stars": 0,
+      "community": true,
+      "look": {
+        "accent": "#10b981"
+      },
+      "single": true,
+      "code": true,
+      "html": "<div class=\"h-full flex flex-col gap-10 p-16\">\n  <div>\n    {{#kicker}}<div class=\"font-mono text-sm font-semibold uppercase tracking-widest text-accent\">{{kicker}}</div>{{/kicker}}\n    <h2 class=\"font-head text-5xl font-bold tracking-tight mt-2\">{{title}}</h2>\n  </div>\n  <div class=\"flex-1 grid grid-cols-4 gap-5 content-center\">\n    {{#items}}\n    <div class=\"rounded-2xl border border-rule bg-panel p-6 flex flex-col gap-4\">\n      <i class=\"ph {{icon}} text-4xl text-accent\"></i>\n      <div>\n        <div class=\"text-xl font-semibold\">{{title}}</div>\n        <div class=\"font-mono text-sm text-muted mt-1\">{{text}}</div>\n      </div>\n    </div>\n    {{/items}}\n  </div>\n</div>\n",
+      "config": {
+        "id": "tech-stack-grid",
+        "name": "Tech stack grid",
+        "category": "Developer",
+        "author": "moovendhan-v",
+        "slots": [
+          "kicker",
+          "title",
+          "items[icon,title,text]"
+        ],
+        "description": "Your stack as a grid of tiles. Icon, tool name and version or role per row."
+      }
+    },
+    {
       "id": "community-tech-talk",
       "name": "Tech talk",
       "description": "A conference or meetup talk: the problem, a code walkthrough, an architecture diagram and takeaways.",
@@ -601,6 +1055,37 @@
         "accent": "#fbbf24",
         "bg": "dots",
         "font": "mono"
+      }
+    },
+    {
+      "id": "community-terminal-hero",
+      "name": "Terminal hero",
+      "description": "A headline beside a big terminal window. The first code block is the terminal session.",
+      "cat": "Developer",
+      "author": "Moovendhan V",
+      "authorGithub": "moovendhan-v",
+      "md": "<!-- layout: custom:terminal-hero -->\n^ Quick start\n# One command to your first deck\nInstall nothing. npx runs the md2slides MCP server and Claude writes the slides.\n```bash\n$ npx -y md2slides-mcp\nmd2slides MCP 0.1.5 ready · workspace ~/acme\n✓ create_deck decks/q3.md · 6 slides · 0 problems\n→ preview: md2slides.cybertechmind.com/v#AQB…\n```\n",
+      "stars": 0,
+      "community": true,
+      "look": {
+        "accent": "#22c55e",
+        "font": "mono"
+      },
+      "single": true,
+      "code": true,
+      "html": "<div class=\"h-full grid grid-cols-[1fr_1.35fr] gap-12 p-16 items-center\">\n  <div class=\"flex flex-col gap-6\">\n    {{#kicker}}<div class=\"font-mono text-sm font-semibold uppercase tracking-widest text-accent\">{{kicker}}</div>{{/kicker}}\n    <h1 class=\"font-head text-6xl font-bold leading-[1.02] tracking-tight\">{{title}}</h1>\n    {{#body}}<p class=\"text-xl text-muted\">{{body}}</p>{{/body}}\n  </div>\n  <div class=\"rounded-2xl overflow-hidden border border-rule bg-[#0b0d10] shadow-2xl\">\n    <div class=\"flex items-center gap-2 px-5 py-4 border-b border-white/10\"><span class=\"size-3 rounded-full bg-[#ff5f57]\"></span><span class=\"size-3 rounded-full bg-[#febc2e]\"></span><span class=\"size-3 rounded-full bg-[#28c840]\"></span><span class=\"ml-3 font-mono text-sm text-white/50\">zsh</span></div>\n    <pre class=\"font-mono text-lg leading-relaxed p-7 text-[#e6edf3] whitespace-pre-wrap break-words\">{{code}}<span class=\"inline-block w-2.5 h-5 align-middle bg-accent animate-pulse\"></span></pre>\n  </div>\n</div>\n",
+      "config": {
+        "id": "terminal-hero",
+        "name": "Terminal hero",
+        "category": "Developer",
+        "author": "moovendhan-v",
+        "slots": [
+          "kicker",
+          "title",
+          "body",
+          "code"
+        ],
+        "description": "A headline beside a big terminal window. The first code block is the terminal session."
       }
     },
     {
@@ -668,7 +1153,7 @@
       "github": "moovendhan-v",
       "name": "Moovendhan V",
       "role": "Creator & maintainer",
-      "templates": 25
+      "templates": 41
     }
   ]
 }

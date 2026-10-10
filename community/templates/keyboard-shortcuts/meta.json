@@ -1,0 +1,17 @@
+{
+  "name": "Keyboard shortcuts",
+  "description": "Shortcuts as key caps. Keys in the first cell (separate with +), action in the second.",
+  "category": "Developer",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "items[title,text]"
+  ],
+  "look": {
+    "accent": "#f59e0b"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "API endpoint",
+  "description": "Document one endpoint: HTTP method in the kicker, path as the title, an example in the code block and parameters as rows.",
+  "category": "Developer",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "body",
+    "items[title,text]",
+    "code"
+  ],
+  "look": {
+    "accent": "#3b82f6",
+    "font": "plex"
+  }
+}

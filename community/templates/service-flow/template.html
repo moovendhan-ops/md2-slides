@@ -1,0 +1,18 @@
+<div class="h-full flex flex-col justify-center gap-14 p-16">
+  <div class="text-center">
+    {{#kicker}}<div class="font-mono text-sm font-semibold uppercase tracking-widest text-accent">{{kicker}}</div>{{/kicker}}
+    <h2 class="font-head text-5xl font-bold tracking-tight mt-2">{{title}}</h2>
+    {{#body}}<p class="text-xl text-muted mt-3">{{body}}</p>{{/body}}
+  </div>
+  <div class="flex items-start justify-center">
+    {{#items}}
+    <div class="flex items-start [&:not(:last-child)]:after:content-['→'] after:text-6xl after:text-accent after:mx-4 after:mt-10">
+      <div class="flex flex-col items-center gap-4 w-52 text-center">
+        <div class="size-28 rounded-[1.75rem] grid place-items-center border-2 border-accent bg-[color-mix(in_srgb,var(--accent)_12%,transparent)]"><i class="ph {{icon}} text-6xl text-accent"></i></div>
+        <div class="font-mono text-2xl font-semibold">{{title}}</div>
+        <div class="text-lg text-muted leading-snug">{{text}}</div>
+      </div>
+    </div>
+    {{/items}}
+  </div>
+</div>

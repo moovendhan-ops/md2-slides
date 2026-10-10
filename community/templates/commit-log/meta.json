@@ -1,0 +1,19 @@
+{
+  "name": "Commit log",
+  "description": "Changes as a git log with a branch line. Put the short hash in the first cell and the message in the second.",
+  "category": "Developer",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "body",
+    "items[title,text]"
+  ],
+  "look": {
+    "accent": "#f97316",
+    "font": "mono"
+  }
+}

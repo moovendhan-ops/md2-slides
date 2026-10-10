@@ -1,0 +1,19 @@
+{
+  "name": "Error spotlight",
+  "description": "A bug or error in focus: error code in the kicker, the message as title, the stack trace as code and the fix as the body.",
+  "category": "Developer",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "body",
+    "code"
+  ],
+  "look": {
+    "accent": "#ef4444",
+    "font": "mono"
+  }
+}

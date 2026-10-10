@@ -1,0 +1,19 @@
+{
+  "name": "Feature flags",
+  "description": "Flags with on/off toggles. Flag name in the first cell, on or off in the second.",
+  "category": "Developer",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "body",
+    "items[title,text]"
+  ],
+  "look": {
+    "accent": "#6366f1",
+    "font": "mono"
+  }
+}

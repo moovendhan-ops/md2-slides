@@ -1,0 +1,17 @@
+{
+  "name": "Service status",
+  "description": "A status page: each service with a status icon, its uptime and a 30-day bar strip.",
+  "category": "Developer",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "items[icon,title,text]"
+  ],
+  "look": {
+    "accent": "#22c55e"
+  }
+}

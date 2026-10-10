@@ -1,0 +1,15 @@
+<div class="h-full flex flex-col gap-8 p-16">
+  <div>
+    {{#kicker}}<div class="font-mono text-sm font-semibold uppercase tracking-widest text-accent">{{kicker}}</div>{{/kicker}}
+    <h2 class="font-head text-5xl font-bold tracking-tight mt-2">{{title}}</h2>
+  </div>
+  <div class="flex-1 rounded-2xl border border-rule bg-[#0b0d10] p-8 font-mono text-xl flex flex-col justify-center gap-4">
+    {{#items}}
+    <div class="flex gap-6">
+      <span class="text-white/40 shrink-0">[{{title}}]</span>
+      <span class="text-accent shrink-0">INFO</span>
+      <span class="text-[#e6edf3]">{{text}}</span>
+    </div>
+    {{/items}}
+  </div>
+</div>

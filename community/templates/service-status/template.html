@@ -1,0 +1,16 @@
+<div class="h-full flex flex-col gap-8 p-16">
+  <div class="flex items-end justify-between">
+    <h2 class="font-head text-5xl font-bold tracking-tight">{{title}}</h2>
+    {{#kicker}}<span class="flex items-center gap-3 rounded-full bg-[color-mix(in_srgb,var(--accent)_16%,transparent)] px-5 py-2 text-lg font-semibold text-accent"><span class="size-3 rounded-full bg-accent animate-pulse"></span>{{kicker}}</span>{{/kicker}}
+  </div>
+  <div class="flex-1 flex flex-col justify-center gap-4">
+    {{#items}}
+    <div class="rounded-2xl border border-rule bg-panel px-7 py-5 flex items-center gap-8">
+      <i class="ph {{icon}} text-3xl text-accent"></i>
+      <span class="text-2xl font-semibold w-56 shrink-0">{{title}}</span>
+      <div class="flex-1 flex gap-1 h-9"><span class="flex-1 rounded-sm bg-accent"></span><span class="flex-1 rounded-sm bg-accent"></span><span class="flex-1 rounded-sm bg-accent"></span><span class="flex-1 rounded-sm bg-accent"></span><span class="flex-1 rounded-sm bg-accent"></span><span class="flex-1 rounded-sm bg-accent"></span><span class="flex-1 rounded-sm bg-accent"></span><span class="flex-1 rounded-sm bg-accent"></span><span class="flex-1 rounded-sm bg-accent"></span><span class="flex-1 rounded-sm bg-accent"></span><span class="flex-1 rounded-sm bg-accent"></span><span class="flex-1 rounded-sm bg-accent"></span><span class="flex-1 rounded-sm bg-accent"></span><span class="flex-1 rounded-sm bg-accent"></span><span class="flex-1 rounded-sm bg-accent"></span><span class="flex-1 rounded-sm bg-accent"></span><span class="flex-1 rounded-sm bg-accent"></span><span class="flex-1 rounded-sm bg-accent"></span><span class="flex-1 rounded-sm bg-accent"></span><span class="flex-1 rounded-sm bg-accent"></span><span class="flex-1 rounded-sm bg-accent"></span><span class="flex-1 rounded-sm bg-accent"></span><span class="flex-1 rounded-sm bg-accent"></span><span class="flex-1 rounded-sm bg-accent"></span><span class="flex-1 rounded-sm bg-accent"></span><span class="flex-1 rounded-sm bg-accent"></span><span class="flex-1 rounded-sm bg-accent"></span><span class="flex-1 rounded-sm bg-accent"></span><span class="flex-1 rounded-sm bg-accent"></span><span class="flex-1 rounded-sm bg-accent"></span></div>
+      <span class="font-mono text-xl w-24 text-right">{{text}}</span>
+    </div>
+    {{/items}}
+  </div>
+</div>

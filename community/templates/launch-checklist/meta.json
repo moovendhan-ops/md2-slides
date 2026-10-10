@@ -1,0 +1,18 @@
+{
+  "name": "Launch checklist",
+  "description": "A go/no-go checklist. Use check-circle for done and circle for open; the icon shows the state.",
+  "category": "Developer",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "body",
+    "items[icon,title,text]"
+  ],
+  "look": {
+    "accent": "#14b8a6"
+  }
+}
