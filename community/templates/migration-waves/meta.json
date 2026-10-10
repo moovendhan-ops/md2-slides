@@ -1,0 +1,18 @@
+{
+  "name": "Migration waves",
+  "description": "A cloud migration split into numbered waves. Wave name in the second cell, the apps or dates in the third.",
+  "category": "Cloud",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "body",
+    "items[icon,title,text]"
+  ],
+  "look": {
+    "accent": "#ff9900"
+  }
+}

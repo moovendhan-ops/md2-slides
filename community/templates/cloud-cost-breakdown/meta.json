@@ -1,0 +1,18 @@
+{
+  "name": "Cloud cost breakdown",
+  "description": "Monthly spend as one stacked bar with a legend. Service in the first cell, its share in percent in the second.",
+  "category": "Cloud",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "body",
+    "items[title,text]"
+  ],
+  "look": {
+    "accent": "#ff9900"
+  }
+}

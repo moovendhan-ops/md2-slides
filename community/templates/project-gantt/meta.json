@@ -1,0 +1,18 @@
+{
+  "name": "Project Gantt",
+  "description": "Phases as staggered bars on a timeline. Phase in the first cell, dates in the second. Best with 4 or 5 phases.",
+  "category": "Plan",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "body",
+    "items[title,text]"
+  ],
+  "look": {
+    "accent": "#7c3aed"
+  }
+}

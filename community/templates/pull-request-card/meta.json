@@ -1,0 +1,18 @@
+{
+  "name": "Pull request card",
+  "description": "One PR as a GitHub-style card: number in the kicker, title, description in the body, and checks as rows.",
+  "category": "Developer",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "body",
+    "items[icon,title,text]"
+  ],
+  "look": {
+    "accent": "#a855f7"
+  }
+}

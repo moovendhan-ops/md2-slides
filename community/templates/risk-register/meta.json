@@ -1,0 +1,17 @@
+{
+  "name": "Risk register",
+  "description": "Risks with their mitigations. Icon shows severity (warning-octagon, warning, info), risk in the second cell, mitigation in the third.",
+  "category": "Plan",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "items[icon,title,text]"
+  ],
+  "look": {
+    "accent": "#dc2626"
+  }
+}

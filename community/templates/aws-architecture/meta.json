@@ -1,0 +1,17 @@
+{
+  "name": "AWS architecture",
+  "description": "Services drawn inside nested AWS Cloud, Region and VPC boundaries. One row per service.",
+  "category": "Cloud",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "items[icon,title,text]"
+  ],
+  "look": {
+    "accent": "#ff9900"
+  }
+}

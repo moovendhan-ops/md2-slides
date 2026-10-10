@@ -1,0 +1,19 @@
+{
+  "name": "Database table",
+  "description": "A table schema as a card: table name as the title, one row per column with its type.",
+  "category": "Developer",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "body",
+    "items[title,text]"
+  ],
+  "look": {
+    "accent": "#0ea5e9",
+    "font": "mono"
+  }
+}

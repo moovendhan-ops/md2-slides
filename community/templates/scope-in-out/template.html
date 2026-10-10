@@ -1,0 +1,18 @@
+<div class="h-full grid grid-cols-[1fr_1.6fr] gap-14 p-16">
+  <div class="flex flex-col justify-center gap-5">
+    {{#kicker}}<div class="text-sm font-semibold uppercase tracking-widest text-accent">{{kicker}}</div>{{/kicker}}
+    <h2 class="font-head text-5xl font-bold leading-tight tracking-tight">{{title}}</h2>
+    {{#body}}<p class="text-xl text-muted">{{body}}</p>{{/body}}
+  </div>
+  <div class="flex flex-col justify-center gap-3">
+    {{#items}}
+    <div data-i="{{icon}}" class="group flex items-start gap-4 rounded-2xl border border-rule bg-panel px-6 py-4 data-[i=ph-x-circle]:bg-transparent data-[i=ph-x-circle]:border-dashed">
+      <i class="ph {{icon}} text-3xl text-accent shrink-0 group-data-[i=ph-x-circle]:text-[#ef4444]"></i>
+      <div class="group-data-[i=ph-x-circle]:opacity-60">
+        <div class="text-xl font-semibold">{{title}}</div>
+        <div class="text-muted">{{text}}</div>
+      </div>
+    </div>
+    {{/items}}
+  </div>
+</div>

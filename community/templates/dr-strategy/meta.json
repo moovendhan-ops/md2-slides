@@ -1,0 +1,18 @@
+{
+  "name": "DR strategy",
+  "description": "Disaster-recovery options compared, cost rising left to right. Strategy in the first cell, RTO/RPO in the second.",
+  "category": "Cloud",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "body",
+    "items[title,text]"
+  ],
+  "look": {
+    "accent": "#ff9900"
+  }
+}

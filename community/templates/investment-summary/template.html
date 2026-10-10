@@ -1,0 +1,17 @@
+<div class="h-full grid grid-cols-[1fr_1.3fr] gap-14 p-16">
+  <div class="flex flex-col justify-center gap-5">
+    {{#kicker}}<div class="text-sm font-semibold uppercase tracking-widest text-accent">{{kicker}}</div>{{/kicker}}
+    <div class="text-xl text-muted">Total investment</div>
+    <h2 class="font-head text-8xl font-black tracking-tighter">{{title}}</h2>
+    {{#body}}<p class="text-xl text-muted">{{body}}</p>{{/body}}
+  </div>
+  <div class="flex flex-col justify-center">
+    {{#items}}
+    <div class="flex items-baseline gap-4 py-5 border-b border-rule">
+      <span class="text-xl">{{title}}</span>
+      <span class="flex-1 border-b-2 border-dotted border-rule"></span>
+      <span class="font-mono text-2xl font-semibold">{{text}}</span>
+    </div>
+    {{/items}}
+  </div>
+</div>

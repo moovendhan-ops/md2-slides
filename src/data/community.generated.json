@@ -79,6 +79,35 @@
       }
     },
     {
+      "id": "community-aws-architecture",
+      "name": "AWS architecture",
+      "description": "Services drawn inside nested AWS Cloud, Region and VPC boundaries. One row per service.",
+      "cat": "Cloud",
+      "author": "Moovendhan V",
+      "authorGithub": "moovendhan-v",
+      "md": "<!-- layout: custom:aws-architecture -->\n^ eu-west-1 · production\n# Serverless API on AWS\n:::cards\n- globe | CloudFront | CDN and TLS at the edge\n- plugs-connected | API Gateway | REST endpoints, auth\n- lightning | Lambda | Node.js handlers\n- database | DynamoDB | On-demand tables\n- archive | S3 | Uploads and exports\n:::\n",
+      "stars": 0,
+      "community": true,
+      "look": {
+        "accent": "#ff9900"
+      },
+      "single": true,
+      "code": true,
+      "html": "<div class=\"h-full flex flex-col gap-6 p-14\">\n  <div class=\"flex items-end justify-between\">\n    <h2 class=\"font-head text-4xl font-bold tracking-tight\">{{title}}</h2>\n    {{#kicker}}<span class=\"font-mono text-sm text-muted\">{{kicker}}</span>{{/kicker}}\n  </div>\n  <div class=\"relative flex-1 rounded-2xl border-2 border-rule p-6 pt-12\">\n    <span class=\"absolute left-5 top-3 flex items-center gap-2 text-sm font-semibold\"><i class=\"ph ph-cloud text-accent text-xl\"></i>AWS Cloud</span>\n    <div class=\"relative h-full rounded-xl border-2 border-dashed border-accent p-6 pt-12\">\n      <span class=\"absolute left-5 top-3 flex items-center gap-2 text-sm font-semibold text-accent\"><i class=\"ph ph-globe-hemisphere-west text-xl\"></i>Region</span>\n      <div class=\"relative h-full rounded-xl border-2 border-[#22c55e] bg-[color-mix(in_srgb,#22c55e_6%,transparent)] p-6 pt-12\">\n        <span class=\"absolute left-5 top-3 flex items-center gap-2 text-sm font-semibold text-[#22c55e]\"><i class=\"ph ph-lock-simple text-xl\"></i>VPC</span>\n        <div class=\"h-full grid grid-flow-col auto-cols-fr gap-5 items-center\">\n          {{#items}}\n          <div class=\"flex flex-col items-center text-center gap-3\">\n            <div class=\"size-20 rounded-2xl grid place-items-center bg-accent text-[#0a0a0c]\"><i class=\"ph {{icon}} text-4xl\"></i></div>\n            <div class=\"text-lg font-semibold\">{{title}}</div>\n            <div class=\"text-sm text-muted leading-snug\">{{text}}</div>\n          </div>\n          {{/items}}\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n",
+      "config": {
+        "id": "aws-architecture",
+        "name": "AWS architecture",
+        "category": "Cloud",
+        "author": "moovendhan-v",
+        "slots": [
+          "kicker",
+          "title",
+          "items[icon,title,text]"
+        ],
+        "description": "Services drawn inside nested AWS Cloud, Region and VPC boundaries. One row per service."
+      }
+    },
+    {
       "id": "community-benchmark-columns",
       "name": "Benchmark columns",
       "description": "A column chart for benchmarks. Label in the first cell, a 0 to 100 score in the second. The first column is highlighted.",
@@ -169,6 +198,37 @@
       }
     },
     {
+      "id": "community-ci-pipeline",
+      "name": "CI pipeline",
+      "description": "A CI/CD run as connected stages. Status from the icon: check-circle passed, x-circle failed, spinner running, circle queued.",
+      "cat": "Developer",
+      "author": "Moovendhan V",
+      "authorGithub": "moovendhan-v",
+      "md": "<!-- layout: custom:ci-pipeline -->\n^ main · #1284\n# Pipeline: deploy blocked at e2e\n:::flow\n- check-circle | install | 22s\n- check-circle | lint | 14s\n- check-circle | unit | 48s\n- x-circle | e2e | 2 failed\n- circle | deploy | queued\n:::\n",
+      "stars": 0,
+      "community": true,
+      "look": {
+        "accent": "#22c55e",
+        "font": "mono"
+      },
+      "single": true,
+      "code": true,
+      "html": "<div class=\"h-full flex flex-col justify-center gap-14 p-16\">\n  <div>\n    {{#kicker}}<div class=\"text-sm font-semibold uppercase tracking-widest text-accent\">{{kicker}}</div>{{/kicker}}\n    <h2 class=\"font-head text-5xl font-bold tracking-tight mt-2\">{{title}}</h2>\n    {{#body}}<p class=\"text-xl text-muted mt-3 max-w-3xl\">{{body}}</p>{{/body}}\n  </div>\n  <div class=\"grid grid-flow-col auto-cols-fr\">\n    {{#items}}\n    <div data-i=\"{{icon}}\" class=\"group relative flex flex-col items-center text-center gap-4\">\n      <div class=\"absolute top-10 left-1/2 w-full h-1 bg-rule group-last:hidden\"></div>\n      <div class=\"relative size-20 rounded-full grid place-items-center bg-bg border-4 border-accent group-data-[i=ph-x-circle]:border-[#ef4444] group-data-[i=ph-circle]:border-rule\">\n        <i class=\"ph {{icon}} text-4xl text-accent group-data-[i=ph-x-circle]:text-[#ef4444] group-data-[i=ph-circle]:text-muted group-data-[i=ph-spinner]:animate-spin\"></i>\n      </div>\n      <div class=\"font-mono text-xl font-semibold\">{{title}}</div>\n      <div class=\"font-mono text-muted\">{{text}}</div>\n    </div>\n    {{/items}}\n  </div>\n</div>\n",
+      "config": {
+        "id": "ci-pipeline",
+        "name": "CI pipeline",
+        "category": "Developer",
+        "author": "moovendhan-v",
+        "slots": [
+          "kicker",
+          "title",
+          "body",
+          "items[icon,title,text]"
+        ],
+        "description": "A CI/CD run as connected stages. Status from the icon: check-circle passed, x-circle failed, spinner running, circle queued."
+      }
+    },
+    {
       "id": "community-cli-reference",
       "name": "CLI reference",
       "description": "Commands and what they do, like a man page. Command in the first cell, description in the second.",
@@ -197,6 +257,36 @@
           "items[title,text]"
         ],
         "description": "Commands and what they do, like a man page. Command in the first cell, description in the second."
+      }
+    },
+    {
+      "id": "community-cloud-cost-breakdown",
+      "name": "Cloud cost breakdown",
+      "description": "Monthly spend as one stacked bar with a legend. Service in the first cell, its share in percent in the second.",
+      "cat": "Cloud",
+      "author": "Moovendhan V",
+      "authorGithub": "moovendhan-v",
+      "md": "<!-- layout: custom:cloud-cost-breakdown -->\n^ AWS bill · September\n# $18,400 a month, and where it goes\nEC2 and RDS are 63% of spend: the first places to right-size.\n:::stats\n- EC2 | 38\n- RDS | 25\n- S3 | 14\n- Data transfer | 11\n- Lambda | 7\n- Other | 5\n:::\n",
+      "stars": 0,
+      "community": true,
+      "look": {
+        "accent": "#ff9900"
+      },
+      "single": true,
+      "code": true,
+      "html": "<div class=\"h-full flex flex-col justify-between gap-10 p-16\">\n  <div>\n    {{#kicker}}<div class=\"text-sm font-semibold uppercase tracking-widest text-accent\">{{kicker}}</div>{{/kicker}}\n    <h2 class=\"font-head text-5xl font-bold tracking-tight mt-2\">{{title}}</h2>\n    {{#body}}<p class=\"text-xl text-muted mt-3 max-w-3xl\">{{body}}</p>{{/body}}\n  </div>\n  <div class=\"flex h-24 rounded-2xl overflow-hidden\">\n    {{#items}}<div class=\"relative h-full border-r-4 border-bg last:border-0 grid place-items-center font-mono text-xl font-bold\" style=\"width: {{text}}%\"><span class=\"absolute inset-0 bg-accent\" style=\"opacity: calc(1.12 - {{index}} * 0.14)\"></span><span class=\"relative\">{{text}}%</span></div>{{/items}}\n  </div>\n  <div class=\"grid grid-cols-3 gap-x-10 gap-y-4\">\n    {{#items}}\n    <div class=\"flex items-center gap-4 text-xl\">\n      <span class=\"size-5 rounded-md bg-accent shrink-0\" style=\"opacity: calc(1.12 - {{index}} * 0.14)\"></span>\n      <span class=\"font-semibold\">{{title}}</span>\n      <span class=\"ml-auto font-mono text-muted\">{{text}}%</span>\n    </div>\n    {{/items}}\n  </div>\n</div>\n",
+      "config": {
+        "id": "cloud-cost-breakdown",
+        "name": "Cloud cost breakdown",
+        "category": "Cloud",
+        "author": "moovendhan-v",
+        "slots": [
+          "kicker",
+          "title",
+          "body",
+          "items[title,text]"
+        ],
+        "description": "Monthly spend as one stacked bar with a legend. Service in the first cell, its share in percent in the second."
       }
     },
     {
@@ -354,6 +444,97 @@
       }
     },
     {
+      "id": "community-db-table",
+      "name": "Database table",
+      "description": "A table schema as a card: table name as the title, one row per column with its type.",
+      "cat": "Developer",
+      "author": "Moovendhan V",
+      "authorGithub": "moovendhan-v",
+      "md": "<!-- layout: custom:db-table -->\n^ PostgreSQL · orders service\n# orders\nOne row per order. The first column is the primary key.\n:::stats\n- id | uuid\n- customer_id | uuid → customers\n- status | order_status\n- total_cents | integer\n- currency | char(3)\n- created_at | timestamptz\n:::\n",
+      "stars": 0,
+      "community": true,
+      "look": {
+        "accent": "#0ea5e9",
+        "font": "mono"
+      },
+      "single": true,
+      "code": true,
+      "html": "<div class=\"h-full grid grid-cols-[1fr_1.2fr] gap-14 p-16 items-center\">\n  <div class=\"flex flex-col gap-5\">\n    {{#kicker}}<div class=\"text-sm font-semibold uppercase tracking-widest text-accent\">{{kicker}}</div>{{/kicker}}\n    <h2 class=\"font-head text-5xl font-bold leading-tight tracking-tight\">Schema</h2>\n    {{#body}}<p class=\"text-xl text-muted\">{{body}}</p>{{/body}}\n  </div>\n  <div class=\"rounded-2xl border-2 border-accent overflow-hidden\">\n    <div class=\"flex items-center gap-3 bg-accent text-[#0a0a0c] px-6 py-4 font-mono text-2xl font-bold\"><i class=\"ph ph-table\"></i>{{title}}</div>\n    {{#items}}\n    <div class=\"group flex items-center justify-between px-6 py-3 border-b border-rule last:border-0 font-mono text-lg [&:nth-child(2)]:font-bold\">\n      <span class=\"flex items-center gap-3\"><i class=\"ph ph-key text-accent opacity-0 group-[:nth-child(2)]:opacity-100\"></i>{{title}}</span>\n      <span class=\"text-muted\">{{text}}</span>\n    </div>\n    {{/items}}\n  </div>\n</div>\n",
+      "config": {
+        "id": "db-table",
+        "name": "Database table",
+        "category": "Developer",
+        "author": "moovendhan-v",
+        "slots": [
+          "kicker",
+          "title",
+          "body",
+          "items[title,text]"
+        ],
+        "description": "A table schema as a card: table name as the title, one row per column with its type."
+      }
+    },
+    {
+      "id": "community-dr-strategy",
+      "name": "DR strategy",
+      "description": "Disaster-recovery options compared, cost rising left to right. Strategy in the first cell, RTO/RPO in the second.",
+      "cat": "Cloud",
+      "author": "Moovendhan V",
+      "authorGithub": "moovendhan-v",
+      "md": "<!-- layout: custom:dr-strategy -->\n^ Resilience\n# Pick a recovery target\nWe recommend warm standby for checkout.\n:::stats\n- Backup and restore | RTO hours · RPO 24h\n- Pilot light | RTO 30 min · RPO minutes\n- Warm standby | RTO minutes · RPO seconds\n- Multi-site active | RTO ~0 · RPO ~0\n:::\n",
+      "stars": 0,
+      "community": true,
+      "look": {
+        "accent": "#ff9900"
+      },
+      "single": true,
+      "code": true,
+      "html": "<div class=\"h-full flex flex-col gap-8 p-16\">\n  <div>\n    {{#kicker}}<div class=\"text-sm font-semibold uppercase tracking-widest text-accent\">{{kicker}}</div>{{/kicker}}\n    <h2 class=\"font-head text-5xl font-bold tracking-tight mt-2\">{{title}}</h2>\n    {{#body}}<p class=\"text-xl text-muted mt-3 max-w-3xl\">{{body}}</p>{{/body}}\n  </div>\n  <div class=\"flex-1 grid grid-flow-col auto-cols-fr gap-6\">\n    {{#items}}\n    <div class=\"flex flex-col justify-end gap-4\">\n      <div class=\"text-xl font-semibold\">{{title}}</div>\n      <div class=\"font-mono text-muted\">{{text}}</div>\n      <div class=\"rounded-t-2xl bg-accent\" style=\"height: calc({{index}} * 22%); opacity: calc(0.35 + {{index}} * 0.16)\"></div>\n    </div>\n    {{/items}}\n  </div>\n  <div class=\"flex justify-between border-t-2 border-rule pt-3 font-mono text-sm uppercase tracking-widest text-muted\"><span>Lower cost, slower recovery</span><span>Higher cost, faster recovery →</span></div>\n</div>\n",
+      "config": {
+        "id": "dr-strategy",
+        "name": "DR strategy",
+        "category": "Cloud",
+        "author": "moovendhan-v",
+        "slots": [
+          "kicker",
+          "title",
+          "body",
+          "items[title,text]"
+        ],
+        "description": "Disaster-recovery options compared, cost rising left to right. Strategy in the first cell, RTO/RPO in the second."
+      }
+    },
+    {
+      "id": "community-environments",
+      "name": "Environments",
+      "description": "Dev, staging and production side by side with version and URL. Environment in the second cell, details in the third.",
+      "cat": "Developer",
+      "author": "Moovendhan V",
+      "authorGithub": "moovendhan-v",
+      "md": "<!-- layout: custom:environments -->\n^ Environments\n# Where each build lives\n:::cards\n- code | dev | v2.5.0-rc.3 · dev.acme.dev\n- flask | staging | v2.4.1 · staging.acme.dev\n- rocket-launch | production | v2.4.0 · acme.dev\n:::\n",
+      "stars": 0,
+      "community": true,
+      "look": {
+        "accent": "#f43f5e",
+        "font": "mono"
+      },
+      "single": true,
+      "code": true,
+      "html": "<div class=\"h-full flex flex-col gap-10 p-16\">\n  <div>\n    {{#kicker}}<div class=\"text-sm font-semibold uppercase tracking-widest text-accent\">{{kicker}}</div>{{/kicker}}\n    <h2 class=\"font-head text-5xl font-bold tracking-tight mt-2\">{{title}}</h2>\n    {{#body}}<p class=\"text-xl text-muted mt-3 max-w-3xl\">{{body}}</p>{{/body}}\n  </div>\n  <div class=\"flex-1 grid grid-flow-col auto-cols-fr gap-6 content-center\">\n    {{#items}}\n    <div class=\"rounded-3xl border border-rule bg-panel p-8 flex flex-col gap-6 last:border-accent last:border-2\">\n      <div class=\"flex items-center justify-between\">\n        <span class=\"text-3xl font-bold\">{{title}}</span>\n        <i class=\"ph {{icon}} text-3xl text-accent\"></i>\n      </div>\n      <div class=\"font-mono text-lg text-muted leading-relaxed\">{{text}}</div>\n      <div class=\"flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-accent\"><span class=\"size-2.5 rounded-full bg-accent\"></span>healthy</div>\n    </div>\n    {{/items}}\n  </div>\n</div>\n",
+      "config": {
+        "id": "environments",
+        "name": "Environments",
+        "category": "Developer",
+        "author": "moovendhan-v",
+        "slots": [
+          "kicker",
+          "title",
+          "items[icon,title,text]"
+        ],
+        "description": "Dev, staging and production side by side with version and URL. Environment in the second cell, details in the third."
+      }
+    },
+    {
       "id": "community-error-spotlight",
       "name": "Error spotlight",
       "description": "A bug or error in focus: error code in the kicker, the message as title, the stack trace as code and the fix as the body.",
@@ -382,6 +563,35 @@
           "code"
         ],
         "description": "A bug or error in focus: error code in the kicker, the message as title, the stack trace as code and the fix as the body."
+      }
+    },
+    {
+      "id": "community-exec-summary",
+      "name": "Executive summary",
+      "description": "Challenge, approach and outcome in three columns. Exactly three rows.",
+      "cat": "Client",
+      "author": "Moovendhan V",
+      "authorGithub": "moovendhan-v",
+      "md": "<!-- layout: custom:exec-summary -->\n^ Acme Corp · proposal\n# Executive summary\n:::cards\n- warning-circle | Challenge | Releases take two weeks and outages hit checkout every month.\n- compass | Approach | Move to AWS with CI/CD, infrastructure as code and multi-AZ databases.\n- trophy | Outcome | Daily releases, 99.95% uptime and 30% lower hosting cost.\n:::\n",
+      "stars": 0,
+      "community": true,
+      "look": {
+        "accent": "#2563eb"
+      },
+      "single": true,
+      "code": true,
+      "html": "<div class=\"h-full flex flex-col gap-10 p-16\">\n  <div>\n    {{#kicker}}<div class=\"text-sm font-semibold uppercase tracking-widest text-accent\">{{kicker}}</div>{{/kicker}}\n    <h2 class=\"font-head text-5xl font-bold tracking-tight mt-2\">{{title}}</h2>\n    {{#body}}<p class=\"text-xl text-muted mt-3 max-w-3xl\">{{body}}</p>{{/body}}\n  </div>\n  <div class=\"flex-1 grid grid-cols-3 gap-6\">\n    {{#items}}\n    <div class=\"rounded-3xl border border-rule bg-panel p-8 flex flex-col gap-5 last:bg-accent last:text-[#0a0a0c] last:border-transparent\">\n      <div class=\"flex items-center justify-between\"><i class=\"ph {{icon}} text-4xl\"></i><span class=\"font-head text-6xl font-black opacity-20\">0{{index}}</span></div>\n      <div class=\"text-3xl font-bold\">{{title}}</div>\n      <div class=\"text-xl leading-relaxed opacity-80\">{{text}}</div>\n    </div>\n    {{/items}}\n  </div>\n</div>\n",
+      "config": {
+        "id": "exec-summary",
+        "name": "Executive summary",
+        "category": "Client",
+        "author": "moovendhan-v",
+        "slots": [
+          "kicker",
+          "title",
+          "items[icon,title,text]"
+        ],
+        "description": "Challenge, approach and outcome in three columns. Exactly three rows."
       }
     },
     {
@@ -551,6 +761,36 @@
       }
     },
     {
+      "id": "community-investment-summary",
+      "name": "Investment summary",
+      "description": "Commercials: line items with prices and the total in the title.",
+      "cat": "Client",
+      "author": "Moovendhan V",
+      "authorGithub": "moovendhan-v",
+      "md": "<!-- layout: custom:investment-summary -->\n^ Commercials\n# $148,000\nFixed price, invoiced at each milestone. Valid for 30 days.\n:::stats\n- Discovery and architecture | $18,000\n- Landing zone and pipelines | $42,000\n- Migration and cut-over | $64,000\n- Hypercare, 4 weeks | $24,000\n:::\n",
+      "stars": 0,
+      "community": true,
+      "look": {
+        "accent": "#0891b2"
+      },
+      "single": true,
+      "code": true,
+      "html": "<div class=\"h-full grid grid-cols-[1fr_1.3fr] gap-14 p-16\">\n  <div class=\"flex flex-col justify-center gap-5\">\n    {{#kicker}}<div class=\"text-sm font-semibold uppercase tracking-widest text-accent\">{{kicker}}</div>{{/kicker}}\n    <div class=\"text-xl text-muted\">Total investment</div>\n    <h2 class=\"font-head text-8xl font-black tracking-tighter\">{{title}}</h2>\n    {{#body}}<p class=\"text-xl text-muted\">{{body}}</p>{{/body}}\n  </div>\n  <div class=\"flex flex-col justify-center\">\n    {{#items}}\n    <div class=\"flex items-baseline gap-4 py-5 border-b border-rule\">\n      <span class=\"text-xl\">{{title}}</span>\n      <span class=\"flex-1 border-b-2 border-dotted border-rule\"></span>\n      <span class=\"font-mono text-2xl font-semibold\">{{text}}</span>\n    </div>\n    {{/items}}\n  </div>\n</div>\n",
+      "config": {
+        "id": "investment-summary",
+        "name": "Investment summary",
+        "category": "Client",
+        "author": "moovendhan-v",
+        "slots": [
+          "kicker",
+          "title",
+          "body",
+          "items[title,text]"
+        ],
+        "description": "Commercials: line items with prices and the total in the title."
+      }
+    },
+    {
       "id": "community-keyboard-shortcuts",
       "name": "Keyboard shortcuts",
       "description": "Shortcuts as key caps. Keys in the first cell (separate with +), action in the second.",
@@ -637,6 +877,66 @@
           "items[title,text]"
         ],
         "description": "An incident or deploy as timestamped log lines. Time in the first cell, event in the second."
+      }
+    },
+    {
+      "id": "community-migration-waves",
+      "name": "Migration waves",
+      "description": "A cloud migration split into numbered waves. Wave name in the second cell, the apps or dates in the third.",
+      "cat": "Cloud",
+      "author": "Moovendhan V",
+      "authorGithub": "moovendhan-v",
+      "md": "<!-- layout: custom:migration-waves -->\n^ Migration plan\n# Four waves to AWS\nLow-risk apps first, the core platform last.\n:::cards\n- flask | Pilot | Internal wiki and CI runners · Jan\n- browser | Web tier | Marketing site and portal · Feb–Mar\n- database | Data | PostgreSQL to RDS, S3 for files · Apr–May\n- cpu | Core | Order and billing services · Jun–Jul\n:::\n",
+      "stars": 0,
+      "community": true,
+      "look": {
+        "accent": "#ff9900"
+      },
+      "single": true,
+      "code": true,
+      "html": "<div class=\"h-full flex flex-col gap-10 p-16\">\n  <div>\n    {{#kicker}}<div class=\"text-sm font-semibold uppercase tracking-widest text-accent\">{{kicker}}</div>{{/kicker}}\n    <h2 class=\"font-head text-5xl font-bold tracking-tight mt-2\">{{title}}</h2>\n    {{#body}}<p class=\"text-xl text-muted mt-3 max-w-3xl\">{{body}}</p>{{/body}}\n  </div>\n  <div class=\"flex-1 grid grid-flow-col auto-cols-fr gap-5 items-end\">\n    {{#items}}\n    <div class=\"rounded-2xl border border-rule bg-panel p-6 flex flex-col gap-4\" style=\"min-height: calc(30% + {{index}} * 12%)\">\n      <div class=\"flex items-center justify-between\">\n        <span class=\"font-mono text-sm font-semibold uppercase tracking-widest text-accent\">Wave {{index}}</span>\n        <i class=\"ph {{icon}} text-2xl text-accent\"></i>\n      </div>\n      <div class=\"text-2xl font-semibold\">{{title}}</div>\n      <div class=\"text-muted leading-snug\">{{text}}</div>\n    </div>\n    {{/items}}\n  </div>\n</div>\n",
+      "config": {
+        "id": "migration-waves",
+        "name": "Migration waves",
+        "category": "Cloud",
+        "author": "moovendhan-v",
+        "slots": [
+          "kicker",
+          "title",
+          "body",
+          "items[icon,title,text]"
+        ],
+        "description": "A cloud migration split into numbered waves. Wave name in the second cell, the apps or dates in the third."
+      }
+    },
+    {
+      "id": "community-next-steps",
+      "name": "Next steps",
+      "description": "Closing call to action: the ask on the left, numbered next steps with owners and dates on the right.",
+      "cat": "Client",
+      "author": "Moovendhan V",
+      "authorGithub": "moovendhan-v",
+      "md": "<!-- layout: custom:next-steps -->\n^ Next steps\n# Let's start on the 4th\nSign the SOW this week and we hold the team for you.\n:::stats\n- Sign the SOW | Acme · by Oct 18\n- Kick-off workshop | Both teams · Nov 4\n- AWS account access | Acme IT · Nov 5\n- Discovery read-out | Us · Nov 22\n:::\n",
+      "stars": 0,
+      "community": true,
+      "look": {
+        "accent": "#4f46e5"
+      },
+      "single": true,
+      "code": true,
+      "html": "<div class=\"h-full grid grid-cols-[1fr_1.3fr] gap-12 p-16\">\n  <div class=\"rounded-3xl bg-accent text-[#0a0a0c] p-12 flex flex-col justify-between\">\n    {{#kicker}}<span class=\"text-sm font-bold uppercase tracking-[0.3em]\">{{kicker}}</span>{{/kicker}}\n    <h2 class=\"font-head text-6xl font-black leading-[0.95] tracking-tight\">{{title}}</h2>\n    {{#body}}<p class=\"text-xl font-medium\">{{body}}</p>{{/body}}\n  </div>\n  <div class=\"flex flex-col justify-center gap-4\">\n    {{#items}}\n    <div class=\"flex items-center gap-6 rounded-2xl border border-rule bg-panel px-6 py-5\">\n      <span class=\"size-12 shrink-0 rounded-full grid place-items-center border-2 border-accent font-mono text-xl font-bold text-accent\">{{index}}</span>\n      <div>\n        <div class=\"text-xl font-semibold\">{{title}}</div>\n        <div class=\"text-muted\">{{text}}</div>\n      </div>\n    </div>\n    {{/items}}\n  </div>\n</div>\n",
+      "config": {
+        "id": "next-steps",
+        "name": "Next steps",
+        "category": "Client",
+        "author": "moovendhan-v",
+        "slots": [
+          "kicker",
+          "title",
+          "body",
+          "items[title,text]"
+        ],
+        "description": "Closing call to action: the ask on the left, numbered next steps with owners and dates on the right."
       }
     },
     {
@@ -745,6 +1045,66 @@
       }
     },
     {
+      "id": "community-project-gantt",
+      "name": "Project Gantt",
+      "description": "Phases as staggered bars on a timeline. Phase in the first cell, dates in the second. Best with 4 or 5 phases.",
+      "cat": "Plan",
+      "author": "Moovendhan V",
+      "authorGithub": "moovendhan-v",
+      "md": "<!-- layout: custom:project-gantt -->\n^ Delivery plan · 12 weeks\n# How the project runs\n:::timeline style=v\n- Discovery | Wk 1–3\n- Design | Wk 3–5\n- Build | Wk 5–9\n- Test | Wk 8–11\n- Launch | Wk 11–12\n:::\n",
+      "stars": 0,
+      "community": true,
+      "look": {
+        "accent": "#7c3aed"
+      },
+      "single": true,
+      "code": true,
+      "html": "<div class=\"h-full flex flex-col gap-10 p-16\">\n  <div>\n    {{#kicker}}<div class=\"text-sm font-semibold uppercase tracking-widest text-accent\">{{kicker}}</div>{{/kicker}}\n    <h2 class=\"font-head text-5xl font-bold tracking-tight mt-2\">{{title}}</h2>\n    {{#body}}<p class=\"text-xl text-muted mt-3 max-w-3xl\">{{body}}</p>{{/body}}\n  </div>\n  <div class=\"flex-1 relative flex flex-col justify-center gap-4\">\n    <div class=\"absolute inset-0 grid grid-cols-6 pointer-events-none\">\n      <div class=\"border-l border-rule\"></div><div class=\"border-l border-rule\"></div><div class=\"border-l border-rule\"></div><div class=\"border-l border-rule\"></div><div class=\"border-l border-rule\"></div><div class=\"border-x border-rule\"></div>\n    </div>\n    {{#items}}\n    <div class=\"relative h-16 rounded-xl bg-accent text-[#0a0a0c] flex items-center justify-between px-6\" style=\"margin-left: calc(({{index}} - 1) * 17%); width: 32%\">\n      <span class=\"text-xl font-semibold\">{{title}}</span>\n      <span class=\"font-mono text-sm opacity-75\">{{text}}</span>\n    </div>\n    {{/items}}\n  </div>\n</div>\n",
+      "config": {
+        "id": "project-gantt",
+        "name": "Project Gantt",
+        "category": "Plan",
+        "author": "moovendhan-v",
+        "slots": [
+          "kicker",
+          "title",
+          "body",
+          "items[title,text]"
+        ],
+        "description": "Phases as staggered bars on a timeline. Phase in the first cell, dates in the second. Best with 4 or 5 phases."
+      }
+    },
+    {
+      "id": "community-pull-request-card",
+      "name": "Pull request card",
+      "description": "One PR as a GitHub-style card: number in the kicker, title, description in the body, and checks as rows.",
+      "cat": "Developer",
+      "author": "Moovendhan V",
+      "authorGithub": "moovendhan-v",
+      "md": "<!-- layout: custom:pull-request-card -->\n^ #482\n# Add multi-AZ failover for checkout\nMoves the orders table to Aurora with a reader in a second AZ and adds a failover runbook.\n:::cards\n- check-circle | Build and unit tests | passed in 1m 12s\n- check-circle | Terraform plan | +6 ~2 -0\n- check-circle | Security scan | no findings\n- user-circle | Review | approved by 2\n:::\n",
+      "stars": 0,
+      "community": true,
+      "look": {
+        "accent": "#a855f7"
+      },
+      "single": true,
+      "code": true,
+      "html": "<div class=\"h-full grid place-items-center p-16\">\n  <div class=\"w-full max-w-[64rem] rounded-3xl border border-rule bg-panel overflow-hidden\">\n    <div class=\"flex items-start gap-5 p-10 border-b border-rule\">\n      <span class=\"flex items-center gap-2 rounded-full bg-accent text-[#0a0a0c] px-4 py-2 font-semibold shrink-0\"><i class=\"ph ph-git-pull-request text-xl\"></i>Open</span>\n      <div>\n        <h2 class=\"font-head text-4xl font-bold leading-tight\">{{title}} <span class=\"text-muted font-normal\">{{kicker}}</span></h2>\n        {{#body}}<p class=\"text-xl text-muted mt-3\">{{body}}</p>{{/body}}\n      </div>\n    </div>\n    <div class=\"divide-y divide-rule\">\n      {{#items}}\n      <div class=\"flex items-center gap-4 px-10 py-4\">\n        <i class=\"ph {{icon}} text-2xl text-accent\"></i>\n        <span class=\"text-lg font-semibold\">{{title}}</span>\n        <span class=\"ml-auto font-mono text-muted\">{{text}}</span>\n      </div>\n      {{/items}}\n    </div>\n  </div>\n</div>\n",
+      "config": {
+        "id": "pull-request-card",
+        "name": "Pull request card",
+        "category": "Developer",
+        "author": "moovendhan-v",
+        "slots": [
+          "kicker",
+          "title",
+          "body",
+          "items[icon,title,text]"
+        ],
+        "description": "One PR as a GitHub-style card: number in the kicker, title, description in the body, and checks as rows."
+      }
+    },
+    {
       "id": "community-quote-spotlight",
       "name": "Quote spotlight",
       "description": "One big testimonial or quote with the speaker underneath.",
@@ -804,6 +1164,65 @@
       }
     },
     {
+      "id": "community-results-before-after",
+      "name": "Before and after results",
+      "description": "Case-study results: metric, before and after. Write the second cell as before → after.",
+      "cat": "Client",
+      "author": "Moovendhan V",
+      "authorGithub": "moovendhan-v",
+      "md": "<!-- layout: custom:results-before-after -->\n^ Case study · Acme\n# Six months after moving to AWS\n:::cards\n- rocket-launch | Release frequency | 2 weeks → daily\n- clock | Page load (p95) | 3.4 s → 0.9 s\n- heartbeat | Uptime | 99.2% → 99.97%\n- currency-dollar | Hosting cost | $26k → $18k / mo\n:::\n",
+      "stars": 0,
+      "community": true,
+      "look": {
+        "accent": "#059669"
+      },
+      "single": true,
+      "code": true,
+      "html": "<div class=\"h-full flex flex-col gap-10 p-16\">\n  <div>\n    {{#kicker}}<div class=\"text-sm font-semibold uppercase tracking-widest text-accent\">{{kicker}}</div>{{/kicker}}\n    <h2 class=\"font-head text-5xl font-bold tracking-tight mt-2\">{{title}}</h2>\n    {{#body}}<p class=\"text-xl text-muted mt-3 max-w-3xl\">{{body}}</p>{{/body}}\n  </div>\n  <div class=\"flex-1 grid grid-cols-2 gap-5 content-center\">\n    {{#items}}\n    <div class=\"flex items-center gap-6 rounded-2xl border border-rule bg-panel p-7\">\n      <div class=\"size-16 shrink-0 rounded-2xl grid place-items-center bg-[color-mix(in_srgb,var(--accent)_16%,transparent)]\"><i class=\"ph {{icon}} text-3xl text-accent\"></i></div>\n      <div>\n        <div class=\"text-muted\">{{title}}</div>\n        <div class=\"font-head text-4xl font-bold tracking-tight mt-1\">{{text}}</div>\n      </div>\n    </div>\n    {{/items}}\n  </div>\n</div>\n",
+      "config": {
+        "id": "results-before-after",
+        "name": "Before and after results",
+        "category": "Client",
+        "author": "moovendhan-v",
+        "slots": [
+          "kicker",
+          "title",
+          "body",
+          "items[icon,title,text]"
+        ],
+        "description": "Case-study results: metric, before and after. Write the second cell as before → after."
+      }
+    },
+    {
+      "id": "community-risk-register",
+      "name": "Risk register",
+      "description": "Risks with their mitigations. Icon shows severity (warning-octagon, warning, info), risk in the second cell, mitigation in the third.",
+      "cat": "Plan",
+      "author": "Moovendhan V",
+      "authorGithub": "moovendhan-v",
+      "md": "<!-- layout: custom:risk-register -->\n^ Delivery risks\n# What could slow us down\n:::cards\n- warning-octagon | Data migration downtime | Rehearse the cut-over twice in staging\n- warning | Access to legacy systems | Client grants read access in week 1\n- warning | Scope growth | Changes go through a weekly change board\n- info | Key-person dependency | Pair on every critical component\n:::\n",
+      "stars": 0,
+      "community": true,
+      "look": {
+        "accent": "#dc2626"
+      },
+      "single": true,
+      "code": true,
+      "html": "<div class=\"h-full flex flex-col gap-8 p-16\">\n  <div>\n    {{#kicker}}<div class=\"text-sm font-semibold uppercase tracking-widest text-accent\">{{kicker}}</div>{{/kicker}}\n    <h2 class=\"font-head text-5xl font-bold tracking-tight mt-2\">{{title}}</h2>\n    {{#body}}<p class=\"text-xl text-muted mt-3 max-w-3xl\">{{body}}</p>{{/body}}\n  </div>\n  <div class=\"my-auto rounded-2xl border border-rule overflow-hidden\">\n    <div class=\"grid grid-cols-[4rem_1fr_1.2fr] gap-6 px-6 py-3 bg-panel text-sm font-semibold uppercase tracking-widest text-muted border-b border-rule\"><span></span><span>Risk</span><span>Mitigation</span></div>\n    {{#items}}\n    <div class=\"grid grid-cols-[4rem_1fr_1.2fr] gap-6 items-center px-6 py-5 border-b border-rule last:border-0\">\n      <i class=\"ph {{icon}} text-3xl text-accent\"></i>\n      <span class=\"text-xl font-semibold\">{{title}}</span>\n      <span class=\"text-lg text-muted\">{{text}}</span>\n    </div>\n    {{/items}}\n  </div>\n</div>\n",
+      "config": {
+        "id": "risk-register",
+        "name": "Risk register",
+        "category": "Plan",
+        "author": "moovendhan-v",
+        "slots": [
+          "kicker",
+          "title",
+          "items[icon,title,text]"
+        ],
+        "description": "Risks with their mitigations. Icon shows severity (warning-octagon, warning, info), risk in the second cell, mitigation in the third."
+      }
+    },
+    {
       "id": "community-roadmap-rail",
       "name": "Roadmap rail",
       "description": "Numbered milestones on a horizontal rail, from a timeline or list.",
@@ -831,6 +1250,36 @@
           "items[title,text]"
         ],
         "description": "Numbered milestones on a horizontal rail, from a timeline or list."
+      }
+    },
+    {
+      "id": "community-scope-in-out",
+      "name": "Scope in and out",
+      "description": "SOW scope as a checklist. Use check-circle for in scope and x-circle for out of scope; out-of-scope rows are muted.",
+      "cat": "Client",
+      "author": "Moovendhan V",
+      "authorGithub": "moovendhan-v",
+      "md": "<!-- layout: custom:scope-in-out -->\n^ Statement of work\n# What is in scope\nAnything not listed here is a change request.\n:::cards\n- check-circle | AWS landing zone | Accounts, SSO, guardrails\n- check-circle | CI/CD pipelines | GitHub Actions for 6 services\n- check-circle | Data migration | PostgreSQL to RDS, one cut-over\n- x-circle | Mobile apps | Owned by the client team\n- x-circle | 24/7 support | Quoted separately after go-live\n:::\n",
+      "stars": 0,
+      "community": true,
+      "look": {
+        "accent": "#16a34a"
+      },
+      "single": true,
+      "code": true,
+      "html": "<div class=\"h-full grid grid-cols-[1fr_1.6fr] gap-14 p-16\">\n  <div class=\"flex flex-col justify-center gap-5\">\n    {{#kicker}}<div class=\"text-sm font-semibold uppercase tracking-widest text-accent\">{{kicker}}</div>{{/kicker}}\n    <h2 class=\"font-head text-5xl font-bold leading-tight tracking-tight\">{{title}}</h2>\n    {{#body}}<p class=\"text-xl text-muted\">{{body}}</p>{{/body}}\n  </div>\n  <div class=\"flex flex-col justify-center gap-3\">\n    {{#items}}\n    <div data-i=\"{{icon}}\" class=\"group flex items-start gap-4 rounded-2xl border border-rule bg-panel px-6 py-4 data-[i=ph-x-circle]:bg-transparent data-[i=ph-x-circle]:border-dashed\">\n      <i class=\"ph {{icon}} text-3xl text-accent shrink-0 group-data-[i=ph-x-circle]:text-[#ef4444]\"></i>\n      <div class=\"group-data-[i=ph-x-circle]:opacity-60\">\n        <div class=\"text-xl font-semibold\">{{title}}</div>\n        <div class=\"text-muted\">{{text}}</div>\n      </div>\n    </div>\n    {{/items}}\n  </div>\n</div>\n",
+      "config": {
+        "id": "scope-in-out",
+        "name": "Scope in and out",
+        "category": "Client",
+        "author": "moovendhan-v",
+        "slots": [
+          "kicker",
+          "title",
+          "body",
+          "items[icon,title,text]"
+        ],
+        "description": "SOW scope as a checklist. Use check-circle for in scope and x-circle for out of scope; out-of-scope rows are muted."
       }
     },
     {
@@ -1146,6 +1595,35 @@
         ],
         "description": "Milestones down a vertical line, with the title and intro on the left."
       }
+    },
+    {
+      "id": "community-well-architected",
+      "name": "Well-Architected pillars",
+      "description": "The six AWS Well-Architected pillars (or any six principles) as cards with a short assessment each.",
+      "cat": "Cloud",
+      "author": "Moovendhan V",
+      "authorGithub": "moovendhan-v",
+      "md": "<!-- layout: custom:well-architected -->\n^ Review findings\n# Well-Architected review\n:::cards\n- gear | Operational excellence | Runbooks in place; add game days\n- shield-check | Security | MFA enforced; rotate old IAM keys\n- heartbeat | Reliability | Multi-AZ RDS; no cross-region backup\n- gauge | Performance | Lambda cold starts on checkout\n- currency-dollar | Cost | 30% idle EC2 at night\n- leaf | Sustainability | Move batch jobs to Graviton\n:::\n",
+      "stars": 0,
+      "community": true,
+      "look": {
+        "accent": "#ff9900"
+      },
+      "single": true,
+      "code": true,
+      "html": "<div class=\"h-full flex flex-col gap-8 p-16\">\n  <div>\n    {{#kicker}}<div class=\"text-sm font-semibold uppercase tracking-widest text-accent\">{{kicker}}</div>{{/kicker}}\n    <h2 class=\"font-head text-5xl font-bold tracking-tight mt-2\">{{title}}</h2>\n    {{#body}}<p class=\"text-xl text-muted mt-3 max-w-3xl\">{{body}}</p>{{/body}}\n  </div>\n  <div class=\"flex-1 grid grid-cols-3 gap-5 content-center\">\n    {{#items}}\n    <div class=\"rounded-2xl border border-rule bg-panel p-6 border-t-[6px] border-t-accent flex flex-col gap-3\">\n      <div class=\"flex items-center gap-3\"><i class=\"ph {{icon}} text-3xl text-accent\"></i><span class=\"text-xl font-semibold\">{{title}}</span></div>\n      <div class=\"text-muted leading-snug\">{{text}}</div>\n    </div>\n    {{/items}}\n  </div>\n</div>\n",
+      "config": {
+        "id": "well-architected",
+        "name": "Well-Architected pillars",
+        "category": "Cloud",
+        "author": "moovendhan-v",
+        "slots": [
+          "kicker",
+          "title",
+          "items[icon,title,text]"
+        ],
+        "description": "The six AWS Well-Architected pillars (or any six principles) as cards with a short assessment each."
+      }
     }
   ],
   "contributors": [
@@ -1153,7 +1631,7 @@
       "github": "moovendhan-v",
       "name": "Moovendhan V",
       "role": "Creator & maintainer",
-      "templates": 41
+      "templates": 57
     }
   ]
 }

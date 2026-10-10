@@ -1,0 +1,17 @@
+{
+  "name": "Well-Architected pillars",
+  "description": "The six AWS Well-Architected pillars (or any six principles) as cards with a short assessment each.",
+  "category": "Cloud",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "items[icon,title,text]"
+  ],
+  "look": {
+    "accent": "#ff9900"
+  }
+}

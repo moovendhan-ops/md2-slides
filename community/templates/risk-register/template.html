@@ -1,0 +1,17 @@
+<div class="h-full flex flex-col gap-8 p-16">
+  <div>
+    {{#kicker}}<div class="text-sm font-semibold uppercase tracking-widest text-accent">{{kicker}}</div>{{/kicker}}
+    <h2 class="font-head text-5xl font-bold tracking-tight mt-2">{{title}}</h2>
+    {{#body}}<p class="text-xl text-muted mt-3 max-w-3xl">{{body}}</p>{{/body}}
+  </div>
+  <div class="my-auto rounded-2xl border border-rule overflow-hidden">
+    <div class="grid grid-cols-[4rem_1fr_1.2fr] gap-6 px-6 py-3 bg-panel text-sm font-semibold uppercase tracking-widest text-muted border-b border-rule"><span></span><span>Risk</span><span>Mitigation</span></div>
+    {{#items}}
+    <div class="grid grid-cols-[4rem_1fr_1.2fr] gap-6 items-center px-6 py-5 border-b border-rule last:border-0">
+      <i class="ph {{icon}} text-3xl text-accent"></i>
+      <span class="text-xl font-semibold">{{title}}</span>
+      <span class="text-lg text-muted">{{text}}</span>
+    </div>
+    {{/items}}
+  </div>
+</div>

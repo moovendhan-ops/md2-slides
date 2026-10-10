@@ -1,0 +1,17 @@
+{
+  "name": "Executive summary",
+  "description": "Challenge, approach and outcome in three columns. Exactly three rows.",
+  "category": "Client",
+  "author": {
+    "github": "moovendhan-v",
+    "name": "Moovendhan V"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "items[icon,title,text]"
+  ],
+  "look": {
+    "accent": "#2563eb"
+  }
+}
