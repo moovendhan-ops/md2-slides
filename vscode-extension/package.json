@@ -2,7 +2,7 @@
   "name": "md2slides",
   "displayName": "md2slides \u2014 Markdown Slides",
   "description": "Open Markdown decks as slides: live preview, draggable components, customizer and presenter mode, powered by the md2slides engine.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "publisher": "moovendhan-the-cybertechmind",
   "icon": "media/icon.png",
   "repository": {
