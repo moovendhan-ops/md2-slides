@@ -53,4 +53,5 @@ next-env.d.ts
 
 # MCP server build output
 /packages/mcp/dist/
-.open-next.wrangler
+.open-next
+.wrangler
