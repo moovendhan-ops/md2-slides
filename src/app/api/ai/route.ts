@@ -1,7 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
+import { getCloudflareContext } from "@opennextjs/cloudflare";
 import { NextResponse } from "next/server";
-import { getServerEngine } from "@/engine/server";
 import { env } from "@/server/env";
 import { chatCompletion } from "@/server/ai/openai-compatible";
 import { AiRequestError } from "@/server/ai/types";
@@ -20,7 +20,27 @@ interface Body {
 const ATTEMPTS = 2;
 
 let spec: string | null = null;
-const loadSpec = async () => (spec ??= await fs.readFile(path.join(process.cwd(), "public", "llms-full.txt"), "utf8"));
+/**
+ * The syntax spec the model follows. On Cloudflare Workers there is no filesystem, so it comes
+ * from the static-assets binding; on Node (dev, tests) it is read from disk.
+ */
+async function loadSpec(origin: string) {
+  if (spec) return spec;
+  try {
+    const assets = (getCloudflareContext().env as { ASSETS?: { fetch: typeof fetch } }).ASSETS;
+    const res = await assets?.fetch(new URL("/llms-full.txt", origin));
+    if (res?.ok) return (spec = await res.text());
+  } catch {
+    // Not running on Workers.
+  }
+  return (spec = await fs.readFile(path.join(process.cwd(), "public", "llms-full.txt"), "utf8"));
+}
+
+/**
+ * Cheap check that the model returned a deck: at least one slide title.
+ * (The server-side Wasm engine can't load on Workers; the editor parses the result anyway.)
+ */
+const hasSlides = (md: string) => /^#{1,2}\s+\S/m.test(md);
 const noStore = { "cache-control": "no-store" };
 const fail = (msg: string, status: number, extra: Record<string, unknown> = {}) => NextResponse.json({ error: msg, ...extra }, { status, headers: noStore });
 
@@ -35,10 +55,20 @@ function extractDeck(text: string) {
 }
 
 /**
- * POST { prompt, slides } → { markdown, problems, provider, model }.
+ * POST { prompt, slides } → { markdown, provider, model }.
  * Uses the single OpenAI-compatible endpoint from AI_BASE_URL / AI_API_KEY / AI_MODEL.
  */
 export async function POST(req: Request) {
+  try {
+    return await generate(req);
+  } catch (e) {
+    // Never answer with an empty 500: the dialog shows this message.
+    notify("error", "AI route crashed", { error: (e as Error).message });
+    return fail(`AI generation failed: ${(e as Error).message}`, 500);
+  }
+}
+
+async function generate(req: Request) {
   const b = (await req.json().catch(() => null)) as Body | null;
   const prompt = b?.prompt?.trim();
   if (!b || !prompt) return fail("prompt is required", 400);
@@ -48,10 +78,9 @@ export async function POST(req: Request) {
   const wait = rateLimit(`ai:${clientIp(req)}`, 10, 60_000);
   if (wait) return fail(`Too many generations — try again in ${wait}s`, 429, { retryAfter: wait });
 
-  const engine = getServerEngine();
   const slides = Math.min(20, Math.max(2, Number(b.slides) || 6));
   const chat = {
-    system: `You write slide decks in md2slides Markdown. Follow this specification exactly:\n\n${await loadSpec()}`,
+    system: `You write slide decks in md2slides Markdown. Follow this specification exactly:\n\n${await loadSpec(req.url)}`,
     user: `Write a deck of about ${slides} slides for this request:\n${prompt}\n\nReturn ONLY the Markdown file, starting with the front-matter --- line. No explanations, no code fences.`,
     maxTokens: 3000,
   };
@@ -59,8 +88,7 @@ export async function POST(req: Request) {
   for (let i = 0; i < ATTEMPTS; i++) {
     try {
       const markdown = extractDeck(await chatCompletion(ai, chat, AbortSignal.timeout(60_000)));
-      const parsed = engine.parse(markdown);
-      if (parsed.slides.length) return NextResponse.json({ markdown, problems: parsed.problems, provider: ai.label, model: ai.model }, { headers: noStore });
+      if (hasSlides(markdown)) return NextResponse.json({ markdown, provider: ai.label, model: ai.model }, { headers: noStore });
       lastError = new AiRequestError(0, "The model's output contained no slides");
     } catch (e) {
       lastError = e instanceof AiRequestError ? e : new AiRequestError(0, (e as Error).message);
