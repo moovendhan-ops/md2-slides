@@ -58,7 +58,6 @@ const example = (id: string) => {
     html: c.html,
     config: JSON.stringify({ id: c.id, ...c.config }, null, 2),
     sample: c.sample,
-    contributor: defaultContributor(c.config.author),
     tab: "html" as StudioTab,
   };
 };
@@ -72,28 +71,29 @@ const BLANK_HTML = `<div class="h-full flex flex-col justify-center gap-4 p-16">
 /** Template studio working copy (HTML + config + sample Markdown + contributor). */
 export const useStudio = create<StudioState>((set) => ({
   ...example(CODE_TEMPLATES[0]?.id ?? ""),
+  contributor: JSON.stringify(
+    {
+      github: "your-username",
+      name: "Your Name",
+      role: "Template author",
+      bio: "Creating custom layouts for md2slides.",
+      color: "#3b82f6",
+      website: "https://github.com/your-username",
+    },
+    null,
+    2
+  ),
   mode: "dark",
   accent: "#60a5fa",
   set: (patch) => set(patch),
-  loadExample: (id) => set(example(id)),
+  loadExample: (id) => set((prev) => ({ ...example(id), contributor: prev.contributor })),
   blank: () =>
-    set({
+    set((prev) => ({
       id: "my-layout",
       html: BLANK_HTML,
       config: JSON.stringify({ id: "my-layout", name: "My layout", category: "Custom", author: "@you", slots: ["kicker", "title", "body"], description: "" }, null, 2),
       sample: "<!-- layout: custom:my-layout -->\n^ Hello\n# My first layout\nEdit template.html on the left.",
-      contributor: JSON.stringify(
-        {
-          github: "your-username",
-          name: "Your Name",
-          role: "Template author",
-          bio: "Creating custom layouts for md2slides.",
-          color: "#3b82f6",
-          website: "https://github.com/your-username",
-        },
-        null,
-        2
-      ),
+      contributor: prev.contributor,
       tab: "html",
-    }),
+    })),
 }));
