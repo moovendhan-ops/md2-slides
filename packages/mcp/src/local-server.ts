@@ -17,7 +17,7 @@ function openBrowser(url: string) {
   exec(cmd, () => {});
 }
 
-export async function startLocalSlideServer(ctx: Context, filePath: string, opts: { port?: number; open?: boolean } = {}) {
+export async function startLocalSlideServer(ctx: Context, filePath: string, opts: { port?: number; open?: boolean; version?: string } = {}) {
   const fullPath = resolve(process.cwd(), filePath);
   if (!existsSync(fullPath)) {
     console.error(`❌ Error: File not found: ${filePath}`);
@@ -139,7 +139,8 @@ export async function startLocalSlideServer(ctx: Context, filePath: string, opts
   const tryListen = (currentPort: number) => {
     server.listen(currentPort, () => {
       const localUrl = `http://localhost:${currentPort}`;
-      console.log(`\n✨ md2slides v0.1.3 (Local Server Mode)`);
+      const ver = opts.version ? `v${opts.version}` : "v0.1.5";
+      console.log(`\n✨ md2slides ${ver} (Local Server Mode)`);
       console.log(`📄 File: ${filePath} (${validation.slides} slide${validation.slides === 1 ? "" : "s"})`);
       console.log(`🌐 Local Slides Server: \x1b[36m${localUrl}\x1b[0m (Live Reload active)`);
 

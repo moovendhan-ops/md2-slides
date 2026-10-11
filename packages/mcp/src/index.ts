@@ -19,9 +19,14 @@ import { defaultRoot, rootFromClient } from "./workspace";
 
 const VERSION = "0.1.5";
 
-function arg(name: string): string | undefined {
+function arg(name: string, short?: string): string | undefined {
   const i = process.argv.indexOf(`--${name}`);
-  return i > 0 ? process.argv[i + 1] : process.argv.find((a) => a.startsWith(`--${name}=`))?.split("=")[1];
+  if (i > 0) return process.argv[i + 1];
+  if (short) {
+    const s = process.argv.indexOf(`-${short}`);
+    if (s > 0) return process.argv[s + 1];
+  }
+  return process.argv.find((a) => a.startsWith(`--${name}=`))?.split("=")[1];
 }
 
 /** An explicit workspace wins; otherwise the client's MCP roots (after connect), then defaultRoot(). */
@@ -35,16 +40,17 @@ const ctx: Context = {
 
 // Check if user passed a file to open or preview directly via CLI
 const directFile =
-  arg("file") ??
-  arg("open") ??
+  arg("file", "f") ??
+  arg("open", "o") ??
   process.argv.slice(2).find((a) => !a.startsWith("-") && a.endsWith(".md"));
 
 if (directFile) {
-  const portStr = arg("port");
+  const portStr = arg("port", "p");
   const port = portStr ? parseInt(portStr, 10) : 4321;
   await startLocalSlideServer(ctx, directFile, {
     port,
     open: !process.argv.includes("--no-open"),
+    version: VERSION,
   });
 }
 
