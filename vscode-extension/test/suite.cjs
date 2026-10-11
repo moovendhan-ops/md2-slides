@@ -18,7 +18,7 @@ exports.run = async function run() {
   const doc = await vscode.workspace.openTextDocument(file);
   await vscode.window.showTextDocument(doc);
 
-  const ext = vscode.extensions.all.find((e) => e.packageJSON.name === "slidewise");
+  const ext = vscode.extensions.all.find((e) => e.packageJSON.name === "md2slides");
   assert.ok(ext, "extension is installed");
   await until(() => ext.isActive, "activation on a Markdown file");
 

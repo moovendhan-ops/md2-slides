@@ -1,6 +1,6 @@
 {
   "name": "md2slides",
-  "displayName": "md2slides \u2014 Markdown Slides",
+  "displayName": "md2slides — Markdown Slides",
   "description": "Open Markdown decks as slides: live preview, draggable components, customizer and presenter mode, powered by the md2slides engine.",
   "version": "0.2.0",
   "publisher": "moovendhan-the-cybertechmind",
@@ -51,18 +51,18 @@
       },
       {
         "command": "slidewise.insertSlide",
-        "title": "Insert Slide\u2026",
+        "title": "Insert Slide…",
         "category": "md2slides",
         "icon": "$(add)"
       },
       {
         "command": "slidewise.insertBlock",
-        "title": "Insert Block\u2026",
+        "title": "Insert Block…",
         "category": "md2slides"
       },
       {
         "command": "slidewise.insertIcon",
-        "title": "Insert Icon\u2026",
+        "title": "Insert Icon…",
         "category": "md2slides"
       }
     ],
