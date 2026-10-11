@@ -25,6 +25,11 @@ export const AI_STEPS = [
 
 const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
+export interface GenerateRun {
+  /** Change to make to the current draft instead of writing a new one. */
+  revise?: string;
+}
+
 /** Drives the AI dialog: request → streaming reveal → Wasm validation → apply. */
 export function useAiGenerate() {
   const { ai } = useServices();
@@ -35,10 +40,14 @@ export function useAiGenerate() {
   const abortControllerRef = useRef<AbortController | null>(null);
 
   const generate = useCallback(
-    async (preset?: AiPreset) => {
+    async (preset?: AiPreset, opts: GenerateRun = {}) => {
       const st = useAi.getState();
-      const prompt = preset ? preset.prompt : st.prompt.trim();
+      const revise = opts.revise?.trim() ?? "";
+      const revising = !!revise && !!st.markdown;
+      const prompt = revising ? revise : preset ? preset.prompt : st.prompt.trim();
       const isImproveTask = st.task === "improve" || st.task === "notes" || st.task === "summarize";
+      // Where a failed or cancelled run returns to.
+      const back = revising ? "done" : "idle";
 
       if (!prompt && !isImproveTask) {
         return st.set({ error: "Describe what you want to create first, or pick a preset." });
@@ -58,7 +67,8 @@ export function useAiGenerate() {
         phase: "busy",
         step: 0,
         error: "",
-        prompt: prompt || (isImproveTask ? `Current Slide (${st.task})` : ""),
+        revising,
+        ...(revising ? {} : { prompt: prompt || (isImproveTask ? `Current Slide (${st.task})` : ""), history: [] }),
         typed: "",
       });
 
@@ -88,6 +98,7 @@ export function useAiGenerate() {
           slideContent: currentSlideContent,
           context: deckOutlineContext,
           instruction: st.improveMode === "custom" ? st.customInstruction : st.improveMode,
+          current: revising ? st.markdown : undefined,
           signal: controller.signal,
           onToken: (fullText) => {
             if (alive()) {
@@ -97,7 +108,7 @@ export function useAiGenerate() {
         });
       } catch (e) {
         if (!alive() || controller.signal.aborted) return;
-        return useAi.getState().set({ phase: "idle", error: (e as Error).message });
+        return useAi.getState().set({ phase: back, revising: false, error: (e as Error).message });
       }
 
       if (!alive() || controller.signal.aborted) return;
@@ -119,8 +130,12 @@ export function useAiGenerate() {
         errs ? `${errs} syntax error(s)` : "valid syntax"
       } · ${draft.provider}${draft.model ? ` (${draft.model})` : ""}${speedInfo}`;
 
+      const cur = useAi.getState();
       useAi.getState().set({
         phase: "done",
+        revising: false,
+        refine: revising ? "" : cur.refine,
+        history: revising ? [...cur.history, st.markdown].slice(-10) : [],
         markdown: md,
         summary,
         seed: useAi.getState().seed + 1,
@@ -183,8 +198,17 @@ export function useAiGenerate() {
       abortControllerRef.current.abort();
       abortControllerRef.current = null;
     }
-    useAi.getState().set({ runId: useAi.getState().runId + 1, phase: "idle" });
+    const st = useAi.getState();
+    st.set({ runId: st.runId + 1, phase: st.revising ? "done" : "idle", revising: false });
   }, []);
 
-  return { generate, apply, cancel };
+  /** Go back to the draft before the last change. */
+  const undo = useCallback(() => {
+    const st = useAi.getState();
+    const prev = st.history.at(-1);
+    if (prev === undefined) return;
+    st.set({ markdown: prev, history: st.history.slice(0, -1), seed: st.seed + 1, summary: "Restored the previous version", error: "" });
+  }, []);
+
+  return { generate, apply, cancel, undo };
 }

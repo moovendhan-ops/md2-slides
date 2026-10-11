@@ -92,3 +92,13 @@
   [data-pg] * { animation: none !important; transition: none !important }
 }
 
+
+/* AI dialog: slides "cooking" while the model writes them */
+@keyframes ai-shimmer { from { background-position: 200% 0 } to { background-position: -200% 0 } }
+@keyframes ai-glow { 0%, 100% { box-shadow: 0 0 0 1px rgb(139 92 246 / .55), 0 0 14px rgb(139 92 246 / .2) } 50% { box-shadow: 0 0 0 2px rgb(167 139 250 / .95), 0 0 30px rgb(139 92 246 / .45) } }
+@keyframes ai-caret { 50% { opacity: 0 } }
+@keyframes ai-indeterminate { from { transform: translateX(-100%) } to { transform: translateX(250%) } }
+.ai-shimmer { background: linear-gradient(100deg, rgb(39 39 42 / .5) 30%, rgb(82 82 91 / .55) 50%, rgb(39 39 42 / .5) 70%) 0 0 / 200% 100%; animation: ai-shimmer 1.6s linear infinite }
+.ai-glow { animation: ai-glow 1.8s ease-in-out infinite }
+.ai-caret { animation: ai-caret 1s steps(1) infinite }
+@media (prefers-reduced-motion: reduce) { .ai-shimmer, .ai-glow, .ai-caret { animation: none } }

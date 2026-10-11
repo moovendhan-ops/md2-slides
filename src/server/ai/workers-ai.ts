@@ -1,5 +1,6 @@
 import "server-only";
 import { getCloudflareContext } from "@opennextjs/cloudflare";
+import { deltaOf, sseData } from "./sse";
 import { AiRequestError, type ChatPrompt, type PingResult } from "./types";
 
 /** The parts of the Cloudflare Workers AI binding (`env.AI`) used here. */
@@ -28,6 +29,50 @@ function textOf(out: unknown): string {
   return o?.choices?.[0]?.message?.content ?? "";
 }
 
+const input = (p: ChatPrompt, stream: boolean) => ({
+  messages: [
+    { role: "system", content: p.system },
+    { role: "user", content: p.user },
+  ],
+  max_tokens: p.maxTokens,
+  temperature: 0.7,
+  ...(stream ? { stream: true } : {}),
+});
+
+function requestError(e: unknown) {
+  if (e instanceof AiRequestError) return e;
+  const msg = (e as Error).message || "Workers AI request failed";
+  // Workers AI reports quota/capacity errors as text, e.g. "3036: Account limited…" or "3040: Out of capacity".
+  return new AiRequestError(/\b(3036|3040|429)\b|rate limit|capacity/i.test(msg) ? 429 : 0, msg);
+}
+
+/** Stream a chat prompt on the Workers AI binding, yielding text deltas. */
+export async function* streamWorkersAi(ai: WorkersAiBinding, model: string, p: ChatPrompt, signal: AbortSignal): AsyncGenerator<string> {
+  let body: unknown;
+  try {
+    body = await ai.run(model, input(p, true));
+  } catch (e) {
+    throw requestError(e);
+  }
+  if (!(body instanceof ReadableStream)) {
+    // Some models ignore `stream`; hand back the whole reply at once.
+    const text = textOf(body);
+    if (text) yield text;
+    return;
+  }
+  const stop = () => body.cancel().catch(() => {});
+  signal.addEventListener("abort", stop, { once: true });
+  try {
+    for await (const data of sseData(body as ReadableStream<Uint8Array>)) {
+      if (signal.aborted) throw new AiRequestError(0, "Timed out");
+      const d = deltaOf(data);
+      if (d) yield d;
+    }
+  } finally {
+    signal.removeEventListener("abort", stop);
+  }
+}
+
 /** Run a chat prompt on the Workers AI binding and return the assistant's text. */
 export async function runWorkersAi(ai: WorkersAiBinding, model: string, p: ChatPrompt, signal: AbortSignal): Promise<string> {
   const aborted = new Promise<never>((_, reject) => {
@@ -38,21 +83,11 @@ export async function runWorkersAi(ai: WorkersAiBinding, model: string, p: ChatP
   let out: unknown;
   try {
     out = await Promise.race([
-      ai.run(model, {
-        messages: [
-          { role: "system", content: p.system },
-          { role: "user", content: p.user },
-        ],
-        max_tokens: p.maxTokens,
-        temperature: 0.7,
-      }),
+      ai.run(model, input(p, false)),
       aborted,
     ]);
   } catch (e) {
-    if (e instanceof AiRequestError) throw e;
-    const msg = (e as Error).message || "Workers AI request failed";
-    // Workers AI reports quota/capacity errors as text, e.g. "3036: Account limited…" or "3040: Out of capacity".
-    throw new AiRequestError(/\b(3036|3040|429)\b|rate limit|capacity/i.test(msg) ? 429 : 0, msg);
+    throw requestError(e);
   }
   const text = textOf(out);
   if (!text.trim()) throw new AiRequestError(0, "The model returned no text");

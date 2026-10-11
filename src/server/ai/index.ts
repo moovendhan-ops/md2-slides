@@ -1,14 +1,16 @@
 import "server-only";
 import { env } from "../env";
-import { chatCompletion, ping } from "./openai-compatible";
+import { chatCompletion, chatStream, ping } from "./openai-compatible";
 import type { ChatPrompt, PingResult } from "./types";
-import { DEFAULT_WORKERS_AI_MODEL, pingWorkersAi, runWorkersAi, workersAiBinding } from "./workers-ai";
+import { DEFAULT_WORKERS_AI_MODEL, pingWorkersAi, runWorkersAi, streamWorkersAi, workersAiBinding } from "./workers-ai";
 
 /** The AI backend this request uses, whichever kind it is. */
 export interface AiClient {
   label: string;
   model: string;
   chat(p: ChatPrompt, signal: AbortSignal): Promise<string>;
+  /** Same as `chat`, yielding text deltas as the model writes them. */
+  stream(p: ChatPrompt, signal: AbortSignal): AsyncGenerator<string>;
   ping(): Promise<PingResult>;
 }
 
@@ -25,10 +27,11 @@ export function resolveAi(): AiClient | null {
       label: "Cloudflare Workers AI",
       model,
       chat: (p, signal) => runWorkersAi(binding, model, p, signal),
+      stream: (p, signal) => streamWorkersAi(binding, model, p, signal),
       ping: () => pingWorkersAi(binding, model),
     };
   }
   const c = env.ai();
   if (!c) return null;
-  return { label: c.label, model: c.model, chat: (p, signal) => chatCompletion(c, p, signal), ping: () => ping(c) };
+  return { label: c.label, model: c.model, chat: (p, signal) => chatCompletion(c, p, signal), stream: (p, signal) => chatStream(c, p, signal), ping: () => ping(c) };
 }

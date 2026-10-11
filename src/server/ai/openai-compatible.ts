@@ -1,4 +1,5 @@
 import "server-only";
+import { deltaOf, sseData } from "./sse";
 import { AiRequestError, type AiConfig, type ChatPrompt, type PingResult } from "./types";
 
 interface ChatResponse {
@@ -37,6 +38,38 @@ export async function chatCompletion(c: AiConfig, p: ChatPrompt, signal: AbortSi
   const text = Array.isArray(content) ? content.map((x) => x.text ?? "").join("") : (content ?? "");
   if (!text.trim()) throw new AiRequestError(0, `The model returned no text (${j.choices?.[0]?.finish_reason ?? "unknown"})`);
   return text;
+}
+
+/** `POST /chat/completions` with `stream: true`, yielding text deltas as they arrive. */
+export async function* chatStream(c: AiConfig, p: ChatPrompt, signal: AbortSignal): AsyncGenerator<string> {
+  let res: Response;
+  try {
+    res = await fetch(url(c, "chat/completions"), {
+      method: "POST",
+      signal,
+      headers: headers(c),
+      body: JSON.stringify({
+        model: c.model,
+        messages: [
+          { role: "system", content: p.system },
+          { role: "user", content: p.user },
+        ],
+        max_tokens: p.maxTokens,
+        temperature: 0.7,
+        stream: true,
+      }),
+    });
+  } catch (e) {
+    throw new AiRequestError(0, (e as Error).name === "TimeoutError" ? "Timed out" : `Network error: ${(e as Error).message}`);
+  }
+  if (!res.ok || !res.body) {
+    const j = (await res.json().catch(() => ({}))) as ChatResponse;
+    throw new AiRequestError(res.status, errorText(j, res.statusText || "AI request failed"));
+  }
+  for await (const data of sseData(res.body)) {
+    const d = deltaOf(data);
+    if (d) yield d;
+  }
 }
 
 /**
