@@ -2,8 +2,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 import { NextResponse } from "next/server";
-import { env } from "@/server/env";
-import { chatCompletion } from "@/server/ai/openai-compatible";
+import { resolveAi } from "@/server/ai";
 import { AiRequestError } from "@/server/ai/types";
 import { notify } from "@/server/notify";
 import { clientIp, rateLimit } from "@/server/rate-limit";
@@ -56,7 +55,7 @@ function extractDeck(text: string) {
 
 /**
  * POST { prompt, slides } → { markdown, provider, model }.
- * Uses the single OpenAI-compatible endpoint from AI_BASE_URL / AI_API_KEY / AI_MODEL.
+ * Uses Cloudflare Workers AI (the `AI` binding) on Workers, else the OpenAI-compatible endpoint.
  */
 export async function POST(req: Request) {
   try {
@@ -73,8 +72,8 @@ async function generate(req: Request) {
   const prompt = b?.prompt?.trim();
   if (!b || !prompt) return fail("prompt is required", 400);
   if (prompt.length > 4000) return fail("prompt is too long (max 4000 characters)", 400);
-  const ai = env.ai();
-  if (!ai) return fail("AI is not configured on the server (set AI_BASE_URL, AI_API_KEY and AI_MODEL)", 503);
+  const ai = resolveAi();
+  if (!ai) return fail("AI is not configured on the server (add the Workers AI binding, or set AI_BASE_URL, AI_API_KEY and AI_MODEL)", 503);
   const wait = rateLimit(`ai:${clientIp(req)}`, 10, 60_000);
   if (wait) return fail(`Too many generations — try again in ${wait}s`, 429, { retryAfter: wait });
 
@@ -87,7 +86,7 @@ async function generate(req: Request) {
   let lastError: AiRequestError | null = null;
   for (let i = 0; i < ATTEMPTS; i++) {
     try {
-      const markdown = extractDeck(await chatCompletion(ai, chat, AbortSignal.timeout(60_000)));
+      const markdown = extractDeck(await ai.chat(chat, AbortSignal.timeout(60_000)));
       if (hasSlides(markdown)) return NextResponse.json({ markdown, provider: ai.label, model: ai.model }, { headers: noStore });
       lastError = new AiRequestError(0, "The model's output contained no slides");
     } catch (e) {

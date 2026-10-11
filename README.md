@@ -39,7 +39,8 @@ Environment variables (see `.env.example`):
 | --- | --- |
 | `GITHUB_CLIENT_ID` / `GITHUB_CLIENT_SECRET` | GitHub OAuth App used for sign-in, reading repos and pushing commits. |
 | `SESSION_SECRET` | Encrypts the http-only session cookie that holds the GitHub token (AES-256-GCM). |
-| `AI_BASE_URL` / `AI_API_KEY` / `AI_MODEL` | The one AI endpoint, in the OpenAI-compatible format. It works with OpenAI, Gemini, Cloudflare Workers AI, OpenRouter, Groq, Ollama and others (examples in `.env.example`). `AI_PROVIDER_NAME` optionally sets the name shown in the UI. |
+| `WORKERS_AI_MODEL` | On Cloudflare Workers, AI generation uses the Workers AI `AI` binding (no API key). Defaults to `@cf/meta/llama-3.1-8b-instruct-fast`. |
+| `AI_BASE_URL` / `AI_API_KEY` / `AI_MODEL` | Used when the Workers AI binding is absent (local dev, other hosts): the one AI endpoint, in the OpenAI-compatible format. It works with OpenAI, Gemini, Cloudflare Workers AI, OpenRouter, Groq, Ollama and others (examples in `.env.example`). `AI_PROVIDER_NAME` optionally sets the name shown in the UI. |
 | `DISCORD_WEBHOOK_URL` | Optional alerts: AI failures, OAuth failures, GitHub rate limits, pushes. No secrets or prompt text are sent. |
 | `NEXT_PUBLIC_TEMPLATE_SOURCE=remote` | Read/write templates through the Wasm-backed `/api/templates` function instead of the in-browser store. |
 
