@@ -1,10 +1,13 @@
+import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { AuthorCredit } from "@/components/common/author-credit";
 import { Icon } from "@/components/common/icon";
 import { COMMUNITY_TEMPLATES } from "@/data";
 import { BRAND } from "@/lib/brand";
 import { EXPORTS, FAQ } from "./content";
 import { SectionHead } from "./section-head";
+import { ContributorProfileDialog } from "@/features/community/contributor-profile-dialog";
 
 export function ExportStrip() {
   return (
@@ -29,6 +32,8 @@ const SHOWN = 7;
 
 /** Community templates, each credited to its author's GitHub profile. */
 export function CommunitySection() {
+  const router = useRouter();
+  const [selectedAuthor, setSelectedAuthor] = useState<string | null>(null);
   const more = COMMUNITY_TEMPLATES.length - SHOWN;
   return (
     <section id="templates" className="mx-auto max-w-6xl scroll-mt-20 px-5 py-24">
@@ -48,7 +53,12 @@ export function CommunitySection() {
             <h3 className="mt-3 text-[16px] font-semibold text-zinc-50">{t.name}</h3>
             <p className="mt-1 flex-1 text-[13px] leading-relaxed text-zinc-400">{t.description}</p>
             <div className="mt-4 flex items-center justify-between gap-2 border-t border-zinc-900 pt-4 text-[13px] text-zinc-300">
-              <AuthorCredit name={t.author} github={t.authorGithub} size={22} />
+              <AuthorCredit
+                name={t.author}
+                github={t.authorGithub}
+                size={22}
+                onClick={t.authorGithub ? () => setSelectedAuthor(t.authorGithub ?? null) : undefined}
+              />
               <Link href="/app" className="shrink-0 text-xs text-blue-400 hover:text-blue-300">
                 Use template →
               </Link>
@@ -68,6 +78,13 @@ export function CommunitySection() {
           <span className="text-xs">Submit to community from the app, or open a PR</span>
         </a>
       </div>
+
+      <ContributorProfileDialog
+        github={selectedAuthor}
+        onClose={() => setSelectedAuthor(null)}
+        onUseTemplate={() => router.push("/app")}
+        onPreviewTemplate={() => router.push("/app")}
+      />
     </section>
   );
 }

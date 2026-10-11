@@ -2103,10 +2103,41 @@
   ],
   "contributors": [
     {
+      "categories": [
+        "Developer",
+        "Product",
+        "Cloud",
+        "Data",
+        "Process",
+        "Code",
+        "Title",
+        "Closing",
+        "Marketing",
+        "Text",
+        "Events",
+        "Client",
+        "Pitch",
+        "Features",
+        "Media",
+        "Engineering",
+        "Company",
+        "Plan",
+        "Agenda",
+        "Business",
+        "Strategy",
+        "Quote",
+        "Timeline",
+        "Structure",
+        "People",
+        "Comparison"
+      ],
+      "templates": 73,
       "github": "moovendhan-v",
       "name": "Moovendhan V",
       "role": "Creator & maintainer",
-      "templates": 73
+      "bio": "Creator of md2slides. Focused on developer tooling, Markdown architectures, and interactive slide engines.",
+      "website": "https://github.com/moovendhan-v",
+      "sponsor": "https://github.com/sponsors/moovendhan-v"
     }
   ]
 }

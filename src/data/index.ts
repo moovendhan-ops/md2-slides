@@ -34,7 +34,12 @@ export interface Contributor {
   github: string;
   name?: string;
   role?: string;
+  bio?: string;
+  website?: string;
+  twitter?: string;
+  sponsor?: string;
   templates: number;
+  categories?: string[];
 }
 
 export const SEED_TEMPLATES = templates as TemplateRecord[];

@@ -1,8 +1,11 @@
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { AuthorCredit } from "@/components/common/author-credit";
 import { Icon } from "@/components/common/icon";
-import { CONTRIBUTORS } from "@/data";
+import { CONTRIBUTORS, type Contributor } from "@/data";
 import { BRAND } from "@/lib/brand";
 import { SectionHead } from "./section-head";
+import { ContributorProfileDialog } from "@/features/community/contributor-profile-dialog";
 
 const WAYS: [string, string, string, string][] = [
   ["git-pull-request", "Add a template", "A deck.md and meta.json in community/templates. Your name and GitHub profile appear on it.", `${BRAND.repo}/blob/main/CONTRIBUTING.md`],
@@ -18,6 +21,9 @@ const DONATE: [string, string, string, string][] = [
 
 /** Contribute (code, templates, stars), donate, and the contributors wall. */
 export function SupportSection() {
+  const router = useRouter();
+  const [selectedContributor, setSelectedContributor] = useState<Contributor | null>(null);
+
   return (
     <section id="contribute" className="scroll-mt-20 border-y border-zinc-900 bg-zinc-950 py-24">
       <div className="mx-auto max-w-6xl px-5">
@@ -52,13 +58,19 @@ export function SupportSection() {
           <div className="text-sm font-semibold text-zinc-200">Contributors</div>
           <div className="mt-4 flex flex-wrap gap-3">
             {CONTRIBUTORS.map((c) => (
-              <div key={c.github} className="flex items-center gap-3 rounded-full border border-zinc-800 py-1.5 pr-4 pl-1.5 text-[13px] text-zinc-200">
-                <AuthorCredit name={c.name || c.github} github={c.github} size={28} />
-                <span className="text-xs text-zinc-500">
+              <button
+                key={c.github}
+                type="button"
+                onClick={() => setSelectedContributor(c)}
+                className="group flex cursor-pointer items-center gap-3 rounded-full border border-zinc-800 py-1.5 pr-4 pl-1.5 text-[13px] text-zinc-200 transition-colors hover:border-zinc-600 hover:bg-zinc-900"
+              >
+                <AuthorCredit name={c.name || c.github} github={c.github} size={28} stopPropagation onClick={() => setSelectedContributor(c)} />
+                <span className="text-xs text-zinc-500 group-hover:text-zinc-400">
                   {c.role}
                   {c.templates ? ` · ${c.templates} template${c.templates > 1 ? "s" : ""}` : ""}
                 </span>
-              </div>
+                <Icon name="arrow-up-right" className="text-xs text-zinc-600 group-hover:text-zinc-300" />
+              </button>
             ))}
             <a href={`${BRAND.repo}/blob/main/CONTRIBUTING.md`} className="flex items-center gap-2 rounded-full border border-dashed border-zinc-800 px-4 py-1.5 text-[13px] text-zinc-500 hover:text-zinc-200">
               <Icon name="plus" /> You?
@@ -66,6 +78,13 @@ export function SupportSection() {
           </div>
         </div>
       </div>
+
+      <ContributorProfileDialog
+        contributor={selectedContributor}
+        onClose={() => setSelectedContributor(null)}
+        onUseTemplate={() => router.push("/app")}
+        onPreviewTemplate={() => router.push("/app")}
+      />
     </section>
   );
 }

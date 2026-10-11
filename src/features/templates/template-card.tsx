@@ -6,7 +6,15 @@ import { Icon } from "@/components/common/icon";
 import { SlideView } from "@/components/slide/slide-view";
 import { useTemplateDeck } from "./use-template-look";
 
-export function TemplateCard({ template: t, onOpen }: { template: TemplateRecord; onOpen: () => void }) {
+export function TemplateCard({
+  template: t,
+  onOpen,
+  onAuthorClick,
+}: {
+  template: TemplateRecord;
+  onOpen: () => void;
+  onAuthorClick?: (github?: string) => void;
+}) {
   const parsed = useTemplateDeck(t);
   const first = parsed?.deck.slides[0];
   return (
@@ -19,7 +27,13 @@ export function TemplateCard({ template: t, onOpen }: { template: TemplateRecord
             <span className="shrink-0">
               {t.cat} · {parsed?.deck.slides.length ?? 0} slides ·
             </span>
-            <AuthorCredit name={t.author} github={t.authorGithub} size={14} stopPropagation />
+            <AuthorCredit
+              name={t.author}
+              github={t.authorGithub}
+              size={14}
+              stopPropagation
+              onClick={onAuthorClick ? () => onAuthorClick(t.authorGithub) : undefined}
+            />
           </span>
         </div>
         {t.community && (

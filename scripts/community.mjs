@@ -65,11 +65,12 @@ const templates = readdirSync(dir, { withFileTypes: true })
 
 const listed = JSON.parse(readFileSync(join(root, "community/CONTRIBUTORS.json"), "utf8"));
 for (const c of listed) if (!HANDLE.test(c.github ?? "")) errors.push(`community/CONTRIBUTORS.json: invalid github "${c.github}"`);
-const byHandle = new Map(listed.map((c) => [c.github.toLowerCase(), { ...c, templates: 0 }]));
+const byHandle = new Map(listed.map((c) => [c.github.toLowerCase(), { categories: [], templates: 0, ...c }]));
 for (const t of templates) {
   const k = t.authorGithub.toLowerCase();
-  const c = byHandle.get(k) ?? { github: t.authorGithub, name: t.author, role: "Template author", templates: 0 };
+  const c = byHandle.get(k) ?? { github: t.authorGithub, name: t.author, role: "Template author", templates: 0, categories: [] };
   c.templates++;
+  if (t.cat && !c.categories.includes(t.cat)) c.categories.push(t.cat);
   byHandle.set(k, c);
 }
 
