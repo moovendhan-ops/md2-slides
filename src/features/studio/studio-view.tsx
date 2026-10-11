@@ -150,9 +150,38 @@ export function StudioView() {
       return;
     }
     register(config.id, { html: st.html, config });
-    const md = st.sample.replace(/layout:\s*custom:[\w-]+/, `layout: custom:${config.id}`);
-    const meta = { id: config.id, name: config.name || config.id, category: config.category || "Custom", author: config.author || "You" };
-    await save.mutateAsync({ id: `code-${meta.id}`, name: meta.name, cat: meta.category, author: meta.author, md, stars: 0, community: true, single: true, code: true, look: {}, html: st.html, config: meta });
+    const authorStr =
+      typeof config.author === "string"
+        ? config.author
+        : typeof config.author === "object" && config.author !== null
+        ? ((config.author as { name?: string; github?: string }).name ||
+           (config.author as { name?: string; github?: string }).github ||
+           "You")
+        : "You";
+
+    const authorGithub =
+      typeof config.author === "object" && config.author !== null
+        ? (config.author as { github?: string }).github
+        : typeof config.author === "string" && config.author.startsWith("@")
+        ? config.author.slice(1)
+        : undefined;
+
+    const meta = { id: config.id, name: config.name || config.id, category: config.category || "Custom", author: authorStr };
+    await save.mutateAsync({
+      id: `code-${meta.id}`,
+      name: meta.name,
+      cat: meta.category,
+      author: meta.author,
+      authorGithub,
+      md: st.sample,
+      stars: 0,
+      community: true,
+      single: true,
+      code: true,
+      look: {},
+      html: st.html,
+      config: meta,
+    });
     if (!pr) return toast(`Saved “${meta.name}” — use <!-- layout: custom:${config.id} -->`);
     const { description, slots } = config as { description?: string; slots?: string[] };
 
@@ -166,7 +195,7 @@ export function StudioView() {
       name: meta.name,
       category: meta.category,
       description,
-      md,
+      md: st.sample,
       color: contrib.color,
       bio: contrib.bio,
       authorName: contrib.name || (existingContributor ? existingContributor.name : me?.name),

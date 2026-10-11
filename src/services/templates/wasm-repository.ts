@@ -49,9 +49,18 @@ export class WasmTemplateRepository implements TemplateRepository {
 
   async save(t: TemplateRecord) {
     const store = await this.store;
-    store.upsert(t);
+    const authorStr =
+      typeof t.author === "string"
+        ? t.author
+        : typeof t.author === "object" && t.author !== null
+        ? ((t.author as { name?: string; github?: string }).name ||
+           (t.author as { name?: string; github?: string }).github ||
+           "You")
+        : "You";
+    const record: TemplateRecord = { ...t, author: authorStr };
+    store.upsert(record);
     await this.persist(store);
-    return t;
+    return record;
   }
 
   async remove(id: string) {
