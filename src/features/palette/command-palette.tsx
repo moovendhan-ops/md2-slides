@@ -53,7 +53,7 @@ export function CommandPalette() {
       { label: "Share view-only link", icon: "share-network", run: inEditor(() => openModal("share")) },
       { label: "Commit & push", icon: "git-commit", run: () => openModal("commit"), hint: "⌘S" },
       { label: "Format document", icon: "magic-wand", run: () => { deck.format(); closeModal(); } },
-      { label: "Export… (HTML presentation, PDF, Markdown)", icon: "export", run: inEditor(() => openModal("export")) },
+      { label: "Export… (HTML presentation, PDF, PowerPoint, Markdown)", icon: "export", run: inEditor(() => openModal("export")) },
       { label: "Download .md", icon: "download-simple", run: file.download },
       { label: "Export PDF", icon: "file-pdf", run: file.exportPdf },
       { label: "Slide overview", icon: "grid-nine", run: () => deck.present(undefined, true) },

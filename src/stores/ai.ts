@@ -22,6 +22,12 @@ export interface AiState {
   customInstruction: string;
   typed: string;
   markdown: string;
+  /** The change being asked for on the current draft ("Ask for changes" box). */
+  refine: string;
+  /** True while a change to an existing draft is being written. */
+  revising: boolean;
+  /** Earlier drafts, newest last, for undoing a change. */
+  history: string[];
   summary: string;
   error: string;
   runId: number;
@@ -47,6 +53,9 @@ export const useAi = create<AiState>()(
       customInstruction: "",
       typed: "",
       markdown: "",
+      refine: "",
+      revising: false,
+      history: [],
       summary: "",
       error: "",
       runId: 0,

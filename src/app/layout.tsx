@@ -21,9 +21,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en" className="dark">
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link rel="stylesheet" href={FONTS} />
+        {/* CORS so PDF export can read the @font-face rules and embed the fonts. */}
+        <link rel="stylesheet" href={FONTS} crossOrigin="anonymous" />
         <link rel="preload" href="/wasm/slide_engine_bg.wasm" as="fetch" type="application/wasm" crossOrigin="" />
       </head>
       <body className="bg-zinc-950 text-[13px] text-zinc-50 antialiased">{children}</body>

@@ -4,14 +4,15 @@
   "main": ".open-next/worker.js",
   "compatibility_date": "2026-09-25",
   "vars": {
-    "AI_BASE_URL": "https://generativelanguage.googleapis.com/v1beta/openai",
-    "AI_MODEL": "gemini-2.5-flash",
-    "AI_PROVIDER_NAME": "Gemini",
+    "WORKERS_AI_MODEL": "@cf/meta/llama-3.1-8b-instruct-fast",
     "GITHUB_CLIENT_ID": "Ov23liQEB2Fta67p6SvU"
   },
   "compatibility_flags": [
     "nodejs_compat"
   ],
+  "ai": {
+    "binding": "AI"
+  },
   "assets": {
     "directory": ".open-next/assets",
     "binding": "ASSETS"

@@ -2,7 +2,8 @@
 
 import { useMemo } from "react";
 import { toast } from "sonner";
-import { printSlides } from "@/features/export/basic-exporters";
+import { buildPdf } from "@/features/export/pdf-exporter";
+import { saveBlob } from "@/features/export/save-blob";
 import type { TemplateRecord } from "@/engine/types";
 import { buildFrontMatter, stripFrontMatter } from "@/domain/source/frontmatter";
 import { useDeck } from "@/app-shell/deck-context";
@@ -82,7 +83,14 @@ export function useFileActions() {
         ui().closeModal();
         toast(`Downloaded ${a.download}`);
       },
-      exportPdf: () => void printSlides(),
+      exportPdf: () => {
+        const name = (active.path.split("/").pop() ?? "deck").replace(/\.md$/, "") || "deck";
+        toast.promise(buildPdf().then((blob) => saveBlob(blob, `${name}.pdf`)), {
+          loading: "Building PDF…",
+          success: `Downloaded ${name}.pdf`,
+          error: (e: Error) => `PDF export failed: ${e.message}`,
+        });
+      },
       changedKeys: () => selectChanged(useWorkspace.getState()),
     };
   }, [active, saveTemplate, qc, git]);

@@ -8,9 +8,9 @@ import { SlideView } from "@/components/slide/slide-view";
 const PAGE: Record<string, string> = { "16 / 9": "13.333in 7.5in", "4 / 3": "10in 7.5in", "1 / 1": "7.5in 7.5in" };
 
 /**
- * Every slide, one per printed page, sized to the page so "Save as PDF"
- * gives a vector PDF that looks like the slides on screen. Rendered at the
- * top of <body> so the print stylesheet can hide the rest of the app.
+ * Every slide at a fixed width, off screen: PDF export captures each one from here.
+ * It is also sized for printing (one slide per page), and rendered at the top of
+ * <body> so the print stylesheet can hide the rest of the app.
  */
 export function PrintRoot() {
   const { deck, look } = useDeck();

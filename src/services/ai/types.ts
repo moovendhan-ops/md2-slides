@@ -20,6 +20,8 @@ export interface GenerateOptions {
   context?: string;
   instruction?: string;
   slideContent?: string;
+  /** A previous draft to revise; the prompt is then the change to make. */
+  current?: string;
   onToken?: (token: string, delta: string) => void;
 }
 

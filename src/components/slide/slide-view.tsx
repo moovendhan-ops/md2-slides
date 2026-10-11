@@ -34,6 +34,7 @@ export const SlideView = memo(function SlideView({ slide, index, total, look, op
     <div style={{ containerType: "inline-size", width: "100%" }}>
       <div
         key={opts.seed}
+        data-slide-frame
         style={{
           position: "relative", width: "100%", aspectRatio: look.aspect, background: f.bg, color: f.fg, fontFamily: slide.dir.font || look.font,
           overflow: "hidden", borderRadius: look.radius, boxShadow: `inset 0 0 0 1px ${look.rule}`,

@@ -209,7 +209,12 @@ function resolveCdnInvalidation(value = "dummy") {
 }
 
 // open-next.config.ts
-var open_next_config_default = defineCloudflareConfig();
+var open_next_config_default = {
+  ...defineCloudflareConfig(),
+  // OpenNext runs `npm run build` by default, but that script itself runs `opennextjs-cloudflare build`:
+  // the nested build appends next-env.mjs twice and wrangler then fails on the duplicate exports.
+  buildCommand: "npm run build:next"
+};
 export {
   open_next_config_default as default
 };
