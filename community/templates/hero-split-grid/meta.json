@@ -1,0 +1,15 @@
+{
+  "name": "Category Hub",
+  "description": "Floating frosted-glass modal grid over an illuminated dark backdrop for category selection and tech portals.",
+  "category": "Navigation",
+  "author": {
+    "github": "moovendhan-ops",
+    "name": "moovendhan-ops"
+  },
+  "slots": [
+    "title",
+    "kicker",
+    "items[icon,title]",
+    "image"
+  ]
+}
