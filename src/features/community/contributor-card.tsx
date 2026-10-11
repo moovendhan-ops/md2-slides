@@ -40,6 +40,7 @@ export function ContributorCard({
         {/* Header with avatar & info */}
         <div className="flex items-start gap-3.5">
           <div className="relative shrink-0">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={profile?.avatar || `https://avatars.githubusercontent.com/${c.github}?v=4&s=96`}
               alt={c.name || c.github}

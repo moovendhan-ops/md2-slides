@@ -11,13 +11,13 @@ export function LandingNav({ signedIn }: { signedIn: boolean }) {
           <Logo size={28} wordmark />
         </Link>
         <div className="hidden items-center gap-5 text-[13px] text-zinc-400 md:flex">
-          <a href="/#demo" className="hover:text-zinc-100">Demo</a>
-          <a href="/#how" className="hover:text-zinc-100">How it works</a>
-          <a href="/#features" className="hover:text-zinc-100">Features</a>
-          <a href="/#mcp" className="hover:text-zinc-100">MCP</a>
-          <a href="/#templates" className="hover:text-zinc-100">Templates</a>
+          <Link href="/#demo" className="hover:text-zinc-100">Demo</Link>
+          <Link href="/#how" className="hover:text-zinc-100">How it works</Link>
+          <Link href="/#features" className="hover:text-zinc-100">Features</Link>
+          <Link href="/#mcp" className="hover:text-zinc-100">MCP</Link>
+          <Link href="/#templates" className="hover:text-zinc-100">Templates</Link>
           <Link href="/contributors" className="hover:text-zinc-100">Contributors</Link>
-          <a href="/#contribute" className="hover:text-zinc-100">Contribute</a>
+          <Link href="/#contribute" className="hover:text-zinc-100">Contribute</Link>
         </div>
         <div className="flex-1" />
         <a href={BRAND.repo} className="hidden h-9 items-center gap-1.5 rounded-lg border border-zinc-800 px-3 text-[13px] text-zinc-300 hover:border-zinc-600 sm:flex" aria-label="Star md2slides on GitHub">

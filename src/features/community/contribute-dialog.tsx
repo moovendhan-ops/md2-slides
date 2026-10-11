@@ -10,7 +10,6 @@ import { COMMUNITY_TEMPLATES, CONTRIBUTORS, SEED_TEMPLATES } from "@/data";
 import { slugify, validateSubmission, type CommunitySubmission } from "@/domain/community/submission";
 import { useServices } from "@/app-shell/services";
 import { useMeQuery } from "@/hooks/use-queries";
-import { BRAND } from "@/lib/brand";
 import type { ContributeResult } from "@/services/git/types";
 import { useContribute } from "@/stores/contribute";
 

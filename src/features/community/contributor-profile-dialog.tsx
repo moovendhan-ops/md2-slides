@@ -83,6 +83,7 @@ export function ContributorProfileDialog({
         <DialogHeader className="border-b border-zinc-900 p-6 pb-5">
           <div className="flex flex-col gap-5 sm:flex-row sm:items-start">
             <div className="relative shrink-0">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={profile?.avatar || `https://avatars.githubusercontent.com/${contributor.github}?v=4&s=160`}
                 alt={contributor.name || contributor.github}

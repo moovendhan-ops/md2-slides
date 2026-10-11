@@ -4,7 +4,6 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Icon } from "@/components/common/icon";
-import { Button } from "@/components/ui/button";
 import { CONTRIBUTORS, type Contributor } from "@/data";
 import { githubProfile } from "@/lib/github";
 import { ContributorProfileDialog } from "@/features/community/contributor-profile-dialog";
@@ -74,6 +73,7 @@ export function ContributorsSlides() {
                 <div>
                   <div className="flex items-start gap-3.5">
                     <div className="relative">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={profile?.avatar || `https://avatars.githubusercontent.com/${c.github}?v=4&s=112`}
                         alt={c.name || c.github}

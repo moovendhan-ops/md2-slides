@@ -4,7 +4,6 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Icon } from "@/components/common/icon";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { CONTRIBUTORS, COMMUNITY_TEMPLATES, type Contributor } from "@/data";
 import { BRAND } from "@/lib/brand";
