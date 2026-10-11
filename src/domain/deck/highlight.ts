@@ -67,3 +67,38 @@ export function highlightMarkdown(t: string, inFrontMatter: boolean): ColorSeg[]
   }
   return out.length ? out : [{ t: " ", c: MD.tx }];
 }
+
+/** Colour HTML + Mustache template code. */
+export function highlightTemplateHtml(line: string): ColorSeg[] {
+  const out: ColorSeg[] = [];
+  const REGEX = /(\{\{[#^/]?\w+\}\})|(<!--[\s\S]*?-->)|(<\/?[A-Za-z0-9-]+)|([\w:-]+(?==))|("[^"]*"|'[^']*')|([<>/=])|(\s+)|([^<>{}"'\s=]+)/g;
+  for (const m of line.matchAll(REGEX)) {
+    const t = m[0];
+    let c = "#e4e4e7";
+    if (m[1]) c = "#f472b6";
+    else if (t.startsWith("<!--")) c = "#71717a";
+    else if (m[3]) c = "#60a5fa";
+    else if (m[4]) c = "#c084fc";
+    else if (m[5]) c = "#4ade80";
+    else if (m[6]) c = "#94a3b8";
+    push(out, t, c);
+  }
+  return out.length ? out : [{ t: " ", c: "#e4e4e7" }];
+}
+
+/** Colour JSON config code. */
+export function highlightJson(line: string): ColorSeg[] {
+  const out: ColorSeg[] = [];
+  const REGEX = /("(?:\\.|[^"\\])*"(?=\s*:))|("(?:\\.|[^"\\])*")|(\b(true|false|null|\d+(?:\.\d+)?)\b)|([{}[\],:])|(\s+)|([^"{}[\],:\s]+)/g;
+  for (const m of line.matchAll(REGEX)) {
+    const t = m[0];
+    let c = "#e4e4e7";
+    if (m[1]) c = "#60a5fa";
+    else if (m[2]) c = "#4ade80";
+    else if (m[3]) c = "#fbbf24";
+    else if (m[5]) c = "#71717a";
+    push(out, t, c);
+  }
+  return out.length ? out : [{ t: " ", c: "#e4e4e7" }];
+}
+

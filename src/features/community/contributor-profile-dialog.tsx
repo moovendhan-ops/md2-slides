@@ -75,6 +75,7 @@ export function ContributorProfileDialog({
   if (!contributor) return null;
 
   const profile = githubProfile(contributor.github, 160);
+  const color = contributor.color || "#3b82f6";
 
   return (
     <Dialog open onOpenChange={(o) => !o && onClose()}>
@@ -87,9 +88,13 @@ export function ContributorProfileDialog({
                 alt={contributor.name || contributor.github}
                 width={80}
                 height={80}
-                className="size-20 rounded-2xl border-2 border-zinc-700/60 bg-zinc-900 object-cover shadow-xl"
+                className="size-20 rounded-2xl border-2 bg-zinc-900 object-cover shadow-xl"
+                style={{ borderColor: `${color}80` }}
               />
-              <span className="absolute -bottom-1 -right-1 grid size-6 place-items-center rounded-full bg-blue-500 text-xs text-white shadow">
+              <span
+                className="absolute -bottom-1 -right-1 grid size-6 place-items-center rounded-full text-xs text-white shadow"
+                style={{ backgroundColor: color }}
+              >
                 <Icon name="check" />
               </span>
             </div>
@@ -99,7 +104,14 @@ export function ContributorProfileDialog({
                 <DialogTitle className="text-xl font-bold tracking-tight text-zinc-50">
                   {contributor.name || contributor.github}
                 </DialogTitle>
-                <span className="rounded-full border border-blue-500/30 bg-blue-500/10 px-2.5 py-0.5 text-xs font-medium text-blue-300">
+                <span
+                  className="rounded-full border px-2.5 py-0.5 text-xs font-medium"
+                  style={{
+                    borderColor: `${color}40`,
+                    backgroundColor: `${color}15`,
+                    color: color,
+                  }}
+                >
                   {contributor.role || "Contributor"}
                 </span>
               </div>

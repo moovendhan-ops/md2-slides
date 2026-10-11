@@ -2137,7 +2137,8 @@
       "role": "Creator & maintainer",
       "bio": "Creator of md2slides. Focused on developer tooling, Markdown architectures, and interactive slide engines.",
       "website": "https://github.com/moovendhan-v",
-      "sponsor": "https://github.com/sponsors/moovendhan-v"
+      "sponsor": "https://github.com/sponsors/moovendhan-v",
+      "color": "#3b82f6"
     }
   ]
 }

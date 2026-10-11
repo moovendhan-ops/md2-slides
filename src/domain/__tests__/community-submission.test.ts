@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { slugify, submissionFiles, submissionPullRequest, validateSubmission, type CommunitySubmission } from "@/domain/community/submission";
+import { slugify, submissionFiles, submissionPullRequest, updateContributorsJson, validateSubmission, type CommunitySubmission } from "@/domain/community/submission";
 
 const deck: CommunitySubmission = { id: "design-review", name: "Design review", description: "Get feedback on a design.", category: "Design", md: "# Hello" };
 const author = { github: "octocat", name: "The Octocat" };
@@ -43,5 +43,18 @@ describe("community submissions", () => {
     expect(pr.title).toBe("Community template: Design review");
     expect(pr.body).toContain("@octocat");
     expect(pr.body).not.toMatch(/\n\n\n/);
+  });
+
+  it("updates CONTRIBUTORS.json only when author is not already present", () => {
+    const existing = JSON.stringify([{ github: "existing-user", name: "Existing", color: "#3b82f6" }]);
+    const alreadyListed = updateContributorsJson(existing, { github: "existing-user", name: "Existing" });
+    expect(alreadyListed).toBeNull();
+
+    const newAuthorChange = updateContributorsJson(existing, { github: "new-user", name: "New User", color: "#ec4899" });
+    expect(newAuthorChange).not.toBeNull();
+    expect(newAuthorChange?.path).toBe("community/CONTRIBUTORS.json");
+    const parsed = JSON.parse(newAuthorChange!.content);
+    expect(parsed).toHaveLength(2);
+    expect(parsed[1]).toMatchObject({ github: "new-user", name: "New User", color: "#ec4899" });
   });
 });

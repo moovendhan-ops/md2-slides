@@ -63,6 +63,7 @@ export function ContributorsSlides() {
         <div className="animate-marquee-track flex gap-5 py-3">
           {marqueeItems.map((c, idx) => {
             const profile = githubProfile(c.github, 112);
+            const color = c.color || "#3b82f6";
             return (
               <button
                 key={`${c.github}-${idx}`}
@@ -78,9 +79,13 @@ export function ContributorsSlides() {
                         alt={c.name || c.github}
                         width={52}
                         height={52}
-                        className="size-13 rounded-2xl border border-zinc-700/80 bg-zinc-900 object-cover shadow"
+                        className="size-13 rounded-2xl border bg-zinc-900 object-cover shadow"
+                        style={{ borderColor: `${color}60` }}
                       />
-                      <span className="absolute -bottom-1 -right-1 grid size-4 place-items-center rounded-full bg-blue-500 text-[9px] text-white">
+                      <span
+                        className="absolute -bottom-1 -right-1 grid size-4 place-items-center rounded-full text-[9px] text-white"
+                        style={{ backgroundColor: color }}
+                      >
                         <Icon name="check" />
                       </span>
                     </div>
@@ -90,7 +95,14 @@ export function ContributorsSlides() {
                         {c.name || c.github}
                       </div>
                       <div className="text-xs text-zinc-500">@{c.github}</div>
-                      <div className="mt-1 inline-flex items-center rounded-full border border-zinc-800 bg-zinc-900 px-2 py-0.5 text-[11px] font-medium text-zinc-300">
+                      <div
+                        className="mt-1 inline-flex items-center rounded-full border px-2 py-0.5 text-[11px] font-medium"
+                        style={{
+                          borderColor: `${color}40`,
+                          backgroundColor: `${color}15`,
+                          color: color,
+                        }}
+                      >
                         {c.role || "Template author"}
                       </div>
                     </div>

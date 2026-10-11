@@ -38,6 +38,7 @@ export interface Contributor {
   website?: string;
   twitter?: string;
   sponsor?: string;
+  color?: string;
   templates: number;
   categories?: string[];
 }

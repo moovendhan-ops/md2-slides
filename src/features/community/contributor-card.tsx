@@ -23,6 +23,8 @@ export function ContributorCard({
 
   const previewTemplates = authorTemplates.slice(0, 3);
 
+  const color = c.color || "#3b82f6";
+
   return (
     <div
       role="button"
@@ -30,17 +32,27 @@ export function ContributorCard({
       onClick={() => onOpenProfile(c)}
       onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && (e.preventDefault(), onOpenProfile(c))}
       className="group flex cursor-pointer flex-col justify-between rounded-2xl border border-zinc-800 bg-zinc-950/70 p-5 text-left transition-all hover:border-zinc-700 hover:bg-zinc-900/40"
+      style={{
+        boxShadow: "0 0 0 1px transparent",
+      }}
     >
       <div>
         {/* Header with avatar & info */}
         <div className="flex items-start gap-3.5">
-          <img
-            src={profile?.avatar || `https://avatars.githubusercontent.com/${c.github}?v=4&s=96`}
-            alt={c.name || c.github}
-            width={48}
-            height={48}
-            className="size-12 rounded-xl border border-zinc-700/60 bg-zinc-900 object-cover shrink-0"
-          />
+          <div className="relative shrink-0">
+            <img
+              src={profile?.avatar || `https://avatars.githubusercontent.com/${c.github}?v=4&s=96`}
+              alt={c.name || c.github}
+              width={48}
+              height={48}
+              className="size-12 rounded-xl border bg-zinc-900 object-cover"
+              style={{ borderColor: `${color}60` }}
+            />
+            <span
+              className="absolute -bottom-1 -right-1 size-3.5 rounded-full border-2 border-zinc-950"
+              style={{ backgroundColor: color }}
+            />
+          </div>
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-2">
               <h3 className="truncate text-[15px] font-semibold text-zinc-100 group-hover:text-white">
@@ -49,7 +61,14 @@ export function ContributorCard({
             </div>
             <p className="text-xs text-zinc-400">@{c.github}</p>
             <div className="mt-1 flex items-center gap-2">
-              <span className="rounded-full border border-blue-500/20 bg-blue-500/10 px-2 py-0.5 text-[11px] font-medium text-blue-300">
+              <span
+                className="rounded-full border px-2 py-0.5 text-[11px] font-medium"
+                style={{
+                  borderColor: `${color}40`,
+                  backgroundColor: `${color}15`,
+                  color: color,
+                }}
+              >
                 {c.role || "Template Contributor"}
               </span>
               <span className="text-xs text-zinc-500">

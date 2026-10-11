@@ -1,12 +1,15 @@
 "use client";
 
+import { useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 import { validateLayout } from "@/domain/deck/custom-layout";
-import { CODE_TEMPLATES, STUDIO_GUIDE } from "@/data";
+import { highlightJson, highlightMarkdown, highlightTemplateHtml } from "@/domain/deck/highlight";
+import { CODE_TEMPLATES, CONTRIBUTORS, STUDIO_GUIDE, type Contributor } from "@/data";
 import { Seg } from "@/components/common/controls";
 import { Icon } from "@/components/common/icon";
 import { Button } from "@/components/ui/button";
-import { useSaveTemplate } from "@/hooks/use-queries";
+import { ContributorProfileDialog } from "@/features/community/contributor-profile-dialog";
+import { useMeQuery, useSaveTemplate } from "@/hooks/use-queries";
 import { useContribute } from "@/stores/contribute";
 import { useLayoutStore } from "@/stores/layouts";
 import { useStudio, type StudioTab } from "@/stores/studio";
@@ -16,8 +19,11 @@ const TABS: { id: StudioTab; label: string }[] = [
   { id: "html", label: "template.html" },
   { id: "config", label: "config.json" },
   { id: "sample", label: "sample.md" },
+  { id: "contributor", label: "contributor.json" },
   { id: "guide", label: "Guide" },
 ];
+
+const CONTRIB_SWATCHES = ["#3b82f6", "#8b5cf6", "#ec4899", "#10b981", "#f97316", "#06b6d4"];
 
 /** Build reusable HTML + Tailwind slide layouts and publish them as templates. */
 export function StudioView() {
@@ -25,7 +31,100 @@ export function StudioView() {
   const save = useSaveTemplate();
   const register = useLayoutStore((s) => s.register);
   const contribute = useContribute((s) => s.open);
+  const me = useMeQuery().data?.user;
+  const [profileModal, setProfileModal] = useState<Contributor | null>(null);
+
   const code = st.tab === "guide" ? "" : st[st.tab];
+  const [scroll, setScroll] = useState({ top: 0, left: 0 });
+
+  const parsedContrib = useMemo(() => {
+    try {
+      return JSON.parse(st.contributor);
+    } catch {
+      return null;
+    }
+  }, [st.contributor]);
+
+  // Identify whether author is already in CONTRIBUTORS.json
+  const targetHandle = (
+    parsedContrib?.github ||
+    me?.login ||
+    ""
+  ).toLowerCase().replace(/^@/, "");
+
+  const existingContributor = useMemo(() => {
+    if (!targetHandle || targetHandle === "your-username") return null;
+    return CONTRIBUTORS.find(
+      (c) =>
+        c.github.toLowerCase() === targetHandle ||
+        c.name?.toLowerCase() === targetHandle
+    );
+  }, [targetHandle]);
+
+  // Auto-sync signed-in user if template contributor is still the default placeholder
+  useEffect(() => {
+    if (!me?.login) return;
+    try {
+      const parsed = JSON.parse(st.contributor);
+      if (parsed.github === "your-username") {
+        const found = CONTRIBUTORS.find((c) => c.github.toLowerCase() === me.login.toLowerCase());
+        if (found) {
+          st.set({
+            contributor: JSON.stringify(
+              {
+                github: found.github,
+                name: found.name || me.name || me.login,
+                role: found.role || "Template author",
+                bio: found.bio || "md2slides contributor",
+                color: found.color || "#3b82f6",
+                website: found.website || `https://github.com/${found.github}`,
+                sponsor: found.sponsor,
+              },
+              null,
+              2
+            ),
+          });
+        } else {
+          st.set({
+            contributor: JSON.stringify(
+              {
+                github: me.login,
+                name: me.name || me.login,
+                role: "Template author",
+                bio: "Slide creator and open-source enthusiast.",
+                color: "#3b82f6",
+                website: `https://github.com/${me.login}`,
+              },
+              null,
+              2
+            ),
+          });
+        }
+      }
+    } catch {}
+  }, [me, st.contributor, st]);
+
+  const updateContribField = (key: string, val: string) => {
+    try {
+      const obj = parsedContrib ? { ...parsedContrib } : {};
+      obj[key] = val;
+      st.set({ contributor: JSON.stringify(obj, null, 2) });
+    } catch {
+      st.set({ contributor: JSON.stringify({ [key]: val }, null, 2) });
+    }
+  };
+
+  const lines = useMemo(() => {
+    if (st.tab === "guide") return [];
+    const textLines = code.split("\n");
+    if (st.tab === "html") {
+      return textLines.map(highlightTemplateHtml);
+    } else if (st.tab === "config" || st.tab === "contributor") {
+      return textLines.map(highlightJson);
+    } else {
+      return textLines.map((l) => highlightMarkdown(l, false));
+    }
+  }, [code, st.tab]);
 
   const persist = async (pr: boolean) => {
     const { config, ok } = validateLayout(st.html, st.config);
@@ -39,7 +138,39 @@ export function StudioView() {
     await save.mutateAsync({ id: `code-${meta.id}`, name: meta.name, cat: meta.category, author: meta.author, md, stars: 0, community: true, single: true, code: true, look: {}, html: st.html, config: meta });
     if (!pr) return toast(`Saved “${meta.name}” — use <!-- layout: custom:${config.id} -->`);
     const { description, slots } = config as { description?: string; slots?: string[] };
-    contribute({ id: config.id, name: meta.name, category: meta.category, description, md, layout: { html: st.html, slots } });
+
+    let contrib: { color?: string; bio?: string; name?: string; role?: string } = {};
+    try {
+      contrib = JSON.parse(st.contributor);
+    } catch {}
+
+    contribute({
+      id: config.id,
+      name: meta.name,
+      category: meta.category,
+      description,
+      md,
+      color: contrib.color,
+      bio: contrib.bio,
+      authorName: contrib.name,
+      role: contrib.role,
+      layout: { html: st.html, slots },
+    });
+  };
+
+  const onKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "Tab") {
+      e.preventDefault();
+      const el = e.currentTarget;
+      const start = el.selectionStart;
+      const end = el.selectionEnd;
+      const val = el.value;
+      const next = val.slice(0, start) + "  " + val.slice(end);
+      st.set({ [st.tab]: next } as Partial<typeof st>);
+      requestAnimationFrame(() => {
+        el.setSelectionRange(start + 2, start + 2);
+      });
+    }
   };
 
   return (
@@ -63,13 +194,15 @@ export function StudioView() {
       </div>
       <div className="flex min-h-0 flex-1 flex-col lg:flex-row">
         <div className="flex min-h-[40vh] min-w-0 flex-1 flex-col border-zinc-800 lg:border-r">
-          <div className="flex shrink-0 gap-1 px-2 py-2">
+          <div className="flex shrink-0 gap-1 px-2 py-2 border-b border-zinc-900 bg-zinc-950/40">
             {TABS.map((t) => (
-              <button key={t.id} type="button" onClick={() => st.set({ tab: t.id })} className={`h-7 rounded-md px-2.5 font-mono text-xs ${st.tab === t.id ? "bg-zinc-800 text-zinc-50" : "text-zinc-400 hover:text-zinc-100"}`}>
+              <button key={t.id} type="button" onClick={() => st.set({ tab: t.id })} className={`h-7 rounded-md px-2.5 font-mono text-xs transition-colors ${st.tab === t.id ? "bg-zinc-800 text-zinc-50 font-medium" : "text-zinc-400 hover:text-zinc-100"}`}>
                 {t.label}
               </button>
             ))}
           </div>
+
+          {/* Guide Tab */}
           {st.tab === "guide" ? (
             <div className="flex-1 overflow-y-auto p-4">
               {STUDIO_GUIDE.map((g) => (
@@ -80,18 +213,192 @@ export function StudioView() {
               ))}
             </div>
           ) : (
-            <textarea
-              value={code}
-              spellCheck={false}
-              aria-label={TABS.find((t) => t.id === st.tab)?.label}
-              onChange={(e) => st.set({ [st.tab]: e.target.value } as Partial<typeof st>)}
-              className="min-h-0 flex-1 resize-none bg-transparent p-3 font-mono text-[13px] leading-5 text-zinc-200 outline-none"
-              style={{ whiteSpace: "pre", overflowWrap: "normal" }}
-            />
+            <div className="flex flex-1 min-h-0 flex-col">
+              {/* Contributor Profile Header: Show if available, ask if first-time */}
+              {st.tab === "contributor" && (
+                existingContributor ? (
+                  <div className="border-b border-zinc-800 bg-zinc-950/80 p-3.5 flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-3 min-w-0">
+                      <div className="relative shrink-0">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={`https://github.com/${existingContributor.github}.png`}
+                          alt={existingContributor.name || existingContributor.github}
+                          className="size-11 rounded-full border-2 object-cover"
+                          style={{ borderColor: existingContributor.color || "#3b82f6" }}
+                        />
+                        <span
+                          className="absolute -bottom-1 -right-1 size-3.5 rounded-full border-2 border-zinc-950"
+                          style={{ backgroundColor: existingContributor.color || "#3b82f6" }}
+                          title={`Signature color: ${existingContributor.color}`}
+                        />
+                      </div>
+                      <div className="flex flex-col min-w-0">
+                        <div className="flex items-center gap-2">
+                          <span className="text-[13px] font-semibold text-zinc-100">{existingContributor.name || existingContributor.github}</span>
+                          <span className="font-mono text-xs text-zinc-400">@{existingContributor.github}</span>
+                          <span className="rounded bg-emerald-500/10 px-1.5 py-0.5 text-[10px] font-medium text-emerald-400 border border-emerald-500/20">
+                            ✓ In CONTRIBUTORS.json
+                          </span>
+                        </div>
+                        <p className="text-xs text-zinc-400 line-clamp-1">{existingContributor.bio || existingContributor.role || "Registered contributor"}</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2 shrink-0">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="h-7 text-xs border-zinc-800 gap-1 text-zinc-300 hover:text-zinc-100"
+                        onClick={() => setProfileModal(existingContributor)}
+                      >
+                        <Icon name="user" className="text-[11px]" /> Profile
+                      </Button>
+                      <a
+                        href="/contributors"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-[11px] text-zinc-400 hover:text-zinc-200 underline"
+                      >
+                        Wall →
+                      </a>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="border-b border-zinc-800 bg-gradient-to-r from-blue-950/20 via-zinc-950 to-zinc-950 p-3.5">
+                    <div className="flex items-center justify-between mb-2.5">
+                      <div className="flex items-center gap-2">
+                        <span className="rounded-full bg-blue-500/20 px-2 py-0.5 text-[11px] font-semibold text-blue-300 border border-blue-500/30">
+                          🌟 First-Time Contributor
+                        </span>
+                        <span className="text-xs text-zinc-400">
+                          {me?.login ? `@${me.login}` : "Set up your contributor profile"}
+                        </span>
+                      </div>
+                      <span className="text-[10px] text-zinc-500">Auto-added to CONTRIBUTORS.json</span>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-left">
+                      <div>
+                        <label className="text-[10px] font-medium text-zinc-400 block mb-1">Your Full Name</label>
+                        <input
+                          type="text"
+                          value={parsedContrib?.name ?? ""}
+                          onChange={(e) => updateContribField("name", e.target.value)}
+                          placeholder="e.g. Alex Rivera"
+                          className="w-full h-7 rounded border border-zinc-800 bg-zinc-900/80 px-2 text-xs text-zinc-200 outline-none focus:border-zinc-600"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-[10px] font-medium text-zinc-400 block mb-1">GitHub Username</label>
+                        <input
+                          type="text"
+                          value={parsedContrib?.github ?? me?.login ?? ""}
+                          onChange={(e) => updateContribField("github", e.target.value.replace(/^@/, ""))}
+                          placeholder="e.g. alexrivera"
+                          className="w-full h-7 rounded border border-zinc-800 bg-zinc-900/80 px-2 text-xs text-zinc-200 outline-none focus:border-zinc-600 font-mono"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-[10px] font-medium text-zinc-400 block mb-1">Role / Headline</label>
+                        <input
+                          type="text"
+                          value={parsedContrib?.role ?? ""}
+                          onChange={(e) => updateContribField("role", e.target.value)}
+                          placeholder="e.g. Slide Designer & Developer"
+                          className="w-full h-7 rounded border border-zinc-800 bg-zinc-900/80 px-2 text-xs text-zinc-200 outline-none focus:border-zinc-600"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-[10px] font-medium text-zinc-400 block mb-1">Signature Color</label>
+                        <div className="flex items-center gap-1.5 h-7">
+                          {CONTRIB_SWATCHES.map((sw) => (
+                            <button
+                              key={sw}
+                              type="button"
+                              onClick={() => updateContribField("color", sw)}
+                              style={{ backgroundColor: sw }}
+                              className={`size-4 rounded-full transition-transform ${
+                                (parsedContrib?.color || "#3b82f6") === sw ? "scale-125 ring-2 ring-white" : "opacity-80 hover:scale-110"
+                              }`}
+                            />
+                          ))}
+                          <input
+                            type="color"
+                            value={parsedContrib?.color || "#3b82f6"}
+                            onChange={(e) => updateContribField("color", e.target.value)}
+                            className="size-4 cursor-pointer bg-transparent border-0 opacity-80"
+                          />
+                          <span className="font-mono text-[10px] text-zinc-400 ml-1">{parsedContrib?.color || "#3b82f6"}</span>
+                        </div>
+                      </div>
+                      <div className="sm:col-span-2">
+                        <label className="text-[10px] font-medium text-zinc-400 block mb-1">Bio / Tagline</label>
+                        <input
+                          type="text"
+                          value={parsedContrib?.bio ?? ""}
+                          onChange={(e) => updateContribField("bio", e.target.value)}
+                          placeholder="Short bio about you or your slides..."
+                          className="w-full h-7 rounded border border-zinc-800 bg-zinc-900/80 px-2 text-xs text-zinc-200 outline-none focus:border-zinc-600"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )
+              )}
+
+              {/* Code Mirror & Textarea Editor */}
+              <div className="relative flex min-h-0 flex-1 bg-[#09090b]">
+                {/* Line Numbers Gutter */}
+                <div className="w-10 shrink-0 select-none overflow-hidden bg-zinc-950/60 pr-2 pt-3 text-right font-mono text-[12px] leading-5 text-zinc-600 border-r border-zinc-900" aria-hidden>
+                  <div style={{ transform: `translateY(${-scroll.top}px)` }}>
+                    {lines.map((_, i) => (
+                      <div key={i}>{i + 1}</div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Editor & Color-Coded Mirror */}
+                <div className="relative min-w-0 flex-1">
+                  {/* Syntax-colored mirror overlay */}
+                  <div className="pointer-events-none absolute inset-0 overflow-hidden whitespace-pre font-mono text-[13px] leading-5" aria-hidden>
+                    <div style={{ transform: `translate(${-scroll.left}px, ${-scroll.top}px)`, padding: "12px 12px 120px 12px" }}>
+                      {lines.map((segs, i) => (
+                        <div key={i} style={{ minHeight: "20px" }}>
+                          {segs.map((s, j) => (
+                            <span key={j} style={{ color: s.c }}>
+                              {s.t}
+                            </span>
+                          ))}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Actual textarea (text transparent, caret visible) */}
+                  <textarea
+                    value={code}
+                    spellCheck={false}
+                    aria-label={TABS.find((t) => t.id === st.tab)?.label}
+                    wrap="off"
+                    onKeyDown={onKeyDown}
+                    onChange={(e) => st.set({ [st.tab]: e.target.value } as Partial<typeof st>)}
+                    onScroll={(e) => setScroll({ top: e.currentTarget.scrollTop, left: e.currentTarget.scrollLeft })}
+                    className="absolute inset-0 resize-none overflow-auto bg-transparent font-mono text-[13px] leading-5 text-transparent caret-zinc-100 outline-none"
+                    style={{ padding: "12px 12px 120px 12px", whiteSpace: "pre" }}
+                  />
+                </div>
+              </div>
+            </div>
           )}
         </div>
         <StudioPreview />
       </div>
+
+      {profileModal && (
+        <ContributorProfileDialog
+          contributor={profileModal}
+          onClose={() => setProfileModal(null)}
+        />
+      )}
     </div>
   );
 }

@@ -15,11 +15,22 @@ export interface CommunitySubmission {
   look?: Record<string, string | number | boolean>;
   /** HTML + Tailwind layout from the Template studio; makes this a `custom:<id>` layout. */
   layout?: { html: string; slots?: string[] };
+  /** Contributor signature color code */
+  color?: string;
+  /** Contributor short bio */
+  bio?: string;
+  /** Contributor display name (especially for first-time contributors) */
+  authorName?: string;
+  /** Contributor role / tagline */
+  role?: string;
 }
 
 export interface Author {
   github: string;
   name: string;
+  color?: string;
+  bio?: string;
+  role?: string;
 }
 
 /** Folder ids, as checked by scripts/community.mjs. */
@@ -103,5 +114,39 @@ export function submissionPullRequest(s: CommunitySubmission, author: Author) {
     ]
       .filter((l, i, a) => l !== "" || a[i - 1] !== "")
       .join("\n"),
+  };
+}
+
+/**
+ * If the author is already in community/CONTRIBUTORS.json, returns null.
+ * If not present, appends them to the JSON and returns the updated file change.
+ */
+export function updateContributorsJson(
+  rawJson: string,
+  author: Author
+): { path: string; content: string } | null {
+  let list: Array<{ github: string; name?: string; role?: string; bio?: string; color?: string }> = [];
+  try {
+    list = JSON.parse(rawJson);
+    if (!Array.isArray(list)) list = [];
+  } catch {
+    list = [];
+  }
+
+  const handle = author.github.toLowerCase();
+  const exists = list.some((c) => c.github?.toLowerCase() === handle);
+  if (exists) return null;
+
+  list.push({
+    github: author.github,
+    name: author.name || author.github,
+    role: "Template author",
+    bio: author.bio || "Community contributor to md2slides.",
+    color: author.color || "#3b82f6",
+  });
+
+  return {
+    path: "community/CONTRIBUTORS.json",
+    content: JSON.stringify(list, null, 2) + "\n",
   };
 }
