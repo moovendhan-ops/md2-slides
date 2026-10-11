@@ -50,7 +50,7 @@ export function customDocument(html: string, data: SlotData, look: Look, fill: S
     `<script src="https://cdn.tailwindcss.com">${close}<script>${tw}${close}` +
     `<link rel="stylesheet" href="${FONT_CSS}">` +
     `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css">` +
-    `<style>:root{${vars}}html{font-size:calc(100vw / 80)}html,body{margin:0;height:100%;overflow:hidden;background:var(--bg);color:var(--fg);font-family:var(--body)}#slide{width:100vw;height:100vh;position:relative;overflow:hidden}</style>` +
+    `<style>:root{${vars}}html{font-size:calc(100vw / 80)}html,body{margin:0;height:100%;overflow:hidden;background:var(--bg);color:var(--fg);font-family:var(--body)}#slide{width:100vw;height:100vh;position:relative;overflow:hidden}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}</style>` +
     `</head><body><div id="slide">${fill(html, data)}</div></body></html>`
   );
 }
