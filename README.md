@@ -115,7 +115,7 @@ claude mcp add md2slides -- npx -y md2slides-mcp
   - It contains the full presenter: transitions, reveals, code steps, overview, pen, laser, timer and speaker view.
   - Mermaid diagrams are pre-rendered, and the file can optionally be password-encrypted.
   - It inlines the standalone player built from `src/player` by `scripts/build-player.mjs`, which runs automatically before `dev` and `build`.
-- **PDF:** the browser's print dialog, one slide per page.
+- **PDF:** a `.pdf` file built in the browser (no print dialog): every slide as it looks on screen, one per page, sized to the deck's aspect ratio.
 - **Markdown:** the deck source.
 
 ## VS Code extension

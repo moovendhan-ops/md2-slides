@@ -36,6 +36,14 @@ export type SlotFiller = (html: string, data: SlotData) => string;
 const FONT_CSS =
   "https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono&family=Space+Grotesk:wght@500;700&family=Instrument+Serif&family=IBM+Plex+Sans:wght@400;600&family=JetBrains+Mono&display=swap";
 
+/**
+ * PDF export can't read this sandboxed iframe, so on a `m2s-capture` message it posts back its
+ * own HTML, with the Tailwind styles already generated, for the exporter to render script-free.
+ */
+const CAPTURE =
+  `addEventListener("message",function(e){var m=e.data;if(!m||m.type!=="m2s-capture")return;` +
+  `document.fonts.ready.then(function(){parent.postMessage({type:"m2s-captured",id:m.id,html:"<!doctype html>"+document.documentElement.outerHTML},"*")})});`;
+
 /** Full iframe document: Tailwind Play CDN themed with the deck's tokens. */
 export function customDocument(html: string, data: SlotData, look: Look, fill: SlotFiller): string {
   const vars = [
@@ -48,10 +56,10 @@ export function customDocument(html: string, data: SlotData, look: Look, fill: S
   return (
     `<!doctype html><html class="${look.mode}"><head><meta charset="utf-8">` +
     `<script src="https://cdn.tailwindcss.com">${close}<script>${tw}${close}` +
-    `<link rel="stylesheet" href="${FONT_CSS}">` +
-    `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css">` +
+    `<link rel="stylesheet" crossorigin="anonymous" href="${FONT_CSS}">` +
+    `<link rel="stylesheet" crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css">` +
     `<style>:root{${vars}}html{font-size:calc(100vw / 80)}html,body{margin:0;height:100%;overflow:hidden;background:var(--bg);color:var(--fg);font-family:var(--body)}#slide{width:100vw;height:100vh;position:relative;overflow:hidden}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}</style>` +
-    `</head><body><div id="slide">${fill(html, data)}</div></body></html>`
+    `</head><body><div id="slide">${fill(html, data)}</div><script>${CAPTURE}${close}</body></html>`
   );
 }
 

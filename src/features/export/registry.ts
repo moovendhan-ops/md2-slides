@@ -1,4 +1,5 @@
-import { markdownExporter, pdfExporter } from "./basic-exporters";
+import { markdownExporter } from "./basic-exporters";
+import { pdfExporter } from "./pdf-exporter";
 import { htmlExporter } from "./html-exporter";
 import type { Exporter } from "./types";
 
