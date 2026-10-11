@@ -54,7 +54,7 @@ export function ExportDialog() {
           <DialogTitle>Export</DialogTitle>
           <DialogDescription>Files are generated in your browser. Nothing is uploaded.</DialogDescription>
         </DialogHeader>
-        <div className="grid gap-2 sm:grid-cols-3" role="radiogroup" aria-label="Format">
+        <div className="grid grid-cols-2 gap-2 sm:grid-cols-4" role="radiogroup" aria-label="Format">
           {EXPORTERS.map((e) => (
             <button
               key={e.id}

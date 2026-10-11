@@ -116,6 +116,7 @@ claude mcp add md2slides -- npx -y md2slides-mcp
   - Mermaid diagrams are pre-rendered, and the file can optionally be password-encrypted.
   - It inlines the standalone player built from `src/player` by `scripts/build-player.mjs`, which runs automatically before `dev` and `build`.
 - **PDF:** a `.pdf` file built in the browser (no print dialog): every slide as it looks on screen, one per page, sized to the deck's aspect ratio.
+- **PowerPoint (.pptx):** opens in PowerPoint, Keynote and Google Slides. Each slide is a lossless 2560px image of the slide exactly as it looks here (themes, gradients, code and custom layouts included), with speaker notes in the notes pane.
 - **Markdown:** the deck source.
 
 ## VS Code extension
