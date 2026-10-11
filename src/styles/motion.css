@@ -102,3 +102,20 @@
 .ai-glow { animation: ai-glow 1.8s ease-in-out infinite }
 .ai-caret { animation: ai-caret 1s steps(1) infinite }
 @media (prefers-reduced-motion: reduce) { .ai-shimmer, .ai-glow, .ai-caret { animation: none } }
+
+/* Infinite horizontal marquee for community contributors */
+@keyframes marquee-track {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-track 28s linear infinite;
+}
+.animate-marquee-track:hover {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee-track { animation: none; }
+}
